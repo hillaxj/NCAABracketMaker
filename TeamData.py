@@ -7,7 +7,7 @@ headers = {"Accept-Language": "en-US, en;q=0.5"}
 urlBase = "https://www.espn.com/mens-college-basketball/team/schedule/_/id/"
 
 teamName = []
-teamMasc = []
+teamMascot = []
 teamRecord = []
 teamID = 2752
 
@@ -18,7 +18,16 @@ results = requests.get(urlTeam, headers=headers)
 soup = BeautifulSoup(results.text, "html.parser")
 team_div = soup.find_all('div', class_='ClubhouseHeader__Main flex items-center pv3 justify-start')
 
-print(team_div)
+for container in team_div:
+    # Name and Mascot
+    name = container.h1.find_all('span', class_='db')
+    teamName.append(name[0].text)
+    teamMascot.append(name[1].text)
+    # Record
+    record = container.find('ul', class_='ClubhouseHeader__Record').find('li').text
+    teamRecord.append(record)
+
+print(teamName, teamMascot, teamRecord)
     # for container in movie_div:
     #     # Name
     #     name = container.h3.a.text
