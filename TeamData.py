@@ -6,6 +6,9 @@ import numpy as np
 import logging as log
 from utilities import datapath
 
+# todo: List of team IDs from https://www.espn.com/mens-college-basketball/teams, \
+#  iterate through list insted of all possible teams
+# todo: import schedule data
 
 def getTeamData():
     headers = {"Accept-Language": "en-US, en;q=0.5"}
@@ -15,25 +18,37 @@ def getTeamData():
     teamMascot = []
     teamRecord = []
 
-    for teamID in range(1, 40):
-        print('Team ' + str(teamID))
+    for teamID in range(1, 1000):
+        log.info('Team ' + str(teamID))
         urlTeam = urlBase + str(teamID)
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
         team_div = soup.find_all('div', class_='ClubhouseHeader__Main flex items-center pv3 justify-start')
 
         for container in team_div:
-            # Name and Mascot
-            try:
-                name = container.h1.find_all('span', class_='db')
-                teamName.append(name[0].text)
-                teamMascot.append(name[1].text)
 
+            try:
             # Record
                 record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
+                log.info(record[0].text)
                 teamRecord.append(record[0].text)
             except:
-                pass
+                continue
+
+            # Name and Mascot
+            name = container.h1.find_all('span', class_='db')
+            log.info(name[0].text + ' ' + name[1].text)
+            if name[0].text is not None:
+                teamName.append(name[0].text)
+            else:
+                teamName.append('N/A')
+
+            if name[1] is not None:
+                teamMascot.append(name[1].text)
+            else:
+                teamMascot.append('N/A')
+
+
 
     teamData = pd.DataFrame({
         'Team Name': teamName,
@@ -71,3 +86,5 @@ def getTeamData():
         #     grosses = nv[1].text if len(nv) > 1 else '-'
         #     us_gross.append(grosses)
     return None
+
+getTeamData()
