@@ -42,12 +42,13 @@ def getTeamData():
     teamMascot = []
     teamWinRecord = []
     teamLossRecord = []
+    teamIDList = []
     teamIDs = getTeamList()
 
     # Iterate through each teamID and populate list
-    for teamID in teamIDs:
-        log.info('Team ' + str(teamID))
-        urlTeam = urlBase + str(teamID)
+    for id in teamIDs:
+        log.info('Team ' + str(id))
+        urlTeam = urlBase + str(id)
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
         # Find team info from HTML
@@ -56,12 +57,14 @@ def getTeamData():
         for container in team_div:
 
             try:
-                # Find record and add win and loss records to teamWinRecord and teamLossRecord lists
+                # Find record and add win and loss records to teamWinRecord and teamLossRecord lists. Adds team ID to \
+                # teamID list
                 record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
                 record = record[0].text.split('-')
                 log.info(record[0] + ' ' + record[1])
                 teamWinRecord.append(record[0])
                 teamLossRecord.append(record[1])
+                teamIDList.append(id)
             except:
                 continue
 
@@ -80,6 +83,7 @@ def getTeamData():
 
     # Create dataframe for lists
     teamData = pd.DataFrame({
+        'Team ID': teamIDList,
         'Team Name': teamName,
         'Team Mascot': teamMascot,
         'Team Win Record': teamWinRecord,
