@@ -38,7 +38,6 @@ def getTeamData():
     teamName = []
     teamMascot = []
     teamRecord = []
-
     teamIDs = getTeamList()
 
     for teamID in teamIDs:
@@ -60,12 +59,12 @@ def getTeamData():
 
             # Name and Mascot
             name = container.h1.find_all('span', class_='db')
-            log.info(name[0].text + ' ' + name[1].text)
+            log.info(name[0].text)
             if name[0].text is not None:
                 teamName.append(name[0].text)
             else:
                 teamName.append('N/A')
-
+# todo: error on Valparaiso, no mascot name[1] out of list range
             if name[1] is not None:
                 teamMascot.append(name[1].text)
             else:
