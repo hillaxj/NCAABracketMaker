@@ -4,13 +4,34 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
 import logging as log
+import re
 from utilities import datapath
 
 # todo: List of team IDs from https://www.espn.com/mens-college-basketball/teams, \
 #  iterate through list insted of all possible teams
 # todo: import schedule data
 
+
+def getTeamList():
+
+    headers = {"Accept-Language": "en-US, en;q=0.5"}
+    urlTeams = 'https://www.espn.com/mens-college-basketball/teams'
+    teamIDs = []
+
+    results = requests.get(urlTeams, headers=headers)
+    soup = BeautifulSoup(results.text, "html.parser")
+    # ID_div = soup.find_all('section', class_="TeamLinks flex items-center")
+    id_div = soup.find_all('a', attrs={'href': re.compile("/mens-college-basketball/team/stats/_/id")})
+    for team in id_div:
+        team = str(team).replace('<a class="AnchorLink" href="/mens-college-basketball/team/stats/_/id/', '')
+        team = team.replace('" tabindex="0">Statistics</a>', '')
+        teamIDs.append(team)
+
+    return teamIDs
+
+
 def getTeamData():
+
     headers = {"Accept-Language": "en-US, en;q=0.5"}
     urlBase = "https://www.espn.com/mens-college-basketball/team/schedule/_/id/"
 
@@ -18,7 +39,9 @@ def getTeamData():
     teamMascot = []
     teamRecord = []
 
-    for teamID in range(1, 1000):
+    teamIDs = getTeamList()
+
+    for teamID in teamIDs:
         log.info('Team ' + str(teamID))
         urlTeam = urlBase + str(teamID)
         results = requests.get(urlTeam, headers=headers)
@@ -28,7 +51,7 @@ def getTeamData():
         for container in team_div:
 
             try:
-            # Record
+                # Record
                 record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
                 log.info(record[0].text)
                 teamRecord.append(record[0].text)
@@ -47,8 +70,6 @@ def getTeamData():
                 teamMascot.append(name[1].text)
             else:
                 teamMascot.append('N/A')
-
-
 
     teamData = pd.DataFrame({
         'Team Name': teamName,
@@ -86,5 +107,6 @@ def getTeamData():
         #     grosses = nv[1].text if len(nv) > 1 else '-'
         #     us_gross.append(grosses)
     return None
+
 
 getTeamData()
