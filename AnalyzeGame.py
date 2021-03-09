@@ -1,4 +1,3 @@
-import logging as log
 from utilities import datapath
 import pandas as pd
 
@@ -14,9 +13,9 @@ def whoWins(team1, team2):
     team2losses = df.loc[team2, 'Team Loss Record']
 
     # Compares wins and losses, tie goes to team2
-    if team1wins > team2wins and team1losses < team2losses:
-        winner = team1
-    else:
+    if team1wins < team2wins and team1losses > team2losses:
         winner = team2
+    else:
+        winner = team1
 
     return winner
