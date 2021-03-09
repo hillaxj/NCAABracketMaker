@@ -43,6 +43,8 @@ def getTeamData(gender, league, sport, year):
     teamWinRecord = []
     teamLossRecord = []
     teamIDList = []
+    teamScheduleResults = []
+    # teamIDs = [2473, 127]
     teamIDs = getTeamList(gender, league, sport)
 
     # Iterate through each teamID and populate list
@@ -81,13 +83,58 @@ def getTeamData(gender, league, sport, year):
                 teamMascot.append('N/A')
             log.info(teamName[-1] + " " + teamMascot[-1])
 
+        schedule_div = soup.find_all('tr', attrs={'class': re.compile("Table__TR Table__TR--sm Table__even")})
+        gameCount = 1
+        teamSchedule = {}
+        for container in schedule_div:
+
+            # gameDate = ''
+            # gameOpponent = ''
+            # gameOpponentRank = ''
+            # gameResult = ''
+            # gameTeamScore = ''
+            # gameOpponentScore = ''
+            try:
+                lines = container.find_all('td')
+                gameDate = lines[0].text
+
+                removedLoc = lines[1].text.partition(' ')[2].strip('*').strip()
+                removedLoc2 = removedLoc.partition(' ')[0]
+
+                if removedLoc.partition(' ')[2] == '' or len(removedLoc.partition(' ')[0]) > 2:
+                    gameOpponent = removedLoc
+                    gameOpponentRank = 'N/A'
+                else:
+                    gameOpponent = removedLoc.partition(' ')[2]
+                    gameOpponentRank = removedLoc2
+
+                gameResult = lines[2].text[:1]
+                if gameResult == 'W':
+                    gameOpponentScore = lines[2].text.partition('-')[2][:3].strip()
+                    gameTeamScore = lines[2].text.partition('-')[0][1:].strip()
+                    teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
+                                               gameOpponentScore]
+                    gameCount = gameCount + 1
+                elif gameResult == 'L':
+                    gameTeamScore = lines[2].text.partition('-')[2][:3].strip()
+                    gameOpponentScore = lines[2].text.partition('-')[0][1:].strip()
+                    teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
+                                              gameOpponentScore]
+                    gameCount = gameCount + 1
+
+            except:
+                continue
+
+        teamScheduleResults.append(teamSchedule)
+# todo: fix dict lengths so pd works. problems with the new schedule dict
     # Create dataframe for lists
     teamData = pd.DataFrame({
         'Team ID': teamIDList,
         'Team Name': teamName,
         'Team Mascot': teamMascot,
         'Team Win Record': teamWinRecord,
-        'Team Loss Record': teamLossRecord
+        'Team Loss Record': teamLossRecord,
+        # 'Team Schedule Results': teamScheduleResults
 
     })
 
@@ -95,6 +142,3 @@ def getTeamData(gender, league, sport, year):
     teamData.to_csv(datapath + gender + league + sport + year + '.csv')
 
     return None
-
-
-getTeamData('womens', 'college', 'basketball', '2021')
