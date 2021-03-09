@@ -1,14 +1,14 @@
 #First 4 teams by seed
-r1seed16a : 'Prairie View'
-r1seed16b : 'N.C. A&T'
+r1seed16a : 'Prairie View A&M'
+r1seed16b : 'North Carolina A&T'
 
-r1seed12a : 'Boise St.'
+r1seed12a : 'Boise State'
 r1seed12b : 'Xavier'
 
-r4seed16a : 'Nicholls St.'
+r4seed16a : 'Nicholls'
 r4seed16b : 'Hartford'
 
-r4seed12a : 'Colorado St.'
+r4seed12a : 'Colorado State'
 r4seed12b : 'Drake'
 
 #Region 1 teams by seed
@@ -21,11 +21,11 @@ r1seed5 : 'Florida State'
 r1seed6 : 'Tennessee'
 r1seed7 : 'Wisconsin'
 r1seed8 : 'Loyola Chicago'
-r1seed9 : 'Uconn'
+r1seed9 : 'UConn'
 r1seed10 : 'UCLA'
 r1seed11 : 'VCU'
 r1seed12 :
-r1seed13 : 'UCSB'
+r1seed13 : 'UC Santa Barbara'
 r1seed14 : 'Georgia State'
 r1seed15 : 'Southern Utah'
 r1seed16 :
@@ -44,7 +44,7 @@ r2seed9 : 'St. Bonaventure'
 r2seed10 : 'Louisville'
 r2seed11 : 'Georgia Tech'
 r2seed12 : 'Winthrop'
-r2seed13 : 'W. Kentucky'
+r2seed13 : 'Western Kentucky'
 r2seed14 : 'South Dakota State'
 r2seed15 : 'Grand Canyon'
 r2seed16 : 'Northeastern'
@@ -82,7 +82,7 @@ r4seed9 : 'North Carolina'
 r4seed10 : 'Rutgers'
 r4seed11 : 'Michigan State'
 r4seed12 :
-r4seed13 : 'UNCG'
+r4seed13 : 'UNC Greensboro'
 r4seed14 : 'Colgate'
 r4seed15 : 'Cleveland State'
 r4seed16 :
