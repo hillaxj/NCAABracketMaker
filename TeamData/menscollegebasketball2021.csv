@@ -128,11 +128,11 @@
 126,2540,UC Santa Barbara,Gauchos,19,4
 127,232,Charleston,Cougars,9,10
 128,48,Delaware,Blue Hens,7,8
-129,2182,Drexel,Dragons,10,7
+129,2182,Drexel,Dragons,11,7
 130,2210,Elon,Phoenix,10,8
 131,2275,Hofstra,Pride,13,10
 132,256,James Madison,Dukes,13,7
-133,111,Northeastern,Huskies,10,8
+133,111,Northeastern,Huskies,10,9
 134,119,Towson,Tigers,4,14
 135,350,UNC Wilmington,Seahawks,7,10
 136,2729,William & Mary,Tribe,7,10
@@ -154,15 +154,15 @@
 152,2174,Detroit Mercy,Titans,12,10
 153,2739,Green Bay,Phoenix,8,17
 154,85,IUPUI,Jaguars,8,10
-155,270,Milwaukee,Panthers,10,11
-156,94,Northern Kentucky,Norse,14,10
-157,2473,Oakland,Golden Grizzlies,11,17
+155,270,Milwaukee,Panthers,10,12
+156,94,Northern Kentucky,Norse,14,11
+157,2473,Oakland,Golden Grizzlies,12,17
 158,2870,Purdue Fort Wayne,Mastodons,8,15
 159,2523,Robert Morris,Colonials,4,15
 160,82,UIC,Flames,9,13
 161,2750,Wright State,Raiders,18,6
 162,2754,Youngstown State,Penguins,15,12
-163,2099,Canisius,Golden Griffins,7,5
+163,2099,Canisius,Golden Griffins,7,6
 164,2217,Fairfield,Stags,7,16
 165,314,Iona,Gaels,8,5
 166,2363,Manhattan,Jaspers,7,12
@@ -170,7 +170,7 @@
 168,2405,Monmouth,Hawks,12,7
 169,315,Niagara,Purple Eagles,8,10
 170,2514,Quinnipiac,Bobcats,9,12
-171,2520,Rider,Broncs,5,16
+171,2520,Rider,Broncs,6,16
 172,2612,Saint Peter's,Peacocks,13,10
 173,2561,Siena,Saints,12,4
 174,2006,Akron,Zips,14,7
@@ -276,10 +276,10 @@
 274,236,Chattanooga,Mocs,18,8
 275,2193,East Tennessee State,Buccaneers,13,12
 276,231,Furman,Paladins,16,9
-277,2382,Mercer,Bears,18,10
+277,2382,Mercer,Bears,18,11
 278,2535,Samford,Bulldogs,6,13
 279,2643,The Citadel,Bulldogs,13,12
-280,2430,UNC Greensboro,Spartans,20,8
+280,2430,UNC Greensboro,Spartans,21,8
 281,2678,VMI,Keydets,13,12
 282,2717,Western Carolina,Catamounts,11,16
 283,2747,Wofford,Terriers,15,9
@@ -308,18 +308,18 @@
 306,2640,Texas Southern,Tigers,13,8
 307,2172,Denver,Pioneers,2,19
 308,155,North Dakota,Fighting Hawks,9,17
-309,2449,North Dakota State,Bison,14,11
+309,2449,North Dakota State,Bison,15,11
 310,2437,Omaha,Mavericks,5,20
 311,198,Oral Roberts,Golden Eagles,15,10
-312,233,South Dakota,Coyotes,14,10
+312,233,South Dakota,Coyotes,14,11
 313,2571,South Dakota State,Jackrabbits,16,7
 314,140,UM Kansas City,Roos,11,13
 315,2710,Western Illinois,Leathernecks,7,15
-316,2026,Appalachian State,Mountaineers,16,11
+316,2026,Appalachian State,Mountaineers,17,11
 317,2032,Arkansas State,Red Wolves,11,13
 318,324,Coastal Carolina,Chanticleers,16,7
 319,290,Georgia Southern,Eagles,13,13
-320,2247,Georgia State,Panthers,16,5
+320,2247,Georgia State,Panthers,16,6
 321,2031,Little Rock,Trojans,11,15
 322,309,Louisiana,Ragin' Cajuns,17,9
 323,6,South Alabama,Jaguars,17,11
@@ -328,12 +328,12 @@
 326,2433,UL Monroe,Warhawks,7,19
 327,250,UT Arlington,Mavericks,13,13
 328,252,BYU,Cougars,19,5
-329,2250,Gonzaga,Bulldogs,24,0
+329,2250,Gonzaga,Bulldogs,25,0
 330,2351,Loyola Marymount,Lions,13,9
 331,279,Pacific,Tigers,9,9
 332,2492,Pepperdine,Waves,12,11
 333,2501,Portland,Pilots,6,15
-334,2608,Saint Mary's,Gaels,14,8
+334,2608,Saint Mary's,Gaels,14,9
 335,301,San Diego,Toreros,3,11
 336,2539,San Francisco,Dons,11,14
 337,2541,Santa Clara,Broncos,12,8
