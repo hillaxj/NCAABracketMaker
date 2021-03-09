@@ -7,10 +7,11 @@ import logging as log
 import re
 from utilities import datapath
 
+# common fxn parameters
+headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 def getTeamList():
     # Adds each team ID from complete team list url to list and returns list
-    headers = {"Accept-Language": "en-US, en;q=0.5"}
     # url for mens NCAA team list, future state: able to change sport and division
     urlTeams = 'https://www.espn.com/mens-college-basketball/teams'
     teamIDs = []
@@ -33,7 +34,6 @@ def getTeamList():
 def getTeamData():
     # Generates CSV with all team names, mascots, and win/loss record
     # todo: import schedule data
-    headers = {"Accept-Language": "en-US, en;q=0.5"}
     # url for mens NCAA team schedule, future state: able to change sport and division
     urlBase = "https://www.espn.com/mens-college-basketball/team/schedule/_/id/"
 
