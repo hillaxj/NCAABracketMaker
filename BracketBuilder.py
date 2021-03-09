@@ -50,6 +50,3 @@ def bracketSim(bracketfile, teamdatafile):
     print(champion)
 
     return None
-
-
-bracketSim('NCAAMBracket2021.yaml', 'menscollegebasketball2021.csv')
