@@ -52,4 +52,4 @@ def bracketSim(bracketfile, teamdatafile):
     return None
 
 
-bracketSim('NCAAWBracket2021.yaml', 'womenscollegebasketball2021.csv')
+bracketSim('NCAAMBracket2021.yaml', 'menscollegebasketball2021.csv')

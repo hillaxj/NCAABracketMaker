@@ -5,7 +5,7 @@ import pandas as pd
 def whoWins(team1, team2, teamdatafile):
     # Selects winner based on team records
 
-    # Pulls each team's wins and losses from TeamData.csv
+    # Pulls each team's wins and losses from team data csv
     df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
     team1wins = df.loc[team1, 'Team Win Record']
     team1losses = df.loc[team1, 'Team Loss Record']
