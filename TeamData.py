@@ -33,7 +33,7 @@ def getTeamList(gender, league, sport):
 
 def getTeamData(gender, league, sport, year):
     # Generates CSV with all team names, mascots, and win/loss record
-    # todo: import schedule data
+
     # url for mens NCAA team schedule
     urlBase = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/team/schedule/_/id/'
 
@@ -44,13 +44,14 @@ def getTeamData(gender, league, sport, year):
     teamLossRecord = []
     teamIDList = []
     teamScheduleResults = []
-    # teamIDs = [2473, 127]
+    # Test teams list
+    # teamIDs = [2473, 127, 251, 399, 171, 172]
     teamIDs = getTeamList(gender, league, sport)
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
         log.info('Team ' + str(id))
-        urlTeam = urlBase + str(id)
+        urlTeam = urlBase + str(id) + '/season/' + year
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
         # Find team info from HTML
@@ -83,50 +84,49 @@ def getTeamData(gender, league, sport, year):
                 teamMascot.append('N/A')
             log.info(teamName[-1] + " " + teamMascot[-1])
 
+        # Finds each row in schedule table
         schedule_div = soup.find_all('tr', attrs={'class': re.compile("Table__TR Table__TR--sm Table__even")})
         gameCount = 1
         teamSchedule = {}
+        # Iterates through each row and extracts date, opponent, opponent rank, result, team score, and opponent score
         for container in schedule_div:
-
-            # gameDate = ''
-            # gameOpponent = ''
-            # gameOpponentRank = ''
-            # gameResult = ''
-            # gameTeamScore = ''
-            # gameOpponentScore = ''
+            # Finds data in each row
             try:
                 lines = container.find_all('td')
                 gameDate = lines[0].text
 
+                # Removes excess info
                 removedLoc = lines[1].text.partition(' ')[2].strip('*').strip()
                 removedLoc2 = removedLoc.partition(' ')[0]
-
-                if removedLoc.partition(' ')[2] == '' or len(removedLoc.partition(' ')[0]) > 2:
+                # Records team rank if present
+                if removedLoc.partition(' ')[2] == '' or len(removedLoc2) > 2:
                     gameOpponent = removedLoc
                     gameOpponentRank = 'N/A'
                 else:
                     gameOpponent = removedLoc.partition(' ')[2]
                     gameOpponentRank = removedLoc2
 
+                # Extracts team result and add scores to correct var
                 gameResult = lines[2].text[:1]
                 if gameResult == 'W':
                     gameOpponentScore = lines[2].text.partition('-')[2][:3].strip()
                     gameTeamScore = lines[2].text.partition('-')[0][1:].strip()
-                    teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
-                                               gameOpponentScore]
-                    gameCount = gameCount + 1
                 elif gameResult == 'L':
                     gameTeamScore = lines[2].text.partition('-')[2][:3].strip()
                     gameOpponentScore = lines[2].text.partition('-')[0][1:].strip()
-                    teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
+                else:
+                    continue
+                teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
                                               gameOpponentScore]
-                    gameCount = gameCount + 1
-
+                gameCount = gameCount + 1
             except:
                 continue
 
-        teamScheduleResults.append(teamSchedule)
-# todo: fix dict lengths so pd works. problems with the new schedule dict
+        if teamSchedule == {}:
+            continue
+        else:
+            teamScheduleResults.append(teamSchedule)
+
     # Create dataframe for lists
     teamData = pd.DataFrame({
         'Team ID': teamIDList,
@@ -134,7 +134,7 @@ def getTeamData(gender, league, sport, year):
         'Team Mascot': teamMascot,
         'Team Win Record': teamWinRecord,
         'Team Loss Record': teamLossRecord,
-        # 'Team Schedule Results': teamScheduleResults
+        'Team Schedule Results': teamScheduleResults
 
     })
 
