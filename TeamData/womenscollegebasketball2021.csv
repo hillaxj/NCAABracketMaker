@@ -1,0 +1,345 @@
+,Team ID,Team Name,Team Mascot,Team Win Record,Team Loss Record
+0,91,Bellarmine,Knights,5,16
+1,526,Florida Gulf Coast,Eagles,23,2
+2,294,Jacksonville,Dolphins,3,16
+3,338,Kennesaw State,Lady Owls,7,11
+4,2335,Liberty,Flames,17,7
+5,288,Lipscomb,Lady Bisons,11,9
+6,2453,North Alabama,Lions,7,17
+7,2454,North Florida,Lady Ospreys,13,10
+8,56,Stetson,Hatters,9,12
+9,399,Albany,Great Danes,7,11
+10,2066,Binghamton,Bearcats,5,11
+11,42,Hartford,Hawks,3,9
+12,311,Maine,Black Bears,17,2
+13,2885,NJIT,Highlanders,4,14
+14,160,New Hampshire,Wildcats,5,15
+15,2619,Stony Brook,Seawolves,14,5
+16,2378,UMBC,Retrievers,2,6
+17,2349,UMass Lowell,River Hawks,12,9
+18,261,Vermont,Catamounts,4,2
+19,2132,Cincinnati,Bearcats,8,15
+20,151,East Carolina,Pirates,8,13
+21,248,Houston,Cougars,15,6
+22,235,Memphis,Tigers,4,15
+23,2567,SMU,Mustangs,0,6
+24,58,South Florida,Bulls,15,3
+25,218,Temple,Owls,11,10
+26,2655,Tulane,Green Wave,16,7
+27,202,Tulsa,Golden Hurricane,5,14
+28,2116,UCF,Knights,14,3
+29,2724,Wichita State,Shockers,6,11
+30,2166,Davidson,Wildcats,8,13
+31,2168,Dayton,Flyers,13,2
+32,2184,Duquesne,Dukes,5,10
+33,2230,Fordham,Rams,12,3
+34,2244,George Mason,Patriots,3,18
+35,45,George Washington,Colonials,8,13
+36,2325,La Salle,Explorers,11,13
+37,227,Rhode Island,Rams,11,7
+38,257,Richmond,Spiders,12,8
+39,2603,Saint Joseph's,Hawks,7,9
+40,139,Saint Louis,Billikens,11,3
+41,179,St. Bonaventure,Bonnies,6,14
+42,113,UMass,Minutewomen,11,6
+43,2670,VCU,Rams,12,10
+44,103,Boston College,Eagles,7,12
+45,228,Clemson,Tigers,11,13
+46,150,Duke,Blue Devils,3,1
+47,52,Florida State,Seminoles,10,8
+48,59,Georgia Tech,Yellow Jackets,15,8
+49,97,Louisville,Cardinals,23,3
+50,2390,Miami,Hurricanes,11,11
+51,152,NC State,Wolfpack,20,2
+52,153,North Carolina,Tar Heels,13,10
+53,87,Notre Dame,Fighting Irish,10,10
+54,221,Pittsburgh,Panthers,5,14
+55,183,Syracuse,Orange,14,8
+56,258,Virginia,Cavaliers,0,5
+57,259,Virginia Tech,Hokies,14,9
+58,154,Wake Forest,Demon Deacons,12,12
+59,239,Baylor,Bears,21,2
+60,66,Iowa State,Cyclones,16,9
+61,2305,Kansas,Jayhawks,7,17
+62,2306,Kansas State,Wildcats,8,17
+63,201,Oklahoma,Sooners,12,11
+64,197,Oklahoma State,Cowgirls,17,7
+65,2628,TCU,Horned Frogs,9,14
+66,251,Texas,Longhorns,17,8
+67,2641,Texas Tech,Lady Raiders,10,14
+68,277,West Virginia,Mountaineers,19,4
+69,2086,Butler,Bulldogs,3,17
+70,156,Creighton,Bluejays,9,11
+71,305,DePaul,Blue Demons,14,8
+72,46,Georgetown,Hoyas,2,15
+73,269,Marquette,Golden Eagles,19,5
+74,2507,Providence,Friars,7,14
+75,2550,Seton Hall,Pirates,14,7
+76,2599,St. John's,Red Storm,8,15
+77,41,UConn,Huskies,23,1
+78,222,Villanova,Wildcats,15,6
+79,2752,Xavier,Musketeers,5,10
+80,331,Eastern Washington,Eagles,6,17
+81,304,Idaho State,Bengals,18,3
+82,70,Idaho,Vandals,15,6
+83,149,Montana,Lady Griz,12,10
+84,147,Montana State,Bobcats,16,6
+85,2464,Northern Arizona,Lumberjacks,12,12
+86,2458,Northern Colorado,Bears,13,11
+87,2502,Portland State,Vikings,12,12
+88,16,Sacramento State,Hornets,2,21
+89,253,Southern Utah,Thunderbirds,11,8
+90,2692,Weber State,Wildcats,2,20
+91,2097,Campbell,Fighting Camels,15,6
+92,2127,Charleston Southern,Buccaneers,6,17
+93,2241,Gardner-Webb,Runnin' Bulldogs,10,12
+94,2261,Hampton,Lady Pirates,4,11
+95,2272,High Point,Panthers,20,6
+96,2344,Longwood,Lancers,13,10
+97,2506,Presbyterian,Blue Hose,11,9
+98,2515,Radford,Highlanders,9,11
+99,2908,South Carolina Upstate,Spartans,8,15
+100,2427,UNC Asheville,Bulldogs,10,14
+101,2737,Winthrop,Eagles,6,18
+102,356,Illinois,Fighting Illini,4,17
+103,84,Indiana,Hoosiers,18,4
+104,2294,Iowa,Hawkeyes,15,8
+105,120,Maryland,Terrapins,21,2
+106,127,Michigan State,Spartans,13,7
+107,130,Michigan,Wolverines,14,4
+108,135,Minnesota,Golden Gophers,8,12
+109,158,Nebraska,Cornhuskers,11,11
+110,77,Northwestern,Wildcats,13,7
+111,194,Ohio State,Buckeyes,13,7
+112,213,Penn State,Lady Lions,9,14
+113,2509,Purdue,Boilermakers,7,15
+114,164,Rutgers,Scarlet Knights,14,3
+115,275,Wisconsin,Badgers,5,18
+116,2934,CSU Bakersfield,Roadrunners,9,8
+117,2239,CSU Fullerton,Titans,3,17
+118,2463,CSU Northridge,Matadors,0,0
+119,13,Cal Poly,Mustangs,12,10
+120,62,Hawai'i,Rainbow Wahine,8,7
+121,299,Long Beach State,Beach,12,8
+122,302,UC Davis,Aggies,10,2
+123,300,UC Irvine,Anteaters,13,8
+124,27,UC Riverside,Highlanders,7,11
+125,28,UC San Diego,Tritons,6,9
+126,2540,UC Santa Barbara,Gauchos,7,13
+127,232,Charleston,Cougars,6,8
+128,48,Delaware,Blue Hens,19,3
+129,2182,Drexel,Dragons,11,8
+130,2210,Elon,Phoenix,7,7
+131,2275,Hofstra,Pride,7,11
+132,256,James Madison,Dukes,13,9
+133,111,Northeastern,Huskies,7,12
+134,119,Towson,Tigers,13,8
+135,350,UNC Wilmington,Seahawks,6,13
+136,2729,William & Mary,Tribe,6,7
+137,2429,Charlotte,49ers,10,9
+138,2226,Florida Atlantic,Owls,10,10
+139,2229,Florida International,Panthers,12,11
+140,2348,Louisiana Tech,Lady Techsters,13,9
+141,276,Marshall,Thundering Herd,8,10
+142,2393,Middle Tennessee,Lady Raiders,14,7
+143,249,North Texas,Mean Green,13,6
+144,295,Old Dominion,Monarchs,10,10
+145,242,Rice,Owls,16,3
+146,2572,Southern Miss,Golden Eagles,7,11
+147,5,UAB,Blazers,9,12
+148,2638,UTEP,Miners,16,7
+149,2636,UTSA,Roadrunners,2,17
+150,98,Western Kentucky,Lady Toppers,7,15
+151,325,Cleveland State,Vikings,11,9
+152,2174,Detroit Mercy,Titans,1,13
+153,2739,Green Bay,Phoenix,15,7
+154,85,IUPUI,Jaguars,15,4
+155,270,Milwaukee,Panthers,19,7
+156,94,Northern Kentucky,Norse,8,11
+157,2473,Oakland,Golden Grizzlies,12,12
+158,2870,Purdue Fort Wayne,Mastodons,1,22
+159,2523,Robert Morris,Colonials,4,13
+160,82,UIC,Flames,3,16
+161,2750,Wright State,Raiders,17,7
+162,2754,Youngstown State,Penguins,10,8
+163,2099,Canisius,Golden Griffins,0,5
+164,2217,Fairfield,Stags,10,4
+165,314,Iona,Gaels,6,8
+166,2363,Manhattan,Lady Jaspers,10,6
+167,2368,Marist,Red Foxes,15,3
+168,2405,Monmouth,Hawks,2,15
+169,315,Niagara,Purple Eagles,4,6
+170,2514,Quinnipiac,Bobcats,13,7
+171,2520,Rider,Broncs,6,17
+172,2612,Saint Peter's,Peacocks,11,14
+173,2561,Siena,Saints,3,8
+174,2006,Akron,Zips,7,14
+175,2050,Ball State,Cardinals,14,10
+176,189,Bowling Green,Falcons,18,5
+177,2084,Buffalo,Bulls,14,8
+178,2117,Central Michigan,Chippewas,15,8
+179,2199,Eastern Michigan,Eagles,10,9
+180,2309,Kent State,Golden Flashes,11,8
+181,193,Miami (OH),Redhawks,4,20
+182,2459,Northern Illinois,Huskies,12,11
+183,195,Ohio,Bobcats,13,7
+184,2649,Toledo,Rockets,12,12
+185,2711,Western Michigan,Broncos,6,15
+186,2154,Coppin State,Eagles,2,12
+187,2169,Delaware State,Lady Hornets,3,12
+188,47,Howard,Bison,14,3
+189,2415,Morgan State,Lady Bears,11,3
+190,2450,Norfolk State,Spartans,4,8
+191,2448,North Carolina A&T,Aggies,12,2
+192,2428,North Carolina Central,Eagles,4,11
+193,2569,South Carolina State,Lady Bulldogs,1,9
+194,71,Bradley,Braves,14,11
+195,2181,Drake,Bulldogs,15,10
+196,339,Evansville,Purple Aces,6,16
+197,2287,Illinois State,Redbirds,14,6
+198,282,Indiana State,Sycamores,5,14
+199,2350,Loyola Chicago,Ramblers,10,12
+200,2623,Missouri State,Lady Bears,20,2
+201,2460,Northern Iowa,Panthers,14,11
+202,79,Southern Illinois,Salukis,8,15
+203,2674,Valparaiso,N/A,11,12
+204,2005,Air Force,Falcons,8,18
+205,68,Boise State,Broncos,13,8
+206,36,Colorado State,Rams,15,5
+207,278,Fresno State,Bulldogs,15,9
+208,2440,Nevada,Wolf Pack,13,9
+209,167,New Mexico,Lobos,15,3
+210,21,San Diego State,Aztecs,7,17
+211,23,San José State,Spartans,2,2
+212,2439,UNLV,Lady Rebels,15,8
+213,328,Utah State,Aggies,4,20
+214,2751,Wyoming,Cowgirls,11,9
+215,2803,Bryant,Bulldogs,7,14
+216,2115,Central Connecticut,Blue Devils,4,14
+217,161,Fairleigh Dickinson,Knights,16,7
+218,112358,Long Island University,Sharks,7,11
+219,2771,Merrimack,Warriors,5,10
+220,116,Mount St. Mary's,Mountaineers,15,6
+221,2529,Sacred Heart,Pioneers,8,10
+222,2597,St. Francis (BKN),Terriers,4,10
+223,2598,St. Francis (PA),Red Flash,14,8
+224,2681,Wagner,Seahawks,12,5
+225,2046,Austin Peay,Lady Govs,12,11
+226,2057,Belmont,Bruins,20,5
+227,2197,Eastern Illinois,Panthers,11,15
+228,2198,Eastern Kentucky,Colonels,9,15
+229,55,Jacksonville State,Gamecocks,15,9
+230,2413,Morehead State,Eagles,7,16
+231,93,Murray State,Racers,16,11
+232,2565,SIU Edwardsville,Cougars,6,19
+233,2546,Southeast Missouri State,Redhawks,15,11
+234,2634,Tennessee State,Lady Tigers,0,22
+235,2635,Tennessee Tech,Golden Eagles,15,10
+236,2630,UT Martin,Skyhawks,20,5
+237,9,Arizona State,Sun Devils,11,10
+238,12,Arizona,Wildcats,16,5
+239,25,California,Golden Bears,1,16
+240,38,Colorado,Buffaloes,10,10
+241,2483,Oregon,Ducks,13,8
+242,204,Oregon State,Beavers,11,7
+243,24,Stanford,Cardinal,25,2
+244,26,UCLA,Bruins,16,5
+245,30,USC,Trojans,11,12
+246,254,Utah,Utes,5,16
+247,264,Washington,Huskies,7,14
+248,265,Washington State,Cougars,12,11
+249,44,American,Eagles,7,3
+250,349,Army,Black Knights,9,11
+251,104,Boston University,Terriers,11,2
+252,2083,Bucknell,Bison,9,0
+253,2142,Colgate,Raiders,1,8
+254,107,Holy Cross,Crusaders,7,8
+255,322,Lafayette,Leopards,5,8
+256,2329,Lehigh,Mountain Hawks,8,5
+257,2352,Loyola (MD),Greyhounds,0,13
+258,2426,Navy,Midshipmen,5,7
+259,333,Alabama,Crimson Tide,16,9
+260,8,Arkansas,Razorbacks,19,8
+261,2,Auburn,Tigers,5,19
+262,57,Florida,Gators,11,13
+263,61,Georgia,Lady Bulldogs,20,6
+264,96,Kentucky,Wildcats,17,8
+265,99,LSU,Tigers,9,13
+266,344,Mississippi State,Bulldogs,10,9
+267,142,Missouri,Tigers,9,11
+268,145,Ole Miss,Rebels,11,11
+269,2579,South Carolina,Gamecocks,22,4
+270,2633,Tennessee,Lady Volunteers,16,7
+271,245,Texas A&M,Aggies,23,2
+272,238,Vanderbilt,Commodores,4,4
+273,236,Chattanooga,Mocs,14,10
+274,2193,East Tennessee State,Bucs,4,16
+275,231,Furman,Lady Paladins,11,14
+276,2382,Mercer,Bears,19,6
+277,2535,Samford,Bulldogs,14,9
+278,2430,UNC Greensboro,Spartans,8,16
+279,2717,Western Carolina,Catamounts,6,18
+280,2747,Wofford,Terriers,13,11
+281,2000,Abilene Christian,Wildcats,13,9
+282,2110,Central Arkansas,Sugar Bears,11,13
+283,2277,Houston Baptist,Huskies,10,10
+284,2916,Incarnate Word,Cardinals,6,8
+285,2320,Lamar,Cardinals,10,13
+286,2377,McNeese,Cowgirls,6,15
+287,2443,New Orleans,Privateers,6,15
+288,2447,Nicholls,Colonels,10,13
+289,2466,Northwestern State,Lady Demons,1,19
+290,2545,SE Louisiana,Lady Lions,11,7
+291,2534,Sam Houston State,Bearkats,13,7
+292,2617,Stephen F. Austin,Ladyjacks,22,2
+293,357,Texas A&M-CC,Islanders,6,13
+294,2010,Alabama A&M,Bulldogs,10,6
+295,2011,Alabama State,Lady Hornets,14,3
+296,2016,Alcorn State,Lady Braves,7,12
+297,2029,Arkansas-Pine Bluff,Golden Lions,3,18
+298,2755,Grambling,Lady Tigers,9,9
+299,2296,Jackson State,Lady Tigers,15,5
+300,2400,Mississippi Valley State,Devilettes,4,15
+301,2504,Prairie View A&M,Lady Panthers,3,13
+302,2582,Southern,Lady Jaguars,11,10
+303,2640,Texas Southern,Lady Tigers,5,9
+304,2172,Denver,Pioneers,7,16
+305,155,North Dakota,Fighting Hawks,2,19
+306,2449,North Dakota State,Bison,15,9
+307,2437,Omaha,Mavericks,7,12
+308,198,Oral Roberts,Golden Eagles,6,15
+309,233,South Dakota,Coyotes,18,5
+310,2571,South Dakota State,Jackrabbits,21,3
+311,140,UM Kansas City,Roos,10,12
+312,2710,Western Illinois,Leathernecks,8,16
+313,2026,Appalachian State,Mountaineers,15,12
+314,2032,Arkansas State,Red Wolves,9,12
+315,324,Coastal Carolina,Chanticleers,3,15
+316,290,Georgia Southern,Eagles,11,13
+317,2247,Georgia State,Panthers,13,11
+318,2031,Little Rock,Trojans,15,11
+319,309,Louisiana,Ragin' Cajuns,16,6
+320,6,South Alabama,Jaguars,13,13
+321,326,Texas State,Bobcats,11,11
+322,2653,Troy,Trojans,22,5
+323,2433,UL Monroe,Warhawks,3,20
+324,250,UT Arlington,Mavericks,13,7
+325,252,BYU,Cougars,18,4
+326,2250,Gonzaga,Bulldogs,22,3
+327,2351,Loyola Marymount,Lions,7,19
+328,279,Pacific,Tigers,11,11
+329,2492,Pepperdine,Waves,5,18
+330,2501,Portland,Pilots,12,12
+331,2608,Saint Mary's,Gaels,7,19
+332,301,San Diego,Toreros,12,7
+333,2539,San Francisco,Dons,15,10
+334,2541,Santa Clara,Broncos,14,11
+335,2856,California Baptist,Lancers,22,0
+336,2130,Chicago State,Cougars,0,13
+337,3101,Dixie State,Trailblazers,1,2
+338,2253,Grand Canyon,Antelopes,16,6
+339,166,New Mexico State,Aggies,8,11
+340,2547,Seattle U,Redhawks,11,13
+341,2627,Tarleton,Texans,9,16
+342,292,UT Rio Grande Valley,Vaqueros,6,13
+343,3084,Utah Valley,Wolverines,12,5
