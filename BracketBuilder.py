@@ -1,6 +1,4 @@
-import logging as log
 from utilities import bracketpath
-import pandas as pd
 import yaml
 from AnalyzeGame import whoWins
 from math import pow
@@ -19,13 +17,12 @@ with open(bracketpath + 'Bracket2021.yaml') as f:
 def roundResults(teams, round):
     # Tests each game for defined round
     winners = {}
-    maxRange = int(pow(2, 4-round) + 1)
-    maxSeed = int(pow(2, 5-round) + 1)
 
+    # Loops through each seed by region
     for x in range(1, 5):
-        for y in range(1, maxRange):
+        for y in range(1, int(pow(2, 4-round) + 1)):
             winners['r' + str(x) + 'seed' + str(y)] = whoWins(teams.get('r' + str(x) + 'seed' + str(y)), \
-                                                              teams.get('r' + str(x) + 'seed' + str(maxSeed-y)))
+                                                              teams.get('r' + str(x) + 'seed' + str(int(pow(2, 5-round) + 1-y))))
 
     return winners
 
