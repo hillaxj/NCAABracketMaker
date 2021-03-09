@@ -9,32 +9,33 @@ from utilities import datapath
 headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 
-def getTeamList():
+def getTeamList(gender, league, sport):
     # Adds each team ID from complete team list url to list and returns list
-    # url for mens NCAA team list, future state: able to change sport and division
-    urlTeams = 'https://www.espn.com/mens-college-basketball/teams'
+    # url for mens NCAA team list
+    urlTeams = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/teams'
     teamIDs = []
 
     results = requests.get(urlTeams, headers=headers)
     soup = BeautifulSoup(results.text, "html.parser")
 
     # Finds string containing team ID based on stats button
-    id_div = soup.find_all('a', attrs={'href': re.compile("/team/stats/_/id")})
+    id_div = soup.find_all('a', attrs={'href': re.compile("/team/schedule/_/id")})
 
     # Trims excess text from HTML to get only team ID, adds ID to list
     for team in id_div:
-        team = str(team).replace('<a class="AnchorLink" href="/mens-college-basketball/team/stats/_/id/', '')
-        team = team.replace('" tabindex="0">Statistics</a>', '')
+        team = str(team).replace('<a class="AnchorLink" href="/' + gender + '-' + league + '-' + sport + \
+                                 '/team/schedule/_/id/', '')
+        team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
     return teamIDs
 
 
-def getTeamData():
+def getTeamData(gender, league, sport, year):
     # Generates CSV with all team names, mascots, and win/loss record
     # todo: import schedule data
-    # url for mens NCAA team schedule, future state: able to change sport and division
-    urlBase = "https://www.espn.com/mens-college-basketball/team/schedule/_/id/"
+    # url for mens NCAA team schedule
+    urlBase = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/team/schedule/_/id/'
 
     # Initialize lists
     teamName = []
@@ -42,7 +43,7 @@ def getTeamData():
     teamWinRecord = []
     teamLossRecord = []
     teamIDList = []
-    teamIDs = getTeamList()
+    teamIDs = getTeamList(gender, league, sport)
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
@@ -91,9 +92,9 @@ def getTeamData():
     })
 
     # Export dataframe to CSV file in TeamData directory
-    teamData.to_csv(datapath + "TeamData.csv")
+    teamData.to_csv(datapath + gender + league + sport + year + '.csv')
 
     return None
 
 
-getTeamData()
+getTeamData('womens', 'college', 'basketball', '2021')
