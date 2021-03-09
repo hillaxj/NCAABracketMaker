@@ -1,14 +1,13 @@
 import requests
-from requests import get
 from bs4 import BeautifulSoup
 import pandas as pd
-import numpy as np
 import logging as log
 import re
 from utilities import datapath
 
 # common fxn parameters
 headers = {"Accept-Language": "en-US, en;q=0.5"}
+
 
 def getTeamList():
     # Adds each team ID from complete team list url to list and returns list
