@@ -18,7 +18,7 @@ def roundResults(teams, round):
     # Tests each game for defined round
     winners = {}
 
-    # Loops through each seed by region
+    # Loops through each game by region
     for x in range(1, 5):
         for y in range(1, int(pow(2, 4-round) + 1)):
             winners['r' + str(x) + 'seed' + str(y)] = whoWins(teams.get('r' + str(x) + 'seed' + str(y)), \
