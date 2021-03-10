@@ -20,15 +20,20 @@ def whoWins(team1, team2, teamdatafile):
     return winner
 
 def scheduleStrength(team, teamdatafile):
-    # Calculates value for schedule difficulty, need to tweak
+    # Calculates value for schedule difficulty, need to tweak a lot
     strength = 1
+    opponentStrength = []
     # Reads csv file
     df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
     # Creates dict of games played
     schedule = ast.literal_eval(df.at[team, 'Team Schedule Results'])
     # Iterates through games played and calculates strength based on opponent record
     for i in range(1, len(schedule) + 1):
-        opponentStrength = df.at[schedule.get(i)[1], 'Team Win Record'] / (df.at[schedule.get(i)[1], 'Team Loss Record'] + 1)
-        strength = strength / opponentStrength
+        try:
+            opponentStrength.append(df.at[schedule.get(i)[1], 'Team Win Record'] / (df.at[schedule.get(i)[1], \
+                                                                                          'Team Loss Record'] + 1))
+            strength = sum(opponentStrength) / len(opponentStrength)
+        except:
+            continue
 
     return strength
