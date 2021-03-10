@@ -8,8 +8,8 @@ def whoWins(team1, team2, teamdatafile):
 
     # Pulls each team's wins and losses from team data csv
     df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
-    team1Ratio = df.at[team1, 'Team Win Record'] / (df.at[team1, 'Team Loss Record'] + 1)
-    team2Ratio = df.at[team2, 'Team Win Record'] / (df.at[team2, 'Team Loss Record'] + 1)
+    team1Ratio = df.at[team1, 'Team Win Ratio']
+    team2Ratio = df.at[team2, 'Team Win Ratio']
 
     # Compares wins and losses, tie goes to team2
     if team1Ratio >= team2Ratio:
@@ -19,21 +19,28 @@ def whoWins(team1, team2, teamdatafile):
 
     return winner
 
-def scheduleStrength(team, teamdatafile):
+
+def scheduleStrength(teamdatafile):
     # Calculates value for schedule difficulty, need to tweak a lot
-    strength = 1
-    opponentStrength = []
     # Reads csv file
     df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
-    # Creates dict of games played
-    schedule = ast.literal_eval(df.at[team, 'Team Schedule Results'])
-    # Iterates through games played and calculates strength based on opponent record
-    for i in range(1, len(schedule) + 1):
-        try:
-            opponentStrength.append(df.at[schedule.get(i)[1], 'Team Win Record'] / (df.at[schedule.get(i)[1], \
-                                                                                          'Team Loss Record'] + 1))
-            strength = sum(opponentStrength) / len(opponentStrength)
-        except:
-            continue
+    teams = df.index.tolist()
+    strength = 1
+    opponentStrength = []
+    strlist = []
 
-    return strength
+    for team in teams:
+        # Creates dict of games played
+        schedule = ast.literal_eval(df.at[team, 'Team Schedule Results'])
+        # Iterates through games played and calculates strength based on opponent record
+        for i in range(1, len(schedule) + 1):
+            try:
+                opponentStrength.append(df.at[schedule.get(i)[1], 'Team Win Ratio'])
+                strength = sum(opponentStrength) / len(opponentStrength)
+            except:
+                continue
+        strlist.append(strength)
+    df['Schedule Strength'] = strlist
+    df.to_csv(datapath + teamdatafile)
+
+    return None
