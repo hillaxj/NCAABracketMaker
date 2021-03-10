@@ -44,8 +44,10 @@ def getTeamData(gender, league, sport, year):
     teamLossRecord = []
     teamIDList = []
     teamScheduleResults = []
-    # Test teams list
+    # Test mens teams list
     # teamIDs = [2473, 127, 251, 399, 171, 172]
+    # Test women's teams list
+    # teamIDs = [24, 12, 2463, 62, 300, 2483, 26]
     teamIDs = getTeamList(gender, league, sport)
 
     # Iterate through each teamID and populate list
@@ -65,9 +67,12 @@ def getTeamData(gender, league, sport, year):
                 record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
                 record = record[0].text.split('-')
                 log.info(record[0] + ' ' + record[1])
-                teamWinRecord.append(record[0])
-                teamLossRecord.append(record[1])
-                teamIDList.append(id)
+                if record[0] == record[1] == '0':
+                    continue
+                else:
+                    teamWinRecord.append(record[0])
+                    teamLossRecord.append(record[1])
+                    teamIDList.append(id)
             except:
                 continue
 
@@ -96,24 +101,32 @@ def getTeamData(gender, league, sport, year):
                 gameDate = lines[0].text
 
                 # Removes excess info
-                removedLoc = lines[1].text.partition(' ')[2].strip('*').strip()
-                removedLoc2 = removedLoc.partition(' ')[0]
+                removedLoc = lines[1].text.split(' ')
                 # Records team rank if present
-                if removedLoc.partition(' ')[2] == '' or len(removedLoc2) > 2:
-                    gameOpponent = removedLoc
-                    gameOpponentRank = 'N/A'
+                try:
+                    int(removedLoc[1])
+                    rankedTeam = True
+                except:
+                    rankedTeam = False
+
+                if rankedTeam:
+                    gameOpponent = ' '.join(removedLoc[2:]).strip().strip('*').strip()
+                    gameOpponentRank = removedLoc[1]
                 else:
-                    gameOpponent = removedLoc.partition(' ')[2]
-                    gameOpponentRank = removedLoc2
+                    gameOpponent = ' '.join(removedLoc[1:]).strip().strip('*').strip()
+                    gameOpponentRank = 'N/A'
 
                 # Extracts team result and add scores to correct var
+
                 gameResult = lines[2].text[:1]
+                gameScore = lines[2].text.replace('-', ' ')
+                gameScore = gameScore.split(' ')
                 if gameResult == 'W':
-                    gameOpponentScore = lines[2].text.partition('-')[2][:3].strip()
-                    gameTeamScore = lines[2].text.partition('-')[0][1:].strip()
+                    gameOpponentScore = gameScore[1]
+                    gameTeamScore = gameScore[0][1:]
                 elif gameResult == 'L':
-                    gameTeamScore = lines[2].text.partition('-')[2][:3].strip()
-                    gameOpponentScore = lines[2].text.partition('-')[0][1:].strip()
+                    gameTeamScore = gameScore[1]
+                    gameOpponentScore = gameScore[0][1:]
                 else:
                     continue
                 teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
