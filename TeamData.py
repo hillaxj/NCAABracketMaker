@@ -53,7 +53,7 @@ def getTeamData(gender, league, sport, year):
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
-        log.info('Team ' + str(id))
+        # log.info('Team ' + str(id))
         urlTeam = urlBase + str(id) + '/season/' + year
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
@@ -67,7 +67,7 @@ def getTeamData(gender, league, sport, year):
                 # teamID list
                 record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
                 record = record[0].text.split('-')
-                log.info(record[0] + ' ' + record[1])
+                # log.info(record[0] + ' ' + record[1])
                 if record[0] == '0' and record[1] == '0':
                     continue
                 else:
@@ -89,7 +89,7 @@ def getTeamData(gender, league, sport, year):
                 teamMascot.append(name[1].text)
             except:
                 teamMascot.append('N/A')
-            log.info(teamName[-1] + " " + teamMascot[-1])
+            # log.info(teamName[-1] + " " + teamMascot[-1])
 
         # Finds each row in schedule table
         schedule_div = soup.find_all('tr', attrs={'class': re.compile("Table__TR Table__TR--sm Table__even")})
