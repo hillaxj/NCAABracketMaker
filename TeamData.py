@@ -42,6 +42,7 @@ def getTeamData(gender, league, sport, year):
     teamMascot = []
     teamWinRecord = []
     teamLossRecord = []
+    teamWinRatio = []
     teamIDList = []
     teamScheduleResults = []
     # Test mens teams list
@@ -67,11 +68,12 @@ def getTeamData(gender, league, sport, year):
                 record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
                 record = record[0].text.split('-')
                 log.info(record[0] + ' ' + record[1])
-                if record[0] == record[1] == '0':
+                if record[0] == '0' and record[1] == '0':
                     continue
                 else:
                     teamWinRecord.append(record[0])
                     teamLossRecord.append(record[1])
+                    teamWinRatio.append(int(record[0]) / (int(record[0]) + int(record[1])))
                     teamIDList.append(id)
             except:
                 continue
@@ -147,6 +149,7 @@ def getTeamData(gender, league, sport, year):
         'Team Mascot': teamMascot,
         'Team Win Record': teamWinRecord,
         'Team Loss Record': teamLossRecord,
+        'Team Win Ratio': teamWinRatio,
         'Team Schedule Results': teamScheduleResults
 
     })
