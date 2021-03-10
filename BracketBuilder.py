@@ -54,24 +54,21 @@ def bracketSim(bracketfile, teamdatafile):
 
 
 def popBracket():
-    pdf_h = 210
-    pdf_w = 297
-
-    class PDF(FPDF):
-        def lines(self):
-            self.set_line_width(0.0)
-            self.line(5.0, 5.0, 205.0, 5.0)  # top one
-            self.line(5.0, 202.0, 205.0, 202.0)  # bottom one
-            self.line(5.0, 5.0, 5.0, 202.0)  # left one
-            self.line(205.0, 5.0, 205.0, 202.0)
-
-
-    lineheight = pdf_h / 32
+    pdf_h = 216
+    pdf_w = 279
+    lineheight = pdf_h / 34
     linelength = pdf_w / 12
+    pdf = FPDF(orientation='L', unit='mm', format='Letter')
+    pdf.add_page()
 
-    pdf = PDF(orientation='L')
+    for i in range(1, 17):
+        pdf.line(2, lineheight * i, linelength + 2, lineheight * i)
+    pdf.set_font("Arial", size=15)
+    # pdf.cell(200, 10, txt="this is the programming of creating pdf file", ln=1, align="L")
 
-    # pdf.add_page()
+
+
+    #
     pdf.output('test.pdf')
 
     return None
