@@ -7,15 +7,13 @@ def whoWins(team1, team2, teamdatafile):
 
     # Pulls each team's wins and losses from team data csv
     df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
-    team1wins = df.loc[team1, 'Team Win Record']
-    team1losses = df.loc[team1, 'Team Loss Record']
-    team2wins = df.loc[team2, 'Team Win Record']
-    team2losses = df.loc[team2, 'Team Loss Record']
+    team1Ratio = df.loc[team1, 'Team Win Record'] / (df.loc[team1, 'Team Loss Record'] + 1)
+    team2Ratio = df.loc[team2, 'Team Win Record'] / (df.loc[team2, 'Team Loss Record'] + 1)
 
     # Compares wins and losses, tie goes to team2
-    if team1wins < team2wins and team1losses > team2losses:
-        winner = team2
-    else:
+    if team1Ratio >= team2Ratio:
         winner = team1
+    else:
+        winner = team2
 
     return winner
