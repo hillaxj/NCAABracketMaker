@@ -3,7 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
-from utilities import datapath
+from utilities import datapath, bracketpath
+import yaml
 
 # common fxn parameters
 headers = {"Accept-Language": "en-US, en;q=0.5"}
@@ -156,5 +157,51 @@ def getTeamData(gender, league, sport, year):
 
     # Export dataframe to CSV file in TeamData directory
     teamData.to_csv(datapath + gender + league + sport + year + '.csv')
+
+    return None
+
+
+def populateYAML(year: int):
+
+    # All NCAA mens data 2019-1985
+    # urlBracket = 'https://query.data.world/s/esvsa75otwudjalobphshkfrcn72dr'
+
+    csv = pd.read_csv(bracketpath + 'Big_Dance_CSV.csv', index_col=0)
+
+    teams = {}
+    # Loops through each row in pd
+    for row in csv.itertuples():
+        # Records row data
+        if row[0] == year:
+            team = {}
+            for i in range(6, 8):
+                # Corrects team names from csv
+                try:
+                    if row[i].split(' ')[0] == 'St':
+                        team[i] = row[i].replace('St', 'St.')
+                    elif row[i].split(' ')[-1] == 'St':
+                        team[i] = row[i].replace('St', 'State')
+                    else:
+                        team[i] = row[i]
+                except:
+                    pass
+
+            teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
+            # Checks for duplicate seeds
+            try:
+                if len(teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])]) > 0:
+                    teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9]+row[8])] = team[7]
+            except:
+                teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])] = team[7]
+            # Determines champion
+            if row[1] == 6:
+                if row[5] > row[8]:
+                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
+                else:
+                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[7]
+
+    # Dumps teams dict into yaml
+    with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
+        yaml.dump(teams, f, default_flow_style=False)
 
     return None
