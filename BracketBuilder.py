@@ -37,13 +37,14 @@ def bracketSim(bracketfile, teamdatafile):
         pass
 
     # Simulates and stores each round until winner is determined
+    champion = {}
     round1winners = roundResults(data, 1, teamdatafile)
     round2winners = roundResults(round1winners, 2, teamdatafile)
     round3winners = roundResults(round2winners, 3, teamdatafile)
     round4winners = roundResults(round3winners, 4, teamdatafile)
-    round5winners = [whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'), teamdatafile), \
-                     whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatafile)]
-    champion = whoWins(round5winners[0], round5winners[1], teamdatafile)
+    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'), teamdatafile), \
+                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatafile)}
+    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatafile)
 
     print(round1winners)
     print(round2winners)
@@ -52,9 +53,12 @@ def bracketSim(bracketfile, teamdatafile):
     print(round5winners)
     print(champion)
 
+    totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners, **champion}
+
+    with open(bracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
+        yaml.dump(totalsimData, f, default_flow_style=False)
+
     return None
-
-
 
 
 def popBracket():
