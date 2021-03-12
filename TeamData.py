@@ -13,6 +13,7 @@ headers = {"Accept-Language": "en-US, en;q=0.5"}
 def getTeamList(gender, league, sport):
     # Adds each team ID from complete team list url to list and returns list
     # url for mens NCAA team list
+    # Alternate data source 'https://basketball.realgm.com/ncaa/teams'
     urlTeams = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/teams'
     teamIDs = []
 
@@ -36,6 +37,8 @@ def getTeamData(gender, league, sport, year):
     # Generates CSV with all team names, mascots, and win/loss record
 
     # url for mens NCAA team schedule
+    # Alternate data source 'https://basketball.realgm.com/ncaa/team-stats', \
+    # 'https://basketball.realgm.com/ncaa/conferences/West-Coast-Conference/11/Gonzaga/332/Schedule'
     urlBase = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/team/schedule/_/id/'
 
     # Initialize lists
@@ -58,44 +61,14 @@ def getTeamData(gender, league, sport, year):
         urlTeam = urlBase + str(id) + '/season/' + year
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
-        # Find team info from HTML
-        team_div = soup.find_all('div', class_='ClubhouseHeader__Main flex items-center pv3 justify-start')
-
-        for container in team_div:
-
-            try:
-                # Find record and add win and loss records to teamWinRecord and teamLossRecord lists. Adds team ID to \
-                # teamID list
-                record = container.find('ul', class_='ClubhouseHeader__Record').find_all('li')
-                record = record[0].text.split('-')
-                # log.info(record[0] + ' ' + record[1])
-                if record[0] == '0' and record[1] == '0':
-                    continue
-                else:
-                    teamWinRecord.append(record[0])
-                    teamLossRecord.append(record[1])
-                    teamWinRatio.append(int(record[0]) / (int(record[0]) + int(record[1])))
-                    teamIDList.append(id)
-            except:
-                continue
-
-            # Find team name and add name to teamName list
-            name = container.h1.find_all('span', class_='db')
-            try:
-                teamName.append(name[0].text)
-            except:
-                teamName.append('N/A')
-            # Add mascot to teamMascot list
-            try:
-                teamMascot.append(name[1].text)
-            except:
-                teamMascot.append('N/A')
-            # log.info(teamName[-1] + " " + teamMascot[-1])
 
         # Finds each row in schedule table
         schedule_div = soup.find_all('tr', attrs={'class': re.compile("Table__TR Table__TR--sm Table__even")})
         gameCount = 1
         teamSchedule = {}
+        winRecord = 0
+        loseRecord = 0
+
         # Iterates through each row and extracts date, opponent, opponent rank, result, team score, and opponent score
         for container in schedule_div:
             # Finds data in each row
@@ -127,9 +100,11 @@ def getTeamData(gender, league, sport, year):
                 if gameResult == 'W':
                     gameOpponentScore = gameScore[1]
                     gameTeamScore = gameScore[0][1:]
+                    winRecord = winRecord + 1
                 elif gameResult == 'L':
                     gameTeamScore = gameScore[1]
                     gameOpponentScore = gameScore[0][1:]
+                    loseRecord = loseRecord + 1
                 else:
                     continue
                 teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
@@ -141,7 +116,25 @@ def getTeamData(gender, league, sport, year):
         if teamSchedule == {}:
             continue
         else:
+            # Find team info from HTML
+            team_div = soup.find_all('div', class_='ClubhouseHeader__Main flex items-center pv3 justify-start')
+
+            for container in team_div:
+
+                # Find team name and add name to teamName list
+                name = container.h1.find_all('span', class_='db')
+                teamName.append(name[0].text)
+
+                # Add mascot to teamMascot list
+                try:
+                    teamMascot.append(name[1].text)
+                except:
+                    teamMascot.append('N/A')
+            teamWinRecord.append(winRecord)
+            teamLossRecord.append(loseRecord)
+            teamWinRatio.append(winRecord / (winRecord + loseRecord))
             teamScheduleResults.append(teamSchedule)
+            teamIDList.append(id)
 
     # Create dataframe for lists
     teamData = pd.DataFrame({
