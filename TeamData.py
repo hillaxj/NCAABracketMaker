@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
-from utilities import datapath, bracketpath
+from utilities import datapath, bracketpath, simbracketpath
 import yaml
 
 # common fxn parameters
@@ -57,7 +57,7 @@ def getTeamData(gender, league, sport, year):
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
-        # log.info('Team ' + str(id))
+        log.info('Team ' + str(id))
         urlTeam = urlBase + str(id) + '/season/' + year
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
@@ -158,6 +158,13 @@ def populateYAML(year: int):
 
     # All NCAA mens data 2019-1985
     # urlBracket = 'https://query.data.world/s/esvsa75otwudjalobphshkfrcn72dr'
+    if year == 2020:
+        with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
+            yaml.dump('Coronavirus', f, default_flow_style=False)
+        print('2020 Coronovirus')
+        return None
+    else:
+        print(year)
 
     csv = pd.read_csv(bracketpath + 'Big_Dance_CSV.csv', index_col=0)
 
@@ -170,12 +177,7 @@ def populateYAML(year: int):
             for i in range(6, 8):
                 # Corrects team names from csv
                 try:
-                    if row[i].split(' ')[0] == 'St':
-                        team[i] = row[i].replace('St', 'St.')
-                    elif row[i].split(' ')[-1] == 'St':
-                        team[i] = row[i].replace('St', 'State')
-                    else:
-                        team[i] = row[i]
+                    team[i] = nameCheck(row[i])
                 except:
                     pass
 
@@ -198,3 +200,56 @@ def populateYAML(year: int):
         yaml.dump(teams, f, default_flow_style=False)
 
     return None
+
+def nameCheck(teamName):
+    switch = {
+        'Central Florida': 'UCF',
+        'Gardner Webb': 'Gardner-Webb',
+        'Wisconsin Milwaukee': 'Milwaukee',
+        'Connecticut': 'UConn',
+        'Illinois Chicago': 'UIC',
+        'Texas San Antonio': 'UTSA',
+        'Louisiana Lafayette': 'Louisiana',
+        'Southeastern Louisiana': 'SE Louisiana',
+        'Texas A&M Corpus Christi': 'Texas A&M-CC',
+        'Miami Ohio': 'Miami (OH)',
+        'Central Connecticut St': 'Central Connecticut',
+        'Mount St Marys': "Mount St. Mary's",
+        'Cal St Fullerton': "CSU Fullerton",
+        'Texas Arlington': 'UT Arlington',
+        'Cal St Northridge': "CSU Northridge",
+        'Morgan St': "Morgan St",
+        'Stephen F Austin': "Stephen F. Austin",
+        'Santa Barbara': "UC Santa Barbara",
+        'Arkansas Pine Bluff': "Arkansas-Pine Bluff",
+        'Long Island Brooklyn': "Long Island University",
+        'St Johns': "St. John's",
+        'Loyola Maryland': 'Loyola (MD)',
+        'Southern Mississippi': 'Southern Miss',
+        'Detroit': 'Detroit Mercy',
+        'American': 'American',
+        'Massachusetts': 'UMass',
+        'Cal Irvine': 'UC Irvine',
+        'Hawaii': "Hawai'i",
+        'Cal St Bakersfield': 'CSU Bakersfield',
+        'Wisconsin Green Bay': 'Green Bay',
+        'Middle Tennessee St': 'Middle Tennessee',
+        'Arkansas Little Rock': 'Little Rock',
+        'College of Charleston': 'Charleston'
+
+    }
+    team = switch.get(teamName, teamName)
+
+    if team.split(' ')[0] == 'St':
+        if team.split(' ')[1] == "Peters" or team.split(' ')[1] == "Josephs" \
+                or team.split(' ')[1] == 'Louis' or team.split(' ')[1] == "Marys":
+            team = team.replace('St', 'Saint').replace('Peters', "Peter's").replace('Josephs', \
+                                                                                         "Joseph's").replace('Marys',
+                                                                                                             "Mary's")
+        else:
+            team = team.replace('St', 'St.')
+
+    elif team.split(' ')[-1] == 'St' and team != 'Morgan St' and team != 'Norfolk St':
+        team = teamName.replace('St', 'State')
+
+    return team
