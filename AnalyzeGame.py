@@ -24,7 +24,7 @@ def whoWins(team1, team2, teamdatafile):
 
 
 def scheduleStrength(teamdatafile, winfactor, rankfactor, pointsfactor, schedulefactor):
-    # Calculates value for schedule difficulty, need to tweak a lot. Add factor for team rank and points spread
+    # Calculates value for schedule difficulty
     # Reads csv file
     df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
     teams = df.index.tolist()
@@ -44,7 +44,7 @@ def scheduleStrength(teamdatafile, winfactor, rankfactor, pointsfactor, schedule
                     opponentRank = (26-int(schedule.get(i)[2])) / 25
                 else:
                     opponentRank = 0
-                # Point differential factor
+                # Point differential factor, may need tweaks
                 gamePoints = (100 - abs(int(schedule.get(i)[4]) - int(schedule.get(i)[5])))/100
                 opponentStrength.append((winfactor * opponentWinRatio + rankfactor*opponentRank + \
                                          pointsfactor * gamePoints)/schedulefactor)
