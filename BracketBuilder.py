@@ -1,4 +1,4 @@
-from utilities import bracketpath
+from utilities import bracketpath, simbracketpath
 import yaml
 from AnalyzeGame import whoWins
 from math import pow
@@ -13,18 +13,25 @@ def roundResults(teams, round, teamdatafile):
 
     for x in range(1, 5):
         for y in range(1, int(pow(2, 4-round) + 1)):
-            winners['d' + str(round+1) + 'r' + str(x) + 'seed' + str(y)] = whoWins(teams.get('d' + str(round) + 'r' + str(x) + 'seed' + str(y)), \
-                                                              teams.get('d' + str(round) + 'r' + str(x) + 'seed' + str(int(pow(2, 5-round) \
-                                                                                                + 1-y))), teamdatafile)
+            winners['d' + str(round+1) + 'r' + str(x) + 'seed' + str(y)] = \
+                whoWins(teams.get('d' + str(round) + 'r' + str(x) + 'seed' + str(y)), \
+                teams.get('d' + str(round) + 'r' + str(x) + 'seed' + str(int(pow(2, 5-round) + 1-y))), teamdatafile)
 
     return winners
 
 
 def bracketSim(bracketfile, teamdatafile):
+    if '2020' in bracketfile:
+        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
+            yaml.dump('Coronavirus', f, default_flow_style=False)
+        print('Coronavirus')
+        return None
 
     # Simulates all games in the supplied brackets based on teamdatafile info
     with open(bracketpath + bracketfile) as f:
-        data = yaml.load(f, Loader=yaml.FullLoader)
+        dataYaml = yaml.load(f, Loader=yaml.FullLoader)
+
+    data = dict((k, v) for k, v in dataYaml.items() if k[:2] == 'd1')
 
     # First 4 games
     try:
@@ -52,16 +59,27 @@ def bracketSim(bracketfile, teamdatafile):
     print(round4winners)
     print(round5winners)
     print(champion)
+    try:
+        data.pop('d1r1seed16a')
+        data.pop('d1r1seed16b')
+        data.pop('d1r1seed12a')
+        data.pop('d1r1seed12b')
+        data.pop('d1r4seed16a')
+        data.pop('d1r4seed16b')
+        data.pop('d1r4seed12a')
+        data.pop('d1r4seed12b')
+    except:
+        pass
 
     totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners, **champion}
 
-    with open(bracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
+    with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
         yaml.dump(totalsimData, f, default_flow_style=False)
 
     return None
 
 
-def popBracket():
+def populateBracket():
 
     pdf = open(bracketpath + 'NCAA Bracket clean.pdf')
     readpdf = PyPDF2.PdfFileReader(pdf)
