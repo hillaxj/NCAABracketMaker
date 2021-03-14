@@ -7,6 +7,6 @@ from TeamData import *
 
 
 # run bracket simulation
-bracketfile = 'NCAAMBracket2021.yaml'
+bracketfile = '2021results.yaml'
 teamdatafile = 'menscollegebasketball2021.csv'
 bracketSim(bracketfile, teamdatafile)
