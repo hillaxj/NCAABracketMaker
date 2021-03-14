@@ -201,6 +201,7 @@ def populateYAML(year: int):
 
     return None
 
+
 def nameCheck(teamName):
     switch = {
         'Central Florida': 'UCF',
