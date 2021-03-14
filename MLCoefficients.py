@@ -15,11 +15,11 @@ def compareYamls(resultsyaml, simbracketyaml):
     for x in range(2, 8):
         # Iterates through each region
         for y in range(1, 5):
-            listResultsTeams = [v for k, v in dataResultsYaml.items() if k.startswith('d'+ str(x)+'r'+str(y)+'seed')]
-            listSimTeams = [v for k, v in dataSimYaml.items() if k.startswith('d' + str(x) + 'r' + str(y) + 'seed')]
+            seedid = f'd{x}r{y}seed'
+            listResultsTeams = [v for k, v in dataResultsYaml.items() if k.startswith(seedid)]
+            listSimTeams = [v for k, v in dataSimYaml.items() if k.startswith(seedid)]
             # If element is in both lists, adds 1 to percentAccurate, perfect is 63 matching elements
-            for z in range(len(listResultsTeams)):
-                if listResultsTeams[z] in listSimTeams:
-                    percentAccurate = percentAccurate + 1
+            numAccurate = len([z for z in range(len(listResultsTeams)) if listResultsTeams[z] in listSimTeams])
+            percentAccurate = percentAccurate + numAccurate
 
     return percentAccurate / 63
