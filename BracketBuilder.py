@@ -39,7 +39,7 @@ def bracketSim(bracketfile, teamdatafile):
         data['d1r1seed12'] = whoWins(data.get('d1r1seed12a'), data.get('d1r1seed12b'), teamdatafile)
         data['d1r4seed16'] = whoWins(data.get('d1r4seed16a'), data.get('d1r4seed16b'), teamdatafile)
         data['d1r4seed12'] = whoWins(data.get('d1r4seed12a'), data.get('d1r4seed12b'), teamdatafile)
-        print(data.get('d1r1seed16'), data.get('d1r1seed12'), data.get('d1r4seed16'), data.get('d1r4seed12'))
+
     except:
         pass
 
@@ -53,12 +53,6 @@ def bracketSim(bracketfile, teamdatafile):
                      'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatafile)}
     champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatafile)
 
-    print(round1winners)
-    print(round2winners)
-    print(round3winners)
-    print(round4winners)
-    print(round5winners)
-    print(champion)
     try:
         data.pop('d1r1seed16a')
         data.pop('d1r1seed16b')
