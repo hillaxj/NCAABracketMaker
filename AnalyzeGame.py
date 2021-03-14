@@ -4,15 +4,14 @@ import ast
 import logging as log
 
 
-def whoWins(team1, team2, teamdatafile):
+def whoWins(team1, team2, teamdatadf):
     # Selects winner based on team records
 
     # Pulls each team's wins and losses from team data csv
-    df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
-    team1Ratio = df.at[team1, 'Team Win Ratio']
-    team2Ratio = df.at[team2, 'Team Win Ratio']
-    team1Schedule = df.at[team1, 'Schedule Strength']
-    team2Schedule = df.at[team2, 'Schedule Strength']
+    team1Ratio = teamdatadf.at[team1, 'Team Win Ratio']
+    team2Ratio = teamdatadf.at[team2, 'Team Win Ratio']
+    team1Schedule = teamdatadf.at[team1, 'Schedule Strength']
+    team2Schedule = teamdatadf.at[team2, 'Schedule Strength']
 
     # Compares wins and losses, tie goes to team2
     if team1Ratio * team1Schedule >= team2Ratio * team2Schedule:
@@ -38,14 +37,15 @@ def scheduleStrength(teamdatafile, winfactor, rankfactor, pointsfactor, schedule
         for i in range(1, len(schedule) + 1):
             try:
                 # Opponent win ratio from csv
-                opponentWinRatio = df.at[schedule.get(i)[1], 'Team Win Ratio']
+                sched = schedule.get(i)
+                opponentWinRatio = df.at[sched[1], 'Team Win Ratio']
                 # Opponent rank factor
-                if schedule.get(i)[2] != 'N/A':
-                    opponentRank = (26-int(schedule.get(i)[2])) / 25
+                if sched[2] != 'N/A':
+                    opponentRank = (26-int(sched[2])) / 25
                 else:
                     opponentRank = 0
                 # Point differential factor, may need tweaks
-                gamePoints = (100 - abs(int(schedule.get(i)[4]) - int(schedule.get(i)[5])))/100
+                gamePoints = (100 - abs(int(sched[4]) - int(sched[5])))/100
                 opponentStrength.append((winfactor * opponentWinRatio + rankfactor*opponentRank + \
                                          pointsfactor * gamePoints)/schedulefactor)
 
