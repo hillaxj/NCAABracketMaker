@@ -20,6 +20,6 @@ def compareYamls(resultsyaml, simbracketyaml):
             listSimTeams = [v for k, v in dataSimYaml.items() if k.startswith(seedid)]
             # If element is in both lists, adds 1 to percentAccurate, perfect is 63 matching elements
             numAccurate = len([z for z in range(len(listResultsTeams)) if listResultsTeams[z] in listSimTeams])
-            percentAccurate = percentAccurate + numAccurate
+            percentAccurate = percentAccurate + (numAccurate * pow(2, (x-2)))
 
-    return percentAccurate / 63
+    return percentAccurate / 192
