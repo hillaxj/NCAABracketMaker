@@ -1,4 +1,4 @@
-from utilities import bracketpath, simbracketpath
+from NCAABracketMaker.utilities import bracketpath, simbracketpath
 import yaml
 
 

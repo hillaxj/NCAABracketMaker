@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
-from utilities import datapath, bracketpath, simbracketpath
+from NCAABracketMaker.utilities import datapath, bracketpath, simbracketpath
 import yaml
 
 # common fxn parameters

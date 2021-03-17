@@ -1,11 +1,11 @@
-from TeamData import getTeamData, populateYAML
-from BracketBuilder import bracketSim, populateBracket
-from AnalyzeGame import scheduleStrength
-from MLCoefficients import compareYamls
+from NCAABracketMaker.TeamData import getTeamData, populateYAML
+from NCAABracketMaker.BracketBuilder import bracketSim, populateBracket
+from NCAABracketMaker.AnalyzeGame import scheduleStrength
+from NCAABracketMaker.MLCoefficients import compareYamls
 import numpy
 import logging as log
 import cProfile
-from utilities import datapath
+from NCAABracketMaker.utilities import datapath
 import pandas as pd
 gender = 'mens'
 league = 'college'
@@ -22,11 +22,11 @@ k = pointsWeight
 m = scheduleWeight
 
 
-# Gets team data from web, run once
+# # Gets team data from web, run once
 # for x in range(year, 2021):
-# getTeamData(gender, league, sport, year)
-
-# Populate yaml files from past brackets, run once
+#     getTeamData(gender, league, sport, year)
+#
+# # Populate yaml files from past brackets, run once
 # for x in range(year, 2022):
 #     populateYAML(x)
 # increment = 0.25
@@ -37,7 +37,7 @@ m = scheduleWeight
 # compareList = []
 # # Calculate schedule strength, before bracketSim
 # log.info(f'NextSim {i} {j} {k} {m}')
-# # scheduleWeight = i + j +  0.0001
+# scheduleWeight = i + j +  0.0001
 #
 # for x in range(year, 2020):
 #     teamdatacsv = f'menscollegebasketball{x}.csv'

@@ -1,4 +1,4 @@
-from utilities import datapath
+from NCAABracketMaker.utilities import datapath
 import pandas as pd
 import ast
 import logging as log

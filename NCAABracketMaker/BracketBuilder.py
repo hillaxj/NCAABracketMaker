@@ -1,6 +1,6 @@
-from utilities import bracketpath, simbracketpath, datapath
+from NCAABracketMaker.utilities import bracketpath, simbracketpath, datapath
 import yaml
-from AnalyzeGame import whoWins
+from NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
 import PyPDF2
 import pandas as pd
