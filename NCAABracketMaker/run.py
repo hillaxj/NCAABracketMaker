@@ -22,9 +22,9 @@ k = pointsWeight
 m = scheduleWeight
 
 
-# # Gets team data from web, run once
+# Gets team data from web, run once
 # for x in range(year, 2021):
-#     getTeamData(gender, league, sport, year)
+#   getTeamData(gender, league, sport, year)
 #
 # # Populate yaml files from past brackets, run once
 # for x in range(year, 2022):
@@ -65,9 +65,9 @@ m = scheduleWeight
 
 
 # Use to sim current year bracket
-# getTeamData(gender, league, sport, str(year))
+getTeamData(gender, league, sport, str(year))
 scheduleStrength(f'{gender}{league}{sport}{year}.csv', i, j, k, m)
-bracketSim('NCAAMBracket2021.yaml', f'{gender}{league}{sport}{year}.csv')
+bracketSim('NCAAMBracket2021.yaml', f'{gender}{league}{sport}{year}{"_"}{i}{"_"}{j}{"_"}{k}{"_"}{m}.csv')
 # print(compareYamls(f'{year}results.yaml', f'{gender}{league}{sport}{year}SimResults.csv'))
 
 # Doesn't work yet
