@@ -30,6 +30,9 @@ def getTeamList(gender, league, sport):
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
+    if gender == 'womens':
+        teamIDs.append(2623)
+
     return teamIDs
 
 
@@ -58,7 +61,7 @@ def getTeamData(gender, league, sport, year):
     # Iterate through each teamID and populate list
     for id in teamIDs:
         log.info('Team ' + str(id))
-        urlTeam = urlBase + str(id) + '/season/' + year
+        urlTeam = urlBase + str(id) + '/season/' + str(year)
         results = requests.get(urlTeam, headers=headers)
         soup = BeautifulSoup(results.text, "html.parser")
 
@@ -149,7 +152,7 @@ def getTeamData(gender, league, sport, year):
     })
 
     # Export dataframe to CSV file in TeamData directory
-    teamData.to_csv(datapath + gender + league + sport + year + '.csv')
+    teamData.to_csv(datapath + gender + league + sport + str(year) + '.csv')
 
     return None
 
@@ -244,9 +247,8 @@ def nameCheck(teamName):
     if team.split(' ')[0] == 'St':
         if team.split(' ')[1] == "Peters" or team.split(' ')[1] == "Josephs" \
                 or team.split(' ')[1] == 'Louis' or team.split(' ')[1] == "Marys":
-            team = team.replace('St', 'Saint').replace('Peters', "Peter's").replace('Josephs', \
-                                                                                         "Joseph's").replace('Marys',
-                                                                                                             "Mary's")
+            team = team.replace('St', 'Saint').replace('Peters', "Peter's").replace('Josephs',
+                                                                            "Joseph's").replace('Marys', "Mary's")
         else:
             team = team.replace('St', 'St.')
 
