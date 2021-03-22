@@ -1,9 +1,10 @@
-from utilities import bracketpath, simbracketpath, datapath
+from NCAABracketMaker.utilities import bracketpath, simbracketpath, datapath, modulepath
 import yaml
-from AnalyzeGame import whoWins
+from NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
 import PyPDF2
 import pandas as pd
+import os
 
 
 def roundResults(teams, round, teamdatadf):
@@ -69,6 +70,8 @@ def bracketSim(bracketfile, teamdatafile):
 
     totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners, **champion}
 
+    # ensure directory exists
+    os.makedirs(modulepath + 'SimBrackets/', exist_ok=True)
     with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
         yaml.dump(totalsimData, f, default_flow_style=False)
 

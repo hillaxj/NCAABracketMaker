@@ -1,6 +1,7 @@
-from utilities import datapath
+from NCAABracketMaker.utilities import datapath
 import pandas as pd
 import ast
+import re
 import logging as log
 
 
@@ -54,6 +55,8 @@ def scheduleStrength(teamdatafile, winfactor, rankfactor, pointsfactor, schedule
 
         strlist.append(sum(opponentStrength) / len(opponentStrength))
     df['Schedule Strength'] = strlist
-    df.to_csv(datapath + teamdatafile)
+    # drop .csv at end of teamdatafile
+    teamdatafile = re.sub('\.csv$', '', teamdatafile)
+    df.to_csv(f'{datapath}{teamdatafile}{"_"}{winfactor}{"_"}{rankfactor}{"_"}{pointsfactor}{"_"}{schedulefactor}.csv')
 
     return None

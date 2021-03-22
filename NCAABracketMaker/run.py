@@ -1,11 +1,11 @@
-from TeamData import getTeamData, populateYAML
-from BracketBuilder import bracketSim, populateBracket
-from AnalyzeGame import scheduleStrength
-from MLCoefficients import compareYamls
+from NCAABracketMaker.TeamData import getTeamData, populateYAML
+from NCAABracketMaker.BracketBuilder import bracketSim, populateBracket
+from NCAABracketMaker.AnalyzeGame import scheduleStrength
+from NCAABracketMaker.MLCoefficients import compareYamls
 import numpy
 import logging as log
 import cProfile
-from utilities import datapath
+from NCAABracketMaker.utilities import datapath
 import pandas as pd
 gender = 'mens'
 league = 'college'
@@ -13,7 +13,7 @@ sport = 'basketball'
 year = 2021
 averageAccuracy = 0
 winWeight = 1  # Recommendation: Float between 0 and 1
-rankWeight = 1.1  # Recommendation: Float between 0 and 1
+rankWeight = 1.1 # Recommendation: Float between 0 and 1
 pointsWeight = 0  # Recommendation: Float between 0 and 1
 scheduleWeight = 1  # Recommendation: Float between 1 and 3
 i = winWeight
@@ -24,9 +24,9 @@ m = scheduleWeight
 
 # Gets team data from web, run once
 # for x in range(year, 2021):
-# getTeamData(gender, league, sport, year)
-
-# Populate yaml files from past brackets, run once
+#   getTeamData(gender, league, sport, year)
+#
+# # Populate yaml files from past brackets, run once
 # for x in range(year, 2022):
 #     populateYAML(x)
 # increment = 0.25
@@ -37,7 +37,7 @@ m = scheduleWeight
 # compareList = []
 # # Calculate schedule strength, before bracketSim
 # log.info(f'NextSim {i} {j} {k} {m}')
-# # scheduleWeight = i + j +  0.0001
+# scheduleWeight = i + j +  0.0001
 #
 # for x in range(year, 2020):
 #     teamdatacsv = f'menscollegebasketball{x}.csv'
@@ -65,9 +65,9 @@ m = scheduleWeight
 
 
 # Use to sim current year bracket
-# getTeamData(gender, league, sport, str(year))
+getTeamData(gender, league, sport, str(year))
 scheduleStrength(f'{gender}{league}{sport}{year}.csv', i, j, k, m)
-bracketSim('NCAAMBracket2021.yaml', f'{gender}{league}{sport}{year}.csv')
+bracketSim('NCAAMBracket2021.yaml', f'{gender}{league}{sport}{year}{"_"}{i}{"_"}{j}{"_"}{k}{"_"}{m}.csv')
 # print(compareYamls(f'{year}results.yaml', f'{gender}{league}{sport}{year}SimResults.csv'))
 
 # Doesn't work yet
