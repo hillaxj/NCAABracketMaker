@@ -218,23 +218,23 @@ def nameCheck(teamName):
         'Texas A&M Corpus Christi': 'Texas A&M-CC',
         'Miami Ohio': 'Miami (OH)',
         'Central Connecticut St': 'Central Connecticut',
-        'Mount St Marys': "Mount St. Mary's",
-        'Cal St Fullerton': "CSU Fullerton",
+        'Mount St Marys': 'Mount St. Mary\'s',
+        'Cal St Fullerton': 'CSU Fullerton',
         'Texas Arlington': 'UT Arlington',
-        'Cal St Northridge': "CSU Northridge",
-        'Morgan St': "Morgan St",
-        'Stephen F Austin': "Stephen F. Austin",
-        'Santa Barbara': "UC Santa Barbara",
-        'Arkansas Pine Bluff': "Arkansas-Pine Bluff",
-        'Long Island Brooklyn': "Long Island University",
-        'St Johns': "St. John's",
+        'Cal St Northridge': 'CSU Northridge',
+        'Morgan St': 'Morgan St',
+        'Stephen F Austin': 'Stephen F. Austin',
+        'Santa Barbara': 'UC Santa Barbara',
+        'Arkansas Pine Bluff': 'Arkansas-Pine Bluff',
+        'Long Island Brooklyn': 'Long Island University',
+        'St Johns': 'St. John\'s',
         'Loyola Maryland': 'Loyola (MD)',
         'Southern Mississippi': 'Southern Miss',
         'Detroit': 'Detroit Mercy',
         'American': 'American',
         'Massachusetts': 'UMass',
         'Cal Irvine': 'UC Irvine',
-        'Hawaii': "Hawai'i",
+        'Hawaii': 'Hawai\'i',
         'Cal St Bakersfield': 'CSU Bakersfield',
         'Wisconsin Green Bay': 'Green Bay',
         'Middle Tennessee St': 'Middle Tennessee',
@@ -245,14 +245,14 @@ def nameCheck(teamName):
     team = switch.get(teamName, teamName)
 
     if team.split(' ')[0] == 'St':
-        if team.split(' ')[1] == "Peters" or team.split(' ')[1] == "Josephs" \
-                or team.split(' ')[1] == 'Louis' or team.split(' ')[1] == "Marys":
-            team = team.replace('St', 'Saint').replace('Peters', "Peter's").replace('Josephs',
-                                                                            "Joseph's").replace('Marys', "Mary's")
+        if team.split(' ')[1] == 'Peters' or team.split(' ')[1] == 'Josephs' \
+                or team.split(' ')[1] == 'Louis' or team.split(' ')[1] == 'Marys':
+            team = team.replace('St', 'Saint').replace('Peters', 'Peter\'s').replace('Josephs',
+                                                                            'Joseph\'s').replace('Marys', 'Mary\'s')
         else:
             team = team.replace('St', 'St.')
-
-    elif team.split(' ')[-1] == 'St' and team != 'Morgan St' and team != 'Norfolk St':
+    #Morgan State for womens team
+    elif team.split(' ')[-1] == 'St' and team != 'Morgan St':
         team = teamName.replace('St', 'State')
 
     return team
