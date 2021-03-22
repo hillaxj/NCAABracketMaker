@@ -1,4 +1,4 @@
-from NCAABracketMaker.utilities import bracketpath, simbracketpath, datapath, modulepath
+from NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, modulepath
 import yaml
 from NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
@@ -29,7 +29,7 @@ def bracketSim(bracketfile, teamdatafile):
         print('Coronavirus')
         return None
 
-    teamdatadf = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
+    teamdatadf = pd.read_csv(teampath + teamdatafile, index_col='Team Name')
     # Simulates all games in the supplied brackets based on teamdatafile info
     with open(bracketpath + bracketfile) as f:
         dataYaml = yaml.load(f, Loader=yaml.FullLoader)

@@ -5,7 +5,7 @@ from NCAABracketMaker.MLCoefficients import compareYamls
 import numpy
 import logging as log
 import cProfile
-from NCAABracketMaker.utilities import datapath
+from NCAABracketMaker.utilities import teampath
 import pandas as pd
 gender = 'mens'
 league = 'college'

@@ -9,7 +9,7 @@ except NameError:
     modulepath = 'NCAABracketMaker/'
 
 # define package directories
-datapath = modulepath + 'TeamData/'
+teampath = modulepath + 'TeamData/'
 bracketpath = modulepath + 'Brackets/'
 simbracketpath = modulepath + 'SimBrackets/'
 

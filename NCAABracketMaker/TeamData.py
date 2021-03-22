@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
-from NCAABracketMaker.utilities import datapath, bracketpath, simbracketpath
+from NCAABracketMaker.utilities import teampath, bracketpath, simbracketpath
 import yaml
 
 # common fxn parameters
@@ -152,7 +152,7 @@ def getTeamData(gender, league, sport, year):
     })
 
     # Export dataframe to CSV file in TeamData directory
-    teamData.to_csv(datapath + gender + league + sport + str(year) + '.csv')
+    teamData.to_csv(teampath + gender + league + sport + str(year) + '.csv')
 
     return None
 

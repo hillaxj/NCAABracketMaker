@@ -1,4 +1,4 @@
-from NCAABracketMaker.utilities import datapath
+from NCAABracketMaker.utilities import teampath
 import pandas as pd
 import ast
 import re
@@ -26,7 +26,7 @@ def whoWins(team1, team2, teamdatadf):
 def scheduleStrength(teamdatafile, winfactor, rankfactor, pointsfactor, schedulefactor):
     # Calculates value for schedule difficulty
     # Reads csv file
-    df = pd.read_csv(datapath + teamdatafile, index_col='Team Name')
+    df = pd.read_csv(teampath + teamdatafile, index_col='Team Name')
     teams = df.index.tolist()
     strlist = []
 
@@ -57,6 +57,6 @@ def scheduleStrength(teamdatafile, winfactor, rankfactor, pointsfactor, schedule
     df['Schedule Strength'] = strlist
     # drop .csv at end of teamdatafile
     teamdatafile = re.sub('\.csv$', '', teamdatafile)
-    df.to_csv(f'{datapath}{teamdatafile}{"_"}{winfactor}{"_"}{rankfactor}{"_"}{pointsfactor}{"_"}{schedulefactor}.csv')
+    df.to_csv(f'{teampath}{teamdatafile}{"_"}{winfactor}{"_"}{rankfactor}{"_"}{pointsfactor}{"_"}{schedulefactor}.csv')
 
     return None
