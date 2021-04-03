@@ -7,7 +7,7 @@ import pandas as pd
 import os
 
 
-def roundResults(teams, round, teamdatadf):
+def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     # Tests each game for defined round
     winners = {}
 
@@ -17,12 +17,12 @@ def roundResults(teams, round, teamdatadf):
         for y in range(1, int(pow(2, 4-round) + 1)):
             seedid = f'd{round}r{x}seed'
             winners[f'd{round+1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), \
-                                            teams.get(''.join([seedid, str(int(pow(2, 5-round) + 1-y))])), teamdatadf)
+                                            teams.get(''.join([seedid, str(int(pow(2, 5-round) + 1-y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
 
     return winners
 
 
-def bracketSim(bracketfile, teamdatafile):
+def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     if '2020' in bracketfile:
         with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
             yaml.dump('Coronavirus', f, default_flow_style=False)
@@ -38,23 +38,23 @@ def bracketSim(bracketfile, teamdatafile):
 
     # First 4 games
     try:
-        data['d1r1seed16'] = whoWins(data.get('d1r1seed16a'), data.get('d1r1seed16b'), teamdatadf)
-        data['d1r1seed11'] = whoWins(data.get('d1r1seed11a'), data.get('d1r1seed11b'), teamdatadf)
-        data['d1r4seed16'] = whoWins(data.get('d1r4seed16a'), data.get('d1r4seed16b'), teamdatadf)
-        data['d1r4seed11'] = whoWins(data.get('d1r4seed11a'), data.get('d1r4seed11b'), teamdatadf)
+        data['d1r1seed16'] = whoWins(data.get('d1r1seed16a'), data.get('d1r1seed16b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+        data['d1r1seed11'] = whoWins(data.get('d1r1seed11a'), data.get('d1r1seed11b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+        data['d1r4seed16'] = whoWins(data.get('d1r4seed16a'), data.get('d1r4seed16b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+        data['d1r4seed11'] = whoWins(data.get('d1r4seed11a'), data.get('d1r4seed11b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
 
     except:
         pass
 
     # Simulates and stores each round until winner is determined
     champion = {}
-    round1winners = roundResults(data, 1, teamdatadf)
-    round2winners = roundResults(round1winners, 2, teamdatadf)
-    round3winners = roundResults(round2winners, 3, teamdatadf)
-    round4winners = roundResults(round3winners, 4, teamdatadf)
-    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'), teamdatadf), \
-                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatadf)}
-    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatadf)
+    round1winners = roundResults(data, 1, teamdatadf, pointcof, wincof, rankcof, ratiocof)
+    round2winners = roundResults(round1winners, 2, teamdatadf, pointcof, wincof, rankcof, ratiocof)
+    round3winners = roundResults(round2winners, 3, teamdatadf, pointcof, wincof, rankcof, ratiocof)
+    round4winners = roundResults(round3winners, 4, teamdatadf, pointcof, wincof, rankcof, ratiocof)
+    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'), teamdatadf, pointcof, wincof, rankcof, ratiocof), \
+                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatadf, pointcof, wincof, rankcof, ratiocof)}
+    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
 
     try:
         data.pop('d1r1seed16a')
@@ -72,7 +72,8 @@ def bracketSim(bracketfile, teamdatafile):
 
     # ensure directory exists
     os.makedirs(modulepath + 'SimBrackets/', exist_ok=True)
-    with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
+    datafile = teamdatafile.replace('.csv', '')
+    with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-SimResults.yaml', 'w') as f:
         yaml.dump(totalsimData, f, default_flow_style=False)
 
     return None
