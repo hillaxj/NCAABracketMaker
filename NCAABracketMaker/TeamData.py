@@ -4,6 +4,7 @@ import pandas as pd
 import logging as log
 import re
 from NCAABracketMaker.utilities import teampath, bracketpath, simbracketpath
+from NCAABracketMaker.AnalyzeGame import scheduleStrength
 import yaml
 
 # common fxn parameters
@@ -32,6 +33,8 @@ def getTeamList(gender, league, sport):
 
     if gender == 'womens':
         teamIDs.append(2623)
+
+    teamIDs = list(dict.fromkeys(teamIDs))
 
     return teamIDs
 
@@ -153,6 +156,7 @@ def getTeamData(gender, league, sport, year):
 
     # Export dataframe to CSV file in TeamData directory
     teamData.to_csv(teampath + gender + league + sport + str(year) + '.csv')
+    scheduleStrength(f'{gender}{league}{sport}{year}.csv')
 
     return None
 
