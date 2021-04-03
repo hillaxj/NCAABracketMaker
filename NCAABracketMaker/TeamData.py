@@ -65,8 +65,9 @@ def getTeamData(gender, league, sport, year):
     for id in teamIDs:
         log.info('Team ' + str(id))
         urlTeam = urlBase + str(id) + '/season/' + str(year)
-        results = requests.get(urlTeam, headers=headers)
-        soup = BeautifulSoup(results.text, "html.parser")
+        with requests.get(urlTeam, headers=headers):
+            results = requests.get(urlTeam, headers=headers)
+            soup = BeautifulSoup(results.text, "html.parser")
 
         # Finds each row in schedule table
         schedule_div = soup.find_all('tr', attrs={'class': re.compile("Table__TR Table__TR--sm Table__even")})
