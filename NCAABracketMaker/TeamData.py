@@ -162,14 +162,19 @@ def getTeamData(gender, league, sport, year):
     return None
 
 
-def populateYAML(year: int):
+def populateResults(year: int):
 
     # All NCAA mens data 2019-1985
     # urlBracket = 'https://query.data.world/s/esvsa75otwudjalobphshkfrcn72dr'
     if year == 2020:
-        with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
-            yaml.dump('Coronavirus', f, default_flow_style=False)
-        print('2020 Coronovirus')
+        # For yaml files
+        # with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
+        #     yaml.dump('Coronavirus', f, default_flow_style=False)
+
+        # For csv files
+        with open(bracketpath + str(year) + 'results.csv', 'w') as f:
+            f.write('Coronavirus')
+        print('2020 Coronavirus')
         return None
     else:
         print(year)
@@ -203,9 +208,14 @@ def populateYAML(year: int):
                 else:
                     teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[7]
 
-    # Dumps teams dict into yaml
-    with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
-        yaml.dump(teams, f, default_flow_style=False)
+    # Dump teams dict into yaml
+    # with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
+    #     yaml.dump(teams, f, default_flow_style=False)
+
+    # Dump teams dict into csv
+    with open(bracketpath + str(year) + 'results.csv', 'w') as f:
+        for key in teams.keys():
+            f.write("%s, %s\n" % (key, teams[key]))
 
     return None
 

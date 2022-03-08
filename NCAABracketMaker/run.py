@@ -1,7 +1,7 @@
-from NCAABracketMaker.TeamData import getTeamData, populateYAML
+from NCAABracketMaker.TeamData import getTeamData, populateResults
 from NCAABracketMaker.BracketBuilder import bracketSim, populateBracket
 from NCAABracketMaker.AnalyzeGame import scheduleStrength
-from NCAABracketMaker.MLCoefficients import compareYamls
+from NCAABracketMaker.MLCoefficients import compareResults
 import numpy
 import logging as log
 import cProfile
@@ -11,7 +11,7 @@ import pandas as pd
 gender = 'mens'
 league = 'college'
 sport = 'basketball'
-year = 2003
+year = 2021
 averageAccuracy = 0
 winWeight = 1  # Recommendation: Float between 0 and 1
 rankWeight = 1.1 # Recommendation: Float between 0 and 1
@@ -24,13 +24,13 @@ m = scheduleWeight
 
 
 # Gets team data from web, run once
-# for x in range(year, 2022):
+# for x in range(year, 2006):
 #     getTeamData(gender, league, sport, x)
 
 
 # Populate yaml files from past brackets, run once
 # for x in range(year, 2022):
-#     populateYAML(x)
+#     populateResults(x)
 
 # increment = 0.25
 # for i in numpy.arange(1.2, 2.5, .1):
@@ -68,8 +68,8 @@ m = scheduleWeight
 
 # Use to sim current year bracket
 # getTeamData(gender, league, sport, str(2021))
-# bracketSim('NCAAMBracket2021.yaml', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
-# print(compareYamls(f'{year}results.yaml', f'{gender}{league}{sport}{year}SimResults.csv'))
+bracketSim('NCAAMBracket2021.csv', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
+# print(compareYamls(f'{year}results.yaml', f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
 
 # Doesn't work yet
-# popBracket()
+populateBracket(f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv')

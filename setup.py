@@ -15,11 +15,11 @@ setup(
         'pyyaml>=5.3',
         'requests>=2.22.0',
         'numpy>=1.18.0',
-        'PyPDF2>=1.26.0'
+        'BeautifulSoup4>=4.10.0'
     ],
     url='https://github.com/hillaxj/NCAABracketMaker',
     license='MIT',
-    author='hillajx',
+    author='hillaxj',
     author_email='',
     classifiers=[
         "Development Status :: 1 - Alpha",

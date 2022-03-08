@@ -2,9 +2,10 @@ from NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, mo
 import yaml
 from NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
-import PyPDF2
+import pdfrw
 import pandas as pd
 import os
+from openpyxl import load_workbook
 
 
 def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
@@ -24,17 +25,21 @@ def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
 
 def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     if '2020' in bracketfile:
-        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
-            yaml.dump('Coronavirus', f, default_flow_style=False)
+        # with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
+        #     yaml.dump('Coronavirus', f, default_flow_style=False)
+        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.csv', 'w') as f:
+            f.write('Coronavirus')
         print('Coronavirus')
         return None
 
     teamdatadf = pd.read_csv(teampath + teamdatafile, index_col='Team Name')
     # Simulates all games in the supplied brackets based on teamdatafile info
     with open(bracketpath + bracketfile) as f:
-        dataYaml = yaml.load(f, Loader=yaml.FullLoader)
+        bracketData = yaml.load(f, Loader=yaml.FullLoader)
+    # bracketData = pd.read_csv(bracketpath + bracketfile)
 
-    data = dict((k, v) for k, v in dataYaml.items() if k[:2] == 'd1')
+    data = dict((k, v) for k, v in bracketData.items() if k[:2] == 'd1')
+    print(data.get('d1r1seed16a'))
 
     # First 4 games
     try:
@@ -73,17 +78,22 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     # ensure directory exists
     os.makedirs(modulepath + 'SimBrackets/', exist_ok=True)
     datafile = teamdatafile.replace('.csv', '')
-    with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-SimResults.yaml', 'w') as f:
-        yaml.dump(totalsimData, f, default_flow_style=False)
+    # with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-SimResults.yaml', 'w') as f:
+    #     yaml.dump(totalsimData, f, default_flow_style=False)
+    with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-SimResults.csv', 'w') as f:
+        for key in totalsimData.keys():
+            f.write("%s, %s\n" % (key, totalsimData[key]))
 
     return None
 
 
-def populateBracket():
+def populateBracket(simbracket):
 
-    pdf = open(bracketpath + 'NCAA Bracket clean.pdf')
-    readpdf = PyPDF2.PdfFileReader(pdf)
-
-
+    book = load_workbook(f'{simbracketpath}Sim_Bracket.xlsx')
+    writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx', engine='openpyxl')
+    writer.book = book
+    writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx')
+    pd.read_csv(f'{simbracketpath}{simbracket}').to_excel(writer, 'SimResults')
+    writer.save()
 
     return None
