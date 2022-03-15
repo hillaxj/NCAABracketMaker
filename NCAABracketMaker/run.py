@@ -11,25 +11,37 @@ import pandas as pd
 gender = 'mens'
 league = 'college'
 sport = 'basketball'
-year = 2021
+year = 2022
 averageAccuracy = 0
 winWeight = 1  # Recommendation: Float between 0 and 1
-rankWeight = 1.1 # Recommendation: Float between 0 and 1
-pointsWeight = 1  # Recommendation: Float between 0 and 1
-scheduleWeight = 1  # Recommendation: Float between 1 and 3
+rankWeight = 1 # Recommendation: Float between 0 and 1
+pointsWeight = .25  # Recommendation: Float between 0 and 1
+scheduleWeight = 2  # Recommendation: Float between 1 and 3
 i = winWeight
 j = rankWeight
 k = pointsWeight
 m = scheduleWeight
 
 
-# Gets team data from web, run once
-# for x in range(year, 2006):
+# Gets team data from web, run once ESPN has data from 2006 - current year
+getTeamData(gender, league, sport, year)
+
+# Use to sim current year bracket
+# bracketSim('NCAAMBracket2022.yaml', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
+
+# Doesn't work yet, Generates Excel sheet with bracket results graphic
+# populateBracket(f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv')
+
+
+
+# Below used for back testing ONLY
+# Gets team data from web, run once ESPN has data from 2006 - current year
+# Takes a long time to import data, ~10 min per year
+# for x in range(2006, 2023):
 #     getTeamData(gender, league, sport, x)
 
-
-# Populate yaml files from past brackets, run once
-# for x in range(year, 2022):
+# Populate yaml/csv files from past brackets, run once CSV has data from 1985 - 2019
+# for x in range(2006, 2023):
 #     populateResults(x)
 
 # increment = 0.25
@@ -67,9 +79,8 @@ m = scheduleWeight
 
 
 # Use to sim current year bracket
-# getTeamData(gender, league, sport, str(2021))
-bracketSim('NCAAMBracket2021.csv', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
+# getTeamData(gender, league, sport, str(2022))
+# bracketSim('NCAAMBracket2022.yaml', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
 # print(compareYamls(f'{year}results.yaml', f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
 
-# Doesn't work yet
-populateBracket(f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv')
+
