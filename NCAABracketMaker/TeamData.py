@@ -63,7 +63,7 @@ def getTeamData(gender, league, sport, year):
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
-        log.info('Team ' + str(id))
+        log.info('Year ' + str(year) + ' : ' + 'Team ' + str(id))
         urlTeam = urlBase + str(id) + '/season/' + str(year)
         with requests.get(urlTeam, headers=headers):
             results = requests.get(urlTeam, headers=headers)
