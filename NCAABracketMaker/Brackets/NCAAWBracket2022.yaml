@@ -1,16 +1,16 @@
 #First 4 teams by seed
 
 d1r1seed11a : 'Dayton'
-d1r1seed11b : 'DEP'
+d1r1seed11b : 'DePaul'
 
-d1r1seed16a : 'HOW'
-d1r1seed16b : 'UIW'
+d1r1seed16a : 'Howard'
+d1r1seed16b : 'Incarnate Word'
 
-d1r2seed11a : 'MOST'
-d1r2seed11b : 'FSU'
+d1r2seed11a : "Mount St. Mary's"
+d1r2seed11b : 'Florida State'
 
-d1r3seed16a : 'LNG'
-d1r3seed16b : "MSM"
+d1r3seed16a : 'Longwood'
+d1r3seed16b : "Mount St. Mary's"
 
 #Regions labeled as 1(Top Left), 2(Top Right), 3(Bottom Right), 4(Bottom Left)
 
@@ -27,7 +27,7 @@ d1r1seed8 : 'Miami'
 d1r1seed9 : 'South Florida'
 d1r1seed10 : 'Creighton'
 d1r1seed11 :
-d1r1seed12 : 'SF Austin'
+d1r1seed12 : 'Stephen F. Austin'
 d1r1seed13 : 'UNLV'
 d1r1seed14 : 'UT Arlington'
 d1r1seed15 : 'Illinois State'
@@ -46,7 +46,7 @@ d1r2seed8 : 'Kansas'
 d1r2seed9 : 'Georgia Tech'
 d1r2seed10 : 'Arkansas'
 d1r2seed11 :
-d1r2seed12 : 'FGCU'
+d1r2seed12 : 'Florida Gulf Coast'
 d1r2seed13 : 'Delaware'
 d1r2seed14 : 'Jackson State'
 d1r2seed15 : 'Fairfield'
@@ -56,7 +56,7 @@ d1r2seed16 : 'Montana State'
 #Region 3 teams by seed
 
 d1r3seed1 : 'NC State'
-d1r3seed2 : 'UCon'
+d1r3seed2 : 'UConn'
 d1r3seed3 : 'Indiana'
 d1r3seed4 : 'Oklahoma'
 d1r3seed5 : 'Notre Dame'
@@ -87,6 +87,6 @@ d1r4seed10 : 'South Dakota'
 d1r4seed11 : 'Villanova'
 d1r4seed12 : 'Belmont'
 d1r4seed13 : 'Buffalo'
-d1r4seed14 : 'American'
+d1r4seed14 : 'American University'
 d1r4seed15 : "Hawai'i"
 d1r4seed16 : 'Albany'
