@@ -1,0 +1,91 @@
+#First 4 teams by seed
+
+d1r1seed11a : 'Rutgers'
+d1r1seed11b : 'Notre Dame'
+
+d1r2seed16a : 'Wright State'
+d1r2seed16b : 'Bryant'
+
+d1r4seed12a : 'Wyoming'
+d1r4seed12b : 'Indiana'
+
+d1r3seed16a : 'Texas Southern'
+d1r3seed16b : "Texas A&M-CC"
+
+#Regions labeled as 1(Top Left), 2(Top Right), 3(Bottom Right), 4(Bottom Left)
+
+#Region 1 teams by seed
+
+d1r1seed1 : 'Gonzaga'
+d1r1seed2 : 'Duke'
+d1r1seed3 : 'Texas Tech'
+d1r1seed4 : 'Arkansas'
+d1r1seed5 : 'UConn'
+d1r1seed6 : 'Alabama'
+d1r1seed7 : 'Michigan State'
+d1r1seed8 : 'Boise State'
+d1r1seed9 : 'Memphis'
+d1r1seed10 : 'Davidson'
+d1r1seed11 :
+d1r1seed12 : 'New Mexico State'
+d1r1seed13 : 'Vermont'
+d1r1seed14 : 'Montana State'
+d1r1seed15 : 'CSU Fullerton'
+d1r1seed16 : 'Georgia State'
+
+#Region 2 teams by seed
+
+d1r2seed1 : 'Arizona'
+d1r2seed2 : 'Villanova'
+d1r2seed3 : 'Tennessee'
+d1r2seed4 : 'Illinois'
+d1r2seed5 : 'Houston'
+d1r2seed6 : 'Colorado State'
+d1r2seed7 : 'Ohio State'
+d1r2seed8 : 'Seton Hall'
+d1r2seed9 : 'TCU'
+d1r2seed10 : 'Loyola Chicago'
+d1r2seed11 : 'Michigan'
+d1r2seed12 : 'UAB'
+d1r2seed13 : 'Chattanooga'
+d1r2seed14 : 'Longwood'
+d1r2seed15 : 'Delaware'
+d1r2seed16 :
+
+#Region 3 teams by seed
+
+d1r3seed1 : 'Kansas'
+d1r3seed2 : 'Auburn'
+d1r3seed3 : 'Wisconsin'
+d1r3seed4 : 'Providence'
+d1r3seed5 : 'Iowa'
+d1r3seed6 : 'LSU'
+d1r3seed7 : 'USC'
+d1r3seed8 : 'San Diego State'
+d1r3seed9 : 'Creighton'
+d1r3seed10 : 'Miami'
+d1r3seed11 : 'Iowa State'
+d1r3seed12 : 'Richmond'
+d1r3seed13 : 'South Dakota State'
+d1r3seed14 : 'Colgate'
+d1r3seed15 : 'Jacksonville State'
+d1r3seed16 :
+
+#Region 4 teams by seed
+
+d1r4seed1 : 'Baylor'
+d1r4seed2 : 'Kentucky'
+d1r4seed3 : 'Purdue'
+d1r4seed4 : 'UCLA'
+d1r4seed5 : "Saint Mary's"
+d1r4seed6 : 'Texas'
+d1r4seed7 : 'Murray State'
+d1r4seed8 : 'North Carolina'
+d1r4seed9 : 'Marquette'
+d1r4seed10 : 'San Francisco'
+d1r4seed11 : 'Virginia Tech'
+d1r4seed12 :
+d1r4seed13 : 'Akron'
+d1r4seed14 : 'Yale'
+d1r4seed15 : "Saint Peter's"
+d1r4seed16 : 'Norfolk State'
