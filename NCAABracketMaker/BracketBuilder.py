@@ -38,7 +38,6 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     # bracketData = pd.read_csv(bracketpath + bracketfile)
 
     data = dict((k, v) for k, v in bracketData.items() if k[:2] == 'd1')
-    print(data.get('d1r2seed16a'))
 
     # First 4 games, different years have different first 4 games
     try:
