@@ -31,9 +31,6 @@ def getTeamList(gender, league, sport):
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
-    if gender == 'womens':
-        teamIDs.append(2623)
-
     teamIDs = list(dict.fromkeys(teamIDs))
 
     return teamIDs
