@@ -24,9 +24,9 @@ def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
 
 def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     if '2020' in bracketfile:
-        # with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.yaml', 'w') as f:
+        # with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.yaml', 'w') as f:
         #     yaml.dump('Coronavirus', f, default_flow_style=False)
-        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'SimResults.csv', 'w') as f:
+        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.csv', 'w') as f:
             f.write('Coronavirus')
         print('Coronavirus')
         return None
@@ -104,9 +104,9 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     # ensure directory exists
     os.makedirs(modulepath + 'SimBrackets/', exist_ok=True)
     datafile = teamdatafile.replace('.csv', '')
-    # with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-SimResults.yaml', 'w') as f:
+    # with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.yaml', 'w') as f:
     #     yaml.dump(totalsimData, f, default_flow_style=False)
-    with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-SimResults.csv', 'w') as f:
+    with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.csv', 'w') as f:
         for key in totalsimData.keys():
             f.write("%s, %s\n" % (key, totalsimData[key]))
 
@@ -115,11 +115,16 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
 
 def populateBracket(simbracket):
     # TODO: Fix function to export results into excel sheet
-    book = load_workbook(f'{simbracketpath}Sim_Bracket.xlsx')
-    writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx', engine='openpyxl')
-    writer.book = book
-    writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx')
-    pd.read_csv(f'{simbracketpath}{simbracket}').to_excel(writer, 'SimResults')
-    writer.save()
+    df = pd.read_csv(f'{simbracketpath}{simbracket}')
+    filename = simbracket.rstrip('.csv')
+    with pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx', mode='a', if_sheet_exists='replace') as writer:
+        df.to_excel(writer, sheet_name=filename)
+    # book = load_workbook(f'{simbracketpath}Sim_Bracket.xlsx')
+    # source = book.get_sheet_by_name('Results')
+    # writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx', engine='openpyxl')
+    # writer.book = book
+    # writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx')
+    # pd.read_csv(f'{simbracketpath}{simbracket}').to_excel(writer, 'SimResults')
+    # writer.save()
 
     return None
