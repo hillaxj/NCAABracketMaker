@@ -3,6 +3,7 @@ import pandas as pd
 import ast
 import re
 import logging as log
+# TODO: Create better algorithm, machine learning?
 
 
 def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
@@ -18,7 +19,7 @@ def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     team1OppRank = teamdatadf.at[team1, 'Schedule Rank']
     team2OppRank = teamdatadf.at[team2, 'Schedule Rank']
 
-    # Compares wins and losses, tie goes to team2
+    # Compares data from each team to determine winner, tie goes to team1
     if team1Ratio * ratiocof + team1Points * pointcof + team1OppRank * rankcof + team1OppWins * wincof >= \
             team2Ratio * ratiocof + team2Points * pointcof + team2OppRank * rankcof + team2OppWins * wincof:
         winner = team1
