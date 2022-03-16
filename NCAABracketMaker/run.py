@@ -22,7 +22,7 @@ m = scheduleWeight
 
 
 # Gets team data from web, run once for current year
-getTeamData(gender, 2022)
+# getTeamData(gender, 2022)
 
 # Use to sim current year bracket
 if gender == 'mens':
@@ -30,10 +30,8 @@ if gender == 'mens':
 elif gender == 'womens':
     bracketSim('NCAAWBracket2022.yaml', f'{gender}{year}.csv', i, j, k, m)
 
-
-
-
-# Doesn't work yet, Generates Excel sheet with bracket results graphic
+# Generates Excel sheet with bracket results graphic
+# Open Sim_Bracket.xlsx to view results
 populateBracket(f'{gender}{year}-{i}-{j}-{k}-{m}-Sim.csv')
 
 
