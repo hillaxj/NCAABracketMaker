@@ -9,8 +9,6 @@ from NCAABracketMaker.utilities import teampath
 import time
 import pandas as pd
 gender = 'mens'
-league = 'college'
-sport = 'basketball'
 year = 2022
 averageAccuracy = 0
 winWeight = 1  # Recommendation: Float between 0 and 1
@@ -23,14 +21,20 @@ k = pointsWeight
 m = scheduleWeight
 
 
-# Gets team data from web, run once ESPN has data from 2006 - current year
-getTeamData(gender, league, sport, year)
+# Gets team data from web, run once for current year
+getTeamData(gender, 2022)
 
 # Use to sim current year bracket
-# bracketSim('NCAAMBracket2022.yaml', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
+if gender == 'mens':
+    bracketSim('NCAAMBracket2022.yaml', f'{gender}{year}.csv', i, j, k, m)
+elif gender == 'womens':
+    bracketSim('NCAAWBracket2022.yaml', f'{gender}{year}.csv', i, j, k, m)
+
+
+
 
 # Doesn't work yet, Generates Excel sheet with bracket results graphic
-# populateBracket(f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv')
+populateBracket(f'{gender}{year}-{i}-{j}-{k}-{m}-Sim.csv')
 
 
 
@@ -38,7 +42,7 @@ getTeamData(gender, league, sport, year)
 # Gets team data from web, run once ESPN has data from 2006 - current year
 # Takes a long time to import data, ~10 min per year
 # for x in range(2006, 2023):
-#     getTeamData(gender, league, sport, x)
+#     getTeamData(gender, x)
 
 # Populate yaml/csv files from past brackets, run once CSV has data from 1985 - 2019
 # for x in range(2006, 2023):
@@ -55,10 +59,10 @@ getTeamData(gender, league, sport, year)
 # scheduleWeight = i + j +  0.0001
 #
 # for x in range(year, 2020):
-#     teamdatacsv = f'menscollegebasketball{x}.csv'
+#     teamdatacsv = f'mens{x}.csv'
 #     bracketresultsyaml = f'{x}results.yaml'
 #     bracketSim(bracketresultsyaml, teamdatacsv)
-#     compareList.append(compareYamls(bracketresultsyaml, f'menscollegebasketball{x}SimResults.yaml'))
+#     compareList.append(compareYamls(bracketresultsyaml, f'mens{x}SimResults.yaml'))
 #
 # compareValue = sum(compareList) / len(compareList)
 # print(compareValue)
@@ -79,8 +83,8 @@ getTeamData(gender, league, sport, year)
 
 
 # Use to sim current year bracket
-# getTeamData(gender, league, sport, str(2022))
-# bracketSim('NCAAMBracket2022.yaml', f'{gender}{league}{sport}{year}.csv', i, j, k, m)
-# print(compareYamls(f'{year}results.yaml', f'{gender}{league}{sport}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
+# getTeamData(gender, str(2022))
+# bracketSim('NCAAMBracket2022.yaml', f'{gender}{year}.csv', i, j, k, m)
+# print(compareYamls(f'{year}results.yaml', f'{gender}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
 
 

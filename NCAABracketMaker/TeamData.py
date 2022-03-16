@@ -11,11 +11,11 @@ import yaml
 headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 
-def getTeamList(gender, league, sport):
+def getTeamList(gender):
     # Adds each team ID from complete team list url to list and returns list
     # url for mens NCAA team list
     # Alternate data source 'https://basketball.realgm.com/ncaa/teams'
-    urlTeams = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/teams'
+    urlTeams = 'https://www.espn.com/' + gender + '-' + 'college-basketball' + '/teams'
     teamIDs = []
 
     results = requests.get(urlTeams, headers=headers)
@@ -26,7 +26,7 @@ def getTeamList(gender, league, sport):
 
     # Trims excess text from HTML to get only team ID, adds ID to list
     for team in id_div:
-        team = str(team).replace('<a class="AnchorLink" href="/' + gender + '-' + league + '-' + sport + \
+        team = str(team).replace('<a class="AnchorLink" href="/' + gender + '-' + 'college-basketball' + \
                                  '/team/schedule/_/id/', '')
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
@@ -36,13 +36,13 @@ def getTeamList(gender, league, sport):
     return teamIDs
 
 
-def getTeamData(gender, league, sport, year):
+def getTeamData(gender, year):
     # Generates CSV with all team names, mascots, and win/loss record
 
     # url for mens NCAA team schedule
     # Alternate data source 'https://basketball.realgm.com/ncaa/team-stats', \
     # 'https://basketball.realgm.com/ncaa/conferences/West-Coast-Conference/11/Gonzaga/332/Schedule'
-    urlBase = 'https://www.espn.com/' + gender + '-' + league + '-' + sport + '/team/schedule/_/id/'
+    urlBase = 'https://www.espn.com/' + gender + '-' + 'college-basketball' + '/team/schedule/_/id/'
 
     # Initialize lists
     teamName = []
@@ -56,7 +56,7 @@ def getTeamData(gender, league, sport, year):
     # teamIDs = [2473, 127, 251, 399, 171, 172]
     # Test women's teams list
     # teamIDs = [24, 12, 2463, 62, 300, 2483, 26]
-    teamIDs = getTeamList(gender, league, sport)
+    teamIDs = getTeamList(gender)
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
@@ -153,8 +153,8 @@ def getTeamData(gender, league, sport, year):
     })
 
     # Export dataframe to CSV file in TeamData directory
-    teamData.to_csv(teampath + gender + league + sport + str(year) + '.csv')
-    scheduleStrength(f'{gender}{league}{sport}{year}.csv')
+    teamData.to_csv(teampath + gender + str(year) + '.csv')
+    scheduleStrength(f'{gender}{year}.csv')
 
     return None
 
