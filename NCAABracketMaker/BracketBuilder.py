@@ -114,17 +114,12 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
 
 
 def populateBracket(simbracket):
-    # TODO: Fix function to export results into excel sheet
+    # Creates dataframe with simbracket
     df = pd.read_csv(f'{simbracketpath}{simbracket}')
     filename = simbracket.rstrip('.csv')
+    #  Adds sheet with simbracket data
     with pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx', mode='a', if_sheet_exists='replace') as writer:
         df.to_excel(writer, sheet_name=filename)
-    # book = load_workbook(f'{simbracketpath}Sim_Bracket.xlsx')
-    # source = book.get_sheet_by_name('Results')
-    # writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx', engine='openpyxl')
-    # writer.book = book
-    # writer = pd.ExcelWriter(f'{simbracketpath}Sim_Bracket.xlsx')
-    # pd.read_csv(f'{simbracketpath}{simbracket}').to_excel(writer, 'SimResults')
-    # writer.save()
+
 
     return None
