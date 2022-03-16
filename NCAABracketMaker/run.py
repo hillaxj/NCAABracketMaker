@@ -8,13 +8,13 @@ import cProfile
 from NCAABracketMaker.utilities import teampath
 import time
 import pandas as pd
-gender = 'mens'
+gender = 'womens'
 year = 2022
 averageAccuracy = 0
 winWeight = 1  # Recommendation: Float between 0 and 1
-rankWeight = 1 # Recommendation: Float between 0 and 1
-pointsWeight = .25  # Recommendation: Float between 0 and 1
-scheduleWeight = 2  # Recommendation: Float between 1 and 3
+rankWeight = 1.5  # Recommendation: Float between 0 and 1
+pointsWeight = 1 # Recommendation: Float between 0 and 1
+scheduleWeight = 3  # Recommendation: Float between 1 and 3
 i = winWeight
 j = rankWeight
 k = pointsWeight
