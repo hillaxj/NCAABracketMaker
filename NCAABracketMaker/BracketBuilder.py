@@ -207,7 +207,7 @@ def clearSimResults(reset):
             else:
                 workbook.remove(workbook[i])
 
-        # Removes sheets from drop down list
+        # Remove sheets from drop down list
         sheet = workbook['Bracket']
         for x in range(5, 21):
             sheet[f'AE{x}'].value = None

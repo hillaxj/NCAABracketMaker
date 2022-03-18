@@ -3,9 +3,8 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
-from NCAABracketMaker.utilities import teampath, bracketpath, simbracketpath
+from NCAABracketMaker.utilities import teampath, bracketpath
 from NCAABracketMaker.AnalyzeGame import scheduleStrength
-import yaml
 
 # common fxn parameters
 headers = {"Accept-Language": "en-US, en;q=0.5"}
@@ -62,10 +61,6 @@ def getTeamData(sex, year):
     teamWinRatio = []
     teamIDList = []
     teamScheduleResults = []
-    # Test mens teams list
-    # teamIDs = [2473, 127, 251, 399, 171, 172]
-    # Test women's teams list
-    # teamIDs = [24, 12, 2463, 62, 300, 2483, 26]
     teamIDs = getTeamList(sex)
 
     # Iterate through each teamID and populate list
@@ -121,7 +116,7 @@ def getTeamData(sex, year):
                     loseRecord = loseRecord + 1
                 else:
                     continue
-                teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore, \
+                teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore,
                                               gameOpponentScore]
                 gameCount = gameCount + 1
             except:
@@ -178,11 +173,7 @@ def populateResults(year):
     # All NCAA mens data 2019-1985
     # urlBracket = 'https://query.data.world/s/esvsa75otwudjalobphshkfrcn72dr'
     if year == 2020:
-        # For yaml files
-        # with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
-        #     yaml.dump('Coronavirus', f, default_flow_style=False)
-
-        # For csv files
+        # No 2020 bracket exists
         with open(bracketpath + str(year) + 'results.csv', 'w') as f:
             f.write('Coronavirus')
         print('2020 Coronavirus')
@@ -218,10 +209,6 @@ def populateResults(year):
                     teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
                 else:
                     teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[7]
-
-    # Dump teams dict into yaml
-    # with open(bracketpath + str(year) + 'results.yaml', 'w') as f:
-    #     yaml.dump(teams, f, default_flow_style=False)
 
     # Dump teams dict into csv
     with open(bracketpath + str(year) + 'results.csv', 'w') as f:
@@ -282,7 +269,7 @@ def nameCheck(teamName):
                                                                             'Joseph\'s').replace('Marys', 'Mary\'s')
         else:
             team = team.replace('St', 'St.')
-    #Morgan State for womens team
+    # Morgan State for womens team
     elif team.split(' ')[-1] == 'St' and team != 'Morgan St':
         team = teamName.replace('St', 'State')
 

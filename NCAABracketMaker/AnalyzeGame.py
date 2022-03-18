@@ -2,7 +2,6 @@ from NCAABracketMaker.utilities import teampath
 import pandas as pd
 import ast
 import re
-import logging as log
 # TODO: Create better algorithm, machine learning?
 
 
