@@ -7,7 +7,17 @@ import logging as log
 
 
 def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
-    # Selects winner based on team records
+    """
+    Selects winner based on team records
+    :param team1: string, First team in game
+    :param team2: string, Second team in game
+    :param teamdatadf: dataframe, all team data
+    :param pointcof:  float, points weight coefficient
+    :param wincof: float, number of wins weight coefficient
+    :param rankcof: float, top 25 team rank weight coefficient
+    :param ratiocof: float, wins to losses weight coefficient
+    :return: string, winning team
+    """
 
     # Pulls each team's wins and losses from team data csv
     team1Ratio = teamdatadf.at[team1, 'Team Win Ratio']
@@ -30,7 +40,11 @@ def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
 
 
 def scheduleStrength(teamdatafile):
-    # Calculates value for schedule difficulty
+    """
+    Calculates value for schedule difficulty
+    :param teamdatafile: string, filepath for csv of all team data
+    :return: None, adds schedule strength parameters (Schedule Points, Schedule Wins, Schedule Rank) to teamdatafile
+    """
     # Reads csv file
     df = pd.read_csv(teampath + teamdatafile, index_col='Team Name')
     teams = df.index.tolist()
