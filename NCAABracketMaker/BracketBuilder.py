@@ -6,6 +6,7 @@ from math import pow
 import pandas as pd
 import os
 from openpyxl import load_workbook
+import logging as log
 # TODO : Add function to import current year bracket into yaml ie: NCAAMBracket2021.yaml
 
 
@@ -23,8 +24,16 @@ def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, point
     :return: None, creates csv of team data and results, populates xlsx with results
     """
     if reset:
-        # To remove all sim results run this function
+        # Removes all sim results
         clearSimResults(reset)
+        return None
+    try:
+        winWeight = float(winWeight)
+        rankWeight = float(rankWeight)
+        pointsWeight = float(pointsWeight)
+        scheduleWeight = float(scheduleWeight)
+    except:
+        log.error('Coefficients are not float variables')
         return None
 
     # Use to sim current year bracket
@@ -34,7 +43,7 @@ def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, point
     elif sex == 'womens':
         emptybracket = f'NCAAWBracket{year}.yaml'
     else:
-        print('Not a valid sex')
+        log.error('Not a valid sex')
         return None
 
     if year == 2021 or year == 2022:
@@ -51,9 +60,9 @@ def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, point
         # Generates Excel sheet with bracket results graphic
         populateBracket(f'{sex}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
 
-        print('Open Sim_Bracket.xlsx to see results.')
+        log.info('Open Sim_Bracket.xlsx to see results.')
     else:
-        print('No empty bracket for selected year')
+        log.error('No empty bracket for selected year')
     return None
 
 
