@@ -1,30 +1,24 @@
 """
 Call on functions to pull data and create brackets
 """
-from NCAABracketMaker.TeamData import getTeamData
-from NCAABracketMaker.BracketBuilder import bracketSim, populateBracket
-
-gender = 'mens'
-year = 2022
-
-winWeight = 1       # Recommend: Float between 0 and 1
-rankWeight = 1.5    # Recommend: Float between 0 and 1
-pointsWeight = 1    # Recommend: Float between 0 and 1
-scheduleWeight = 3  # Recommend: Float between 1 and 3
+from NCAABracketMaker.BracketBuilder import bracketmaker
 
 
-# Gets team data from web, run once for current year
-getTeamData(gender, 2022)
+gender = 'mens'     # Must be 'mens' or 'womens'
+year = 2019         # Empty brackets available for 2021 and 2022 only
 
-# Use to sim current year bracket
-if gender == 'mens':
-    bracketSim(f'NCAAMBracket{year}.yaml', f'{gender}{year}.csv', winWeight, rankWeight, pointsWeight, scheduleWeight)
-elif gender == 'womens':
-    bracketSim(f'NCAAWBracket{year}.yaml', f'{gender}{year}.csv', winWeight, rankWeight, pointsWeight, scheduleWeight)
+win = 1             # Recommend: Float between 0 and 1
+rank = .2           # Recommend: Float between 0 and 1
+points = 1          # Recommend: Float between 0 and 1
+schedule = 5        # Recommend: Float between 1 and 3
 
-# Generates Excel sheet with bracket results graphic
-# Open Sim_Bracket.xlsx in SimBrackets to view results
-populateBracket(f'{gender}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
+reset = False
+
+# Imports data from current year and simulates bracket with defined parameters. Open Sim_Bracket.xlsx to see results.
+bracketmaker(gender, year, win, rank, points, schedule)
+
+
+
 
 
 
