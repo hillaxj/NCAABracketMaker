@@ -12,6 +12,11 @@ headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 
 def getTeamList(gender):
+    """
+    Generates a list of all the teams in the league
+    :param gender: str, mens or womens league
+    :return: list, list of strings with all team names
+    """
     # Adds each team ID from complete team list url to list and returns list
     # url for mens NCAA team list
     # Alternate data source 'https://basketball.realgm.com/ncaa/teams'
@@ -37,7 +42,12 @@ def getTeamList(gender):
 
 
 def getTeamData(gender, year):
-    # Generates CSV with all team names, mascots, and win/loss record
+    """
+    Generates CSV with all team names, mascots, and win/loss record
+    :param gender: str, mens or womens league
+    :param year: int, year of data being retrieved
+    :return: None, creates csv of team data for each team
+    """
 
     # url for mens NCAA team schedule
     # Alternate data source 'https://basketball.realgm.com/ncaa/team-stats', \
@@ -159,8 +169,12 @@ def getTeamData(gender, year):
     return None
 
 
-def populateResults(year: int):
-
+def populateResults(year):
+    """
+    Populates results for past brackets
+    :param year: int, year for past results
+    :return: None, creates csv file with past results
+    """
     # All NCAA mens data 2019-1985
     # urlBracket = 'https://query.data.world/s/esvsa75otwudjalobphshkfrcn72dr'
     if year == 2020:
@@ -218,6 +232,11 @@ def populateResults(year: int):
 
 
 def nameCheck(teamName):
+    """
+    Checks names to ensure consistent naming
+    :param teamName: str, team name to be checked
+    :return: str, corrected team name
+    """
     switch = {
         'Central Florida': 'UCF',
         'Gardner Webb': 'Gardner-Webb',
