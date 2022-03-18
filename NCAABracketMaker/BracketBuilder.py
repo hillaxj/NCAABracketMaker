@@ -27,23 +27,32 @@ def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, point
         # Removes all sim results
         clearSimResults(reset)
         return None
+
+    # Checks coefficient var types
     try:
         winWeight = float(winWeight)
         rankWeight = float(rankWeight)
         pointsWeight = float(pointsWeight)
         scheduleWeight = float(scheduleWeight)
     except:
-        log.error('Coefficients are not float variables')
+        log.error('Coefficients are not float variables', exc_info=True)
         return None
 
-    # Use to sim current year bracket
+    # Checks sex var type and converts to lower
+    try:
+        sex = sex.lower()
+    except:
+        log.error('Not a valid sex. Must be either "mens" or "womens"')
+        return None
+
+    # Sets emptybracket based of selected sex
     if sex == 'mens':
         emptybracket = f'NCAAMBracket{year}.yaml'
 
     elif sex == 'womens':
         emptybracket = f'NCAAWBracket{year}.yaml'
     else:
-        log.error('Not a valid sex')
+        log.error('Not a valid sex. Must be either "mens" or "womens"')
         return None
 
     if year == 2021 or year == 2022:
