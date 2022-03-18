@@ -9,12 +9,12 @@ from openpyxl import load_workbook
 # TODO : Add function to import current year bracket into yaml ie: NCAAMBracket2021.yaml
 
 
-def bracketmaker(gender: str, year: int, winWeight: float, rankWeight: float, pointsWeight: float,
+def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, pointsWeight: float,
                  scheduleWeight: float, reset=False):
     """
     Imports data from current year and simulates bracket with defined parameters
     :param reset: bool, Default False, deletes all csv files in SimBrackets and clears results from Sim_Bracket.xlsx
-    :param gender: str, mens or womens
+    :param sex: str, mens or womens
     :param year: int, year of bracket to test
     :param winWeight: float, number of wins weight coefficient
     :param rankWeight: float, top 25 team rank weight coefficient
@@ -28,28 +28,28 @@ def bracketmaker(gender: str, year: int, winWeight: float, rankWeight: float, po
         return None
 
     # Use to sim current year bracket
-    if gender == 'mens':
+    if sex == 'mens':
         emptybracket = f'NCAAMBracket{year}.yaml'
 
-    elif gender == 'womens':
+    elif sex == 'womens':
         emptybracket = f'NCAAWBracket{year}.yaml'
     else:
-        print('Not a valid gender')
+        print('Not a valid sex')
         return None
 
     if year == 2021 or year == 2022:
         # Gets team data from web, if file exist, doesn't run
         try:
-            f = open(teampath + gender + str(year) + '.csv')
+            f = open(teampath + sex + str(year) + '.csv')
             f.close()
         except IOError as e:
-            getTeamData(gender, 2022)
+            getTeamData(sex, 2022)
 
         # Use to sim current year bracket
-        bracketSim(emptybracket, f'{gender}{year}.csv', winWeight, rankWeight, pointsWeight,
+        bracketSim(emptybracket, f'{sex}{year}.csv', winWeight, rankWeight, pointsWeight,
                    scheduleWeight)
         # Generates Excel sheet with bracket results graphic
-        populateBracket(f'{gender}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
+        populateBracket(f'{sex}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
 
         print('Open Sim_Bracket.xlsx to see results.')
     else:

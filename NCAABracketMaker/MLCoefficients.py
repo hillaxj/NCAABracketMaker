@@ -41,7 +41,7 @@ def compareResults(results, simbracket):
 # Gets team data from web, run once ESPN has data from 2006 - current year
 # Takes a long time to import data, ~10 min per year
 # for x in range(2006, 2023):
-#     getTeamData(gender, x)
+#     getTeamData(sex, x)
 
 # Populate yaml/csv files from past brackets, run once CSV has data from 1985 - 2019
 # for x in range(2006, 2023):
@@ -82,6 +82,6 @@ def compareResults(results, simbracket):
 
 
 # Use to sim current year bracket
-# getTeamData(gender, str(2022))
-# bracketSim('NCAAMBracket2022.yaml', f'{gender}{year}.csv', i, j, k, m)
-# print(compareYamls(f'{year}results.yaml', f'{gender}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
+# getTeamData(sex, str(2022))
+# bracketSim('NCAAMBracket2022.yaml', f'{sex}{year}.csv', i, j, k, m)
+# print(compareYamls(f'{year}results.yaml', f'{sex}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
