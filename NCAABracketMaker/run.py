@@ -32,14 +32,14 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         rankWeight = float(rankWeight)
         pointsWeight = float(pointsWeight)
         scheduleWeight = float(scheduleWeight)
-    except:
+    except (LookupError, ValueError):
         log.error('Coefficients are not float variables', exc_info=True)
         return None
 
     # Checks league var type and converts to lower
     try:
         league = league.lower()
-    except:
+    except (LookupError, ValueError):
         log.error('Not a valid league. Must be either "mens" or "womens"')
         return None
 
@@ -58,7 +58,7 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         try:
             f = open(teampath + league + str(year) + '.csv')
             f.close()
-        except IOError as e:
+        except FileNotFoundError:
             getTeamData(league, 2022)
 
         # Use to sim current year bracket
