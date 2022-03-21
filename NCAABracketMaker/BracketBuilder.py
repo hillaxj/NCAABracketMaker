@@ -1,78 +1,13 @@
 from NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, modulepath
-from NCAABracketMaker.TeamData import getTeamData
 import yaml
 from NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
 import pandas as pd
 import os
 from openpyxl import load_workbook
-import logging as log
+
+
 # TODO : Add function to import current year bracket into yaml ie: NCAAMBracket2021.yaml
-
-
-def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, pointsWeight: float,
-                 scheduleWeight: float, reset=False):
-    """
-    Imports data from current year and simulates bracket with defined parameters
-    :param reset: bool, Default False, deletes all csv files in SimBrackets and clears results from Sim_Bracket.xlsx
-    :param sex: str, mens or womens
-    :param year: int, year of bracket to test
-    :param winWeight: float, number of wins weight coefficient
-    :param rankWeight: float, top 25 team rank weight coefficient
-    :param pointsWeight: float, points weight coefficient
-    :param scheduleWeight: float, wins to losses weight coefficient
-    :return: None, creates csv of team data and results, populates xlsx with results
-    """
-    if reset:
-        # Removes all sim results
-        clearSimResults(reset)
-        return None
-
-    # Checks coefficient var types
-    try:
-        winWeight = float(winWeight)
-        rankWeight = float(rankWeight)
-        pointsWeight = float(pointsWeight)
-        scheduleWeight = float(scheduleWeight)
-    except:
-        log.error('Coefficients are not float variables', exc_info=True)
-        return None
-
-    # Checks sex var type and converts to lower
-    try:
-        sex = sex.lower()
-    except:
-        log.error('Not a valid sex. Must be either "mens" or "womens"')
-        return None
-
-    # Sets emptybracket based of selected sex
-    if sex == 'mens':
-        emptybracket = f'NCAAMBracket{year}.yaml'
-
-    elif sex == 'womens':
-        emptybracket = f'NCAAWBracket{year}.yaml'
-    else:
-        log.error('Not a valid sex. Must be either "mens" or "womens"')
-        return None
-
-    if year == 2021 or year == 2022:
-        # Gets team data from web, if file exist, doesn't run
-        try:
-            f = open(teampath + sex + str(year) + '.csv')
-            f.close()
-        except IOError as e:
-            getTeamData(sex, 2022)
-
-        # Use to sim current year bracket
-        bracketSim(emptybracket, f'{sex}{year}.csv', winWeight, rankWeight, pointsWeight,
-                   scheduleWeight)
-        # Generates Excel sheet with bracket results graphic
-        populateBracket(f'{sex}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
-
-        log.info('Open Sim_Bracket.xlsx to see results.')
-    else:
-        log.error('No empty bracket for selected year')
-    return None
 
 
 def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):

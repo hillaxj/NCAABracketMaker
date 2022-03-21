@@ -10,16 +10,16 @@ from NCAABracketMaker.AnalyzeGame import scheduleStrength
 headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 
-def getTeamList(sex):
+def getTeamList(league):
     """
     Generates a list of all the teams in the league
-    :param sex: str, mens or womens league
+    :param league: str, mens or womens league
     :return: list, list of strings with all team names
     """
     # Adds each team ID from complete team list url to list and returns list
     # url for mens NCAA team list
     # Alternate data source 'https://basketball.realgm.com/ncaa/teams'
-    urlTeams = 'https://www.espn.com/' + sex + '-college-basketball/teams'
+    urlTeams = 'https://www.espn.com/' + league + '-college-basketball/teams'
     teamIDs = []
 
     results = requests.get(urlTeams, headers=headers)
@@ -30,7 +30,7 @@ def getTeamList(sex):
 
     # Trims excess text from HTML to get only team ID, adds ID to list
     for team in id_div:
-        team = str(team).replace('<a class="AnchorLink" href="/' + sex + '-college-basketball/team/schedule/_/id/', '')
+        team = str(team).replace('<a class="AnchorLink" href="/' + league + '-college-basketball/team/schedule/_/id/', '')
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
@@ -39,10 +39,10 @@ def getTeamList(sex):
     return teamIDs
 
 
-def getTeamData(sex, year):
+def getTeamData(league, year):
     """
     Generates CSV with all team names, mascots, and win/loss record
-    :param sex: str, mens or womens league
+    :param league: str, mens or womens league
     :param year: int, year of data being retrieved
     :return: None, creates csv of team data for each team
     """
@@ -50,7 +50,7 @@ def getTeamData(sex, year):
     # url for mens NCAA team schedule
     # Alternate data source 'https://basketball.realgm.com/ncaa/team-stats', \
     # 'https://basketball.realgm.com/ncaa/conferences/West-Coast-Conference/11/Gonzaga/332/Schedule'
-    urlBase = 'https://www.espn.com/' + sex + '-college-basketball/team/schedule/_/id/'
+    urlBase = 'https://www.espn.com/' + league + '-college-basketball/team/schedule/_/id/'
 
     # Initialize lists
     teamName = []
@@ -60,7 +60,7 @@ def getTeamData(sex, year):
     teamWinRatio = []
     teamIDList = []
     teamScheduleResults = []
-    teamIDs = getTeamList(sex)
+    teamIDs = getTeamList(league)
 
     # Iterate through each teamID and populate list
     for id in teamIDs:
@@ -157,8 +157,8 @@ def getTeamData(sex, year):
     })
 
     # Export dataframe to CSV file in TeamData directory
-    teamData.to_csv(teampath + sex + str(year) + '.csv')
-    scheduleStrength(f'{sex}{year}.csv')
+    teamData.to_csv(teampath + league + str(year) + '.csv')
+    scheduleStrength(f'{league}{year}.csv')
 
     return None
 
@@ -275,7 +275,7 @@ def nameCheck(teamName):
     return team
 
 
-def getemptybracket(sex):
+def getemptybracket(league):
     # TODO get this function working
     urlbracket = 'http://www.espn.com/mens-college-basketball/tournament/bracket'
     bracket_teams = []
