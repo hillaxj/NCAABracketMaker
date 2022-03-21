@@ -19,7 +19,7 @@ def getTeamList(sex):
     # Adds each team ID from complete team list url to list and returns list
     # url for mens NCAA team list
     # Alternate data source 'https://basketball.realgm.com/ncaa/teams'
-    urlTeams = 'https://www.espn.com/' + sex + '-' + 'college-basketball' + '/teams'
+    urlTeams = 'https://www.espn.com/' + sex + '-college-basketball/teams'
     teamIDs = []
 
     results = requests.get(urlTeams, headers=headers)
@@ -30,8 +30,7 @@ def getTeamList(sex):
 
     # Trims excess text from HTML to get only team ID, adds ID to list
     for team in id_div:
-        team = str(team).replace('<a class="AnchorLink" href="/' + sex + '-' + 'college-basketball' + \
-                                 '/team/schedule/_/id/', '')
+        team = str(team).replace('<a class="AnchorLink" href="/' + sex + '-college-basketball/team/schedule/_/id/', '')
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
@@ -51,7 +50,7 @@ def getTeamData(sex, year):
     # url for mens NCAA team schedule
     # Alternate data source 'https://basketball.realgm.com/ncaa/team-stats', \
     # 'https://basketball.realgm.com/ncaa/conferences/West-Coast-Conference/11/Gonzaga/332/Schedule'
-    urlBase = 'https://www.espn.com/' + sex + '-' + 'college-basketball' + '/team/schedule/_/id/'
+    urlBase = 'https://www.espn.com/' + sex + '-college-basketball/team/schedule/_/id/'
 
     # Initialize lists
     teamName = []
@@ -274,3 +273,67 @@ def nameCheck(teamName):
         team = teamName.replace('St', 'State')
 
     return team
+
+
+def getemptybracket(sex):
+    # TODO get this function working
+    urlbracket = 'http://www.espn.com/mens-college-basketball/tournament/bracket'
+    bracket_teams = []
+    bracket_seeds = []
+    year = 2022
+    results = requests.get(urlbracket, headers=headers)
+    soup = BeautifulSoup(results.text, "html.parser")
+
+    # Finds string containing team ID based on stats button
+    id_div = soup.find_all('a', attrs={'href': re.compile("/team/_/id")})
+    # Need to split by region then the following code
+
+    # Finds string containing team seed and team ID
+    seed_div = soup.find_all('b')
+    # Trims excess text from HTML to get only team ID and seed, adds them to lists
+    for seed in seed_div:
+        team_seed = str(seed).rsplit('/')
+        bracket_seeds.append(team_seed[0].replace('<b>', '').replace(' <a href="http:', ''))
+        bracket_teams.append(team_seed[7])
+    # for team in id_div:
+    #     team = str(team).rsplit('/')
+    #     bracket_teams.append(team[7])
+
+
+    bracket_teams = list(dict.fromkeys(bracket_teams))
+
+    csv = pd.read_csv(bracketpath + 'Big_Dance_CSV.csv', index_col=0)
+
+    teams = {}
+    # Loops through each row in pd
+    for row in csv.itertuples():
+        # Records row data
+        if row[0] == year:
+            team = {}
+            for i in range(6, 8):
+                # Corrects team names from csv
+                try:
+                    team[i] = nameCheck(row[i])
+                except ValueError:
+                    pass
+
+            teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
+            # Checks for duplicate seeds
+            try:
+                if len(teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])]) > 0:
+                    teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9]+row[8])] = team[7]
+            except ValueError:
+                teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])] = team[7]
+            # Determines champion
+            if row[1] == 6:
+                if row[5] > row[8]:
+                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
+                else:
+                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[7]
+
+    # Dump teams dict into csv
+    with open(bracketpath + str(year) + 'results.csv', 'w') as f:
+        for key in teams.keys():
+            f.write("%s, %s\n" % (key, teams[key]))
+
+    return None
