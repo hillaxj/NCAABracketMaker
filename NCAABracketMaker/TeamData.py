@@ -30,7 +30,8 @@ def getTeamList(league):
 
     # Trims excess text from HTML to get only team ID, adds ID to list
     for team in id_div:
-        team = str(team).replace('<a class="AnchorLink" href="/' + league + '-college-basketball/team/schedule/_/id/', '')
+        team = str(team).replace('<a class="AnchorLink" href="/' + league + '-college-basketball/team/schedule/_/id/',
+                                 '')
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
@@ -63,9 +64,9 @@ def getTeamData(league, year):
     teamIDs = getTeamList(league)
 
     # Iterate through each teamID and populate list
-    for id in teamIDs:
-        log.info('Year ' + str(year) + ' : ' + 'Team ' + str(id))
-        urlTeam = urlBase + str(id) + '/season/' + str(year)
+    for teamid in teamIDs:
+        log.info('Year ' + str(year) + ' : ' + 'Team ' + str(teamid))
+        urlTeam = urlBase + str(teamid) + '/season/' + str(year)
         with requests.get(urlTeam, headers=headers):
             results = requests.get(urlTeam, headers=headers)
             soup = BeautifulSoup(results.text, "html.parser")
@@ -90,7 +91,7 @@ def getTeamData(league, year):
                 try:
                     int(removedLoc[1])
                     rankedTeam = True
-                except:
+                except (LookupError, ValueError):
                     rankedTeam = False
 
                 if rankedTeam:
@@ -116,9 +117,9 @@ def getTeamData(league, year):
                 else:
                     continue
                 teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore,
-                                              gameOpponentScore]
+                                           gameOpponentScore]
                 gameCount = gameCount + 1
-            except:
+            except (LookupError, ValueError):
                 continue
 
         if teamSchedule == {}:
@@ -136,7 +137,7 @@ def getTeamData(league, year):
                 # Add mascot to teamMascot list
                 try:
                     teamMascot.append(name[1].text)
-                except:
+                except (LookupError, ValueError):
                     teamMascot.append('N/A')
             teamWinRecord.append(winRecord)
             teamLossRecord.append(loseRecord)
@@ -192,7 +193,7 @@ def populateResults(year):
                 # Corrects team names from csv
                 try:
                     team[i] = nameCheck(row[i])
-                except:
+                except (LookupError, ValueError):
                     pass
 
             teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
@@ -200,7 +201,7 @@ def populateResults(year):
             try:
                 if len(teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])]) > 0:
                     teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9]+row[8])] = team[7]
-            except:
+            except (LookupError, ValueError):
                 teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])] = team[7]
             # Determines champion
             if row[1] == 6:
@@ -264,8 +265,8 @@ def nameCheck(teamName):
     if team.split(' ')[0] == 'St':
         if team.split(' ')[1] == 'Peters' or team.split(' ')[1] == 'Josephs' \
                 or team.split(' ')[1] == 'Louis' or team.split(' ')[1] == 'Marys':
-            team = team.replace('St', 'Saint').replace('Peters', 'Peter\'s').replace('Josephs',
-                                                                            'Joseph\'s').replace('Marys', 'Mary\'s')
+            team = team.replace('St', 'Saint').replace('Peters', 'Peter\'s').replace('Josephs', 'Joseph\'s').replace(
+                'Marys', 'Mary\'s')
         else:
             team = team.replace('St', 'St.')
     # Morgan State for womens team
@@ -277,7 +278,7 @@ def nameCheck(teamName):
 
 def getemptybracket(league):
     # TODO get this function working
-    urlbracket = 'http://www.espn.com/mens-college-basketball/tournament/bracket'
+    urlbracket = f'http://www.espn.com/{league}mens-college-basketball/tournament/bracket'
     bracket_teams = []
     bracket_seeds = []
     year = 2022
@@ -295,10 +296,9 @@ def getemptybracket(league):
         team_seed = str(seed).rsplit('/')
         bracket_seeds.append(team_seed[0].replace('<b>', '').replace(' <a href="http:', ''))
         bracket_teams.append(team_seed[7])
-    # for team in id_div:
-    #     team = str(team).rsplit('/')
-    #     bracket_teams.append(team[7])
-
+    for team in id_div:
+        team = str(team).rsplit('/')
+        bracket_teams.append(team[7])
 
     bracket_teams = list(dict.fromkeys(bracket_teams))
 
