@@ -32,27 +32,25 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         rankWeight = float(rankWeight)
         pointsWeight = float(pointsWeight)
         scheduleWeight = float(scheduleWeight)
-    except (LookupError, ValueError):
+    except ValueError:
         log.error('Coefficients are not float variables', exc_info=True)
         return None
 
     # Checks league var type and converts to lower
     try:
         league = league.lower()
-    except (LookupError, ValueError):
-        log.error('Not a valid league. Must be either "mens" or "womens"')
+        if league == 'mens':
+            emptybracket = f'NCAAMBracket{year}.yaml'
+
+        elif league == 'womens':
+            emptybracket = f'NCAAWBracket{year}.yaml'
+        else:
+            raise ValueError
+    except ValueError:
+        log.error('Not a valid league. Must be either "mens" or "womens"', exc_info=True)
         return None
 
     # Sets emptybracket based of selected league
-    if league == 'mens':
-        emptybracket = f'NCAAMBracket{year}.yaml'
-
-    elif league == 'womens':
-        emptybracket = f'NCAAWBracket{year}.yaml'
-    else:
-        log.error('Not a valid league. Must be either "mens" or "womens"')
-        return None
-
     if year == 2021 or year == 2022:
         # Gets team data from web, if file exist, doesn't run
         try:
