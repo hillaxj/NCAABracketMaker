@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='NCAABracketMaker',
-    version='0.0.1',
+    version='1.0',
     packages=['NCAABracketMaker'],
     package_dir={'NCAABracketMaker': 'NCAABracketMaker'},
     package_data={'NCAABracketMaker': [
@@ -16,6 +16,7 @@ setup(
         'requests>=2.22.0',
         'numpy>=1.18.0',
         'BeautifulSoup4>=4.10.0'
+        'openpyxl>=3.0.9'
     ],
     url='https://github.com/hillaxj/NCAABracketMaker',
     license='MIT',
