@@ -1,7 +1,6 @@
 from NCAABracketMaker.utilities import teampath
 import pandas as pd
 import ast
-import re
 
 
 def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
