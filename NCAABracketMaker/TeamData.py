@@ -258,7 +258,6 @@ def nameCheck(teamName):
         'Middle Tennessee St': 'Middle Tennessee',
         'Arkansas Little Rock': 'Little Rock',
         'College of Charleston': 'Charleston'
-
     }
     team = switch.get(teamName, teamName)
 
@@ -277,63 +276,44 @@ def nameCheck(teamName):
 
 
 def getemptybracket(league):
-    # TODO get this function working
-    urlbracket = f'http://www.espn.com/{league}mens-college-basketball/tournament/bracket'
-    bracket_teams = []
-    bracket_seeds = []
-    year = 2022
+    # TODO : Clean up function and make output a yaml
+    urlbracket = f'http://www.espn.com/{league}-college-basketball/tournament/bracket'
+    bracket_teams = {}
+    seed_list = []
     results = requests.get(urlbracket, headers=headers)
     soup = BeautifulSoup(results.text, "html.parser")
 
     # Finds string containing team ID based on stats button
-    id_div = soup.find_all('a', attrs={'href': re.compile("/team/_/id")})
-    # Need to split by region then the following code
+    # id_div = soup.find_all('a', attrs={'href': re.compile("/team/_/id")})
 
-    # Finds string containing team seed and team ID
-    seed_div = soup.find_all('b')
-    # Trims excess text from HTML to get only team ID and seed, adds them to lists
-    for seed in seed_div:
-        team_seed = str(seed).rsplit('/')
-        bracket_seeds.append(team_seed[0].replace('<b>', '').replace(' <a href="http:', ''))
-        bracket_teams.append(team_seed[7])
-    for team in id_div:
-        team = str(team).rsplit('/')
-        bracket_teams.append(team[7])
+    year = soup.find(class_="h2")
+    year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '')
+    year = year.replace('</h1>', '')
+    # Split regions
+    region_div = soup.find_all(class_="region")
+    for region in region_div:
+        # Splits region into list of details
+        regionlist = str(region).split('>')
+        for i in regionlist:
+            # If regionlist item starts with a number(seed) and is longer than 25 chars(team link) adds element to list
+            if len(i) > 25 and i[:1].isnumeric():
+                # Does not add element if it already exists
+                if i not in seed_list:
+                    seed_list.append(i)
 
-    bracket_teams = list(dict.fromkeys(bracket_teams))
-
-    csv = pd.read_csv(bracketpath + 'Big_Dance_CSV.csv', index_col=0)
-
-    teams = {}
-    # Loops through each row in pd
-    for row in csv.itertuples():
-        # Records row data
-        if row[0] == year:
-            team = {}
-            for i in range(6, 8):
-                # Corrects team names from csv
-                try:
-                    team[i] = nameCheck(row[i])
-                except ValueError:
-                    pass
-
-            teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
-            # Checks for duplicate seeds
-            try:
-                if len(teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])]) > 0:
-                    teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9]+row[8])] = team[7]
-            except ValueError:
-                teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])] = team[7]
-            # Determines champion
-            if row[1] == 6:
-                if row[5] > row[8]:
-                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
-                else:
-                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[7]
+    # Creates dictionary with seed as key for team
+    for element in seed_list:
+        bracket_teams['d1r' + str(-(-(seed_list.index(element)+1)//16)) + 'seed' + str(element.split(" ")[0])] = \
+            nameCheck(element.split('title=')[-1])
 
     # Dump teams dict into csv
-    with open(bracketpath + str(year) + 'results.csv', 'w') as f:
-        for key in teams.keys():
-            f.write("%s, %s\n" % (key, teams[key]))
-
+    # Should be a yaml like other brackets
+    if league == 'mens':
+        with open(bracketpath + 'NCAAMBracket' + str(year) + 'TEST.csv', 'w') as f:
+            for key in bracket_teams.keys():
+                f.write("%s, %s\n" % (key, bracket_teams[key]))
+    elif league == 'womens':
+        with open(bracketpath + 'NCAAWBracket' + str(year) + 'TEST.csv', 'w') as f:
+            for key in bracket_teams.keys():
+                f.write("%s, %s\n" % (key, bracket_teams[key]))
     return None
