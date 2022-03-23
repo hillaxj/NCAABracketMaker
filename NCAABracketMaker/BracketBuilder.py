@@ -48,7 +48,7 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     """
     if '2020' in bracketfile:
         # 2020 tournament didn't happen so creates an empty file
-        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.csv', 'w') as f:
+        with open(f'{simbracketpath}{teamdatafile.replace(".csv", "")}Sim.csv', 'w') as f:
             f.write('Coronavirus')
         print('Coronavirus')
         return None
@@ -57,7 +57,6 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     # Simulates all games in the supplied brackets based on teamdatafile info
     with open(bracketpath + bracketfile) as f:
         bracketData = yaml.load(f, Loader=yaml.FullLoader)
-    # bracketData = pd.read_csv(bracketpath + bracketfile)
 
     data = dict((k, v) for k, v in bracketData.items() if k[:2] == 'd1')
 
@@ -67,7 +66,7 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     for i in first4seeds:
         try:
             data[i] = whoWins(data.get(f'{i}a'), data.get(f'{i}b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
-        except:
+        except (LookupError, ValueError):
             pass
 
     # Simulates and stores each round until winner is determined
@@ -95,10 +94,9 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners, **champion}
 
     # ensure directory exists
-    os.makedirs(modulepath + 'SimBrackets/', exist_ok=True)
+    os.makedirs(f'{modulepath}SimBrackets/', exist_ok=True)
     datafile = teamdatafile.replace('.csv', '')
-    # with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.yaml', 'w') as f:
-    #     yaml.dump(totalsimData, f, default_flow_style=False)
+
     with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.csv', 'w') as f:
         for key in totalsimData.keys():
             f.write("%s, %s\n" % (key, totalsimData[key]))
