@@ -4,8 +4,9 @@ Call on functions to pull data and create brackets
 import logging as log
 
 from NCAABracketMaker.BracketBuilder import clearSimResults, bracketSim, populateBracket
-from NCAABracketMaker.TeamData import getTeamData
-from NCAABracketMaker.utilities import teampath
+from NCAABracketMaker.TeamData import getTeamData, getemptybracket
+from NCAABracketMaker.utilities import teampath, bracketpath
+from os.path import exists
 
 
 def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, pointsWeight: float,
@@ -51,7 +52,28 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         return None
 
     # Sets emptybracket based of selected league
-    if year == 2021 or year == 2022:
+    if not exists(bracketpath + emptybracket):
+        getemptybracket(league)
+        checkbracket(emptybracket, league, year, winWeight, rankWeight, pointsWeight, scheduleWeight)
+    else:
+        checkbracket(emptybracket, league, year, winWeight, rankWeight, pointsWeight, scheduleWeight)
+
+    return None
+
+
+def checkbracket(emptybracket, league, year, winWeight, rankWeight, pointsWeight, scheduleWeight):
+    """
+    Checks to ensure the brackfile exists then generates team data if needed and executes bracket sim
+    :param emptybracket: str, file name for empty bracket
+    :param league: str, mens or womens
+    :param year: int, year of bracket to test
+    :param winWeight: float, number of wins weight coefficient
+    :param rankWeight: float, top 25 team rank weight coefficient
+    :param pointsWeight: float, points weight coefficient
+    :param scheduleWeight: float, wins to losses weight coefficient
+    :return: None, creates csv of team data and results, populates xlsx with results
+    """
+    if exists(bracketpath + emptybracket):
         # Gets team data from web, if file exist, doesn't run
         try:
             f = open(teampath + league + str(year) + '.csv')
@@ -68,4 +90,5 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         log.info('Open Sim_Bracket.xlsx to see results.')
     else:
         log.error('No empty bracket for selected year')
+
     return None
