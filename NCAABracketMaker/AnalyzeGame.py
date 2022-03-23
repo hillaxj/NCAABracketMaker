@@ -45,7 +45,7 @@ def scheduleStrength(teamdatafile):
     :return: None, adds schedule strength parameters (Schedule Points, Schedule Wins, Schedule Rank) to teamdatafile
     """
     # Reads csv file
-    df = pd.read_csv(teampath + teamdatafile, index_col='Team Name')
+    df = pd.read_csv(f'{teampath}{teamdatafile}', index_col='Team Name')
     teams = df.index.tolist()
     pointList = []
     rankList = []
@@ -72,7 +72,7 @@ def scheduleStrength(teamdatafile):
                 # Point differential factor, may need tweaks
                 pointsList.append((100 - abs(int(sched[4]) - int(sched[5])))/100)
 
-            except:
+            except (LookupError, ValueError):
                 continue
 
         pointList.append(sum(pointsList) / len(pointsList))
@@ -83,7 +83,7 @@ def scheduleStrength(teamdatafile):
     df['Schedule Wins'] = winList
     df['Schedule Rank'] = rankList
     # drop .csv at end of teamdatafile
-    teamdatafile = re.sub('\.csv$', '', teamdatafile)
+    teamdatafile = teamdatafile.replace('.csv', '')
     df.to_csv(f'{teampath}{teamdatafile}.csv')
 
     return None
