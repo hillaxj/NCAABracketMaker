@@ -275,11 +275,12 @@ def nameCheck(teamName):
     return team
 
 
-def getemptybracket(league):
+def getemptybracket(league, testyear):
     """
     Generates an empty bracket for the current year. Does not work for any other year due to the url only containing
     info for the current year. Prefer to use the output yaml as a guide and correct as needed each year
     :param league: league: str, mens or womens league
+    :param testyear: int, requested empty bracket year
     :return: None, creates a yaml file with the seeds for the current year
     """
     # URL for bracket
@@ -292,6 +293,11 @@ def getemptybracket(league):
     # Gets year for the bracket
     year = soup.find(class_="h2")
     year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
+
+    # Exits if year selected is not current year
+    if testyear != year:
+        log.error('No empty bracket for selected year')
+        raise ValueError
 
     # Split regions
     region_div = soup.find_all(class_="region")
