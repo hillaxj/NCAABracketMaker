@@ -42,7 +42,6 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         league = league.lower()
         if league == 'mens':
             emptybracket = f'NCAAMBracket{year}.yaml'
-
         elif league == 'womens':
             emptybracket = f'NCAAWBracket{year}.yaml'
         else:
@@ -51,35 +50,18 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         log.error('Not a valid league. Must be either "mens" or "womens"', exc_info=True)
         return None
 
-    # Sets emptybracket based of selected league
+    # Checks for empty bracket and generates one for only the current year if it doesn't exist
     if not exists(bracketpath + emptybracket):
         getemptybracket(league)
-        checkbracket(emptybracket, league, year, winWeight, rankWeight, pointsWeight, scheduleWeight)
-    else:
-        checkbracket(emptybracket, league, year, winWeight, rankWeight, pointsWeight, scheduleWeight)
 
-    return None
-
-
-def checkbracket(emptybracket, league, year, winWeight, rankWeight, pointsWeight, scheduleWeight):
-    """
-    Checks to ensure the brackfile exists then generates team data if needed and executes bracket sim
-    :param emptybracket: str, file name for empty bracket
-    :param league: str, mens or womens
-    :param year: int, year of bracket to test
-    :param winWeight: float, number of wins weight coefficient
-    :param rankWeight: float, top 25 team rank weight coefficient
-    :param pointsWeight: float, points weight coefficient
-    :param scheduleWeight: float, wins to losses weight coefficient
-    :return: None, creates csv of team data and results, populates xlsx with results
-    """
+    # Checks for emptybracket again in case the selected year is not the current year
     if exists(bracketpath + emptybracket):
         # Gets team data from web, if file exist, doesn't run
         try:
-            f = open(teampath + league + str(year) + '.csv')
+            f = open(f'{teampath}{league}{year}.csv')
             f.close()
         except FileNotFoundError:
-            getTeamData(league, 2022)
+            getTeamData(league, year)
 
         # Use to sim current year bracket
         bracketSim(emptybracket, f'{league}{year}.csv', winWeight, rankWeight, pointsWeight,
