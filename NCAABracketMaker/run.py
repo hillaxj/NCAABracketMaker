@@ -25,6 +25,7 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
     if reset:
         # Removes all sim results
         clearSimResults(reset)
+        log.info('Cleared all simulation results')
         return None
 
     # Checks coefficient var types
@@ -52,7 +53,10 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
 
     # Checks for empty bracket and generates one for only the current year if it doesn't exist
     if not exists(bracketpath + emptybracket):
-        getemptybracket(league)
+        try:
+            getemptybracket(league, year)
+        except ValueError:
+            return None
 
     # Checks for emptybracket again in case the selected year is not the current year
     if exists(bracketpath + emptybracket):
