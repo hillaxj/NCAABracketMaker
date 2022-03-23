@@ -2,7 +2,6 @@ from NCAABracketMaker.utilities import teampath
 import pandas as pd
 import ast
 import re
-# TODO: Create better algorithm, machine learning?
 
 
 def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
