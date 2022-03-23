@@ -47,8 +47,7 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     :return: None, saves a csv with the results in SimBrackets directory
     """
     if '2020' in bracketfile:
-        # with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.yaml', 'w') as f:
-        #     yaml.dump('Coronavirus', f, default_flow_style=False)
+        # 2020 tournament didn't happen so creates an empty file
         with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.csv', 'w') as f:
             f.write('Coronavirus')
         print('Coronavirus')
