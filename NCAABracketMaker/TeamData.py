@@ -277,18 +277,17 @@ def nameCheck(teamName):
 
 def getemptybracket(league):
     # TODO : Clean up function and make output a yaml
+    # URL for bracket
     urlbracket = f'http://www.espn.com/{league}-college-basketball/tournament/bracket'
     bracket_teams = {}
     seed_list = []
     results = requests.get(urlbracket, headers=headers)
     soup = BeautifulSoup(results.text, "html.parser")
 
-    # Finds string containing team ID based on stats button
-    # id_div = soup.find_all('a', attrs={'href': re.compile("/team/_/id")})
-
+    # Gets year for the bracket
     year = soup.find(class_="h2")
-    year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '')
-    year = year.replace('</h1>', '')
+    year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
+
     # Split regions
     region_div = soup.find_all(class_="region")
     for region in region_div:
