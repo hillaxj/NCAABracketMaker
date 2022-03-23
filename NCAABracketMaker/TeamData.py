@@ -5,6 +5,7 @@ import logging as log
 import re
 from NCAABracketMaker.utilities import teampath, bracketpath
 from NCAABracketMaker.AnalyzeGame import scheduleStrength
+import yaml
 
 # common fxn parameters
 headers = {"Accept-Language": "en-US, en;q=0.5"}
@@ -276,7 +277,12 @@ def nameCheck(teamName):
 
 
 def getemptybracket(league):
-    # TODO : Clean up function and make output a yaml
+    """
+    Generates an empty bracket for the current year. Does not work for any other year due to the url only containing
+    info for the current year. Prefer to use the output yaml as a guide and correct as needed each year
+    :param league: league: str, mens or womens league
+    :return: None, creates a yaml file with the seeds for the current year
+    """
     # URL for bracket
     urlbracket = f'http://www.espn.com/{league}-college-basketball/tournament/bracket'
     bracket_teams = {}
@@ -303,16 +309,15 @@ def getemptybracket(league):
     # Creates dictionary with seed as key for team
     for element in seed_list:
         bracket_teams['d1r' + str(-(-(seed_list.index(element)+1)//16)) + 'seed' + str(element.split(" ")[0])] = \
-            nameCheck(element.split('title=')[-1])
+            nameCheck(element.split('title=')[-1].replace('"', ''))
 
-    # Dump teams dict into csv
-    # Should be a yaml like other brackets
+    # Dump teams dict into yaml
     if league == 'mens':
-        with open(bracketpath + 'NCAAMBracket' + str(year) + 'TEST.csv', 'w') as f:
-            for key in bracket_teams.keys():
-                f.write("%s, %s\n" % (key, bracket_teams[key]))
+        with open(bracketpath + 'NCAAMBracket' + str(year) + '.yaml', 'w') as f:
+            yaml.dump(bracket_teams, f)
+
     elif league == 'womens':
-        with open(bracketpath + 'NCAAWBracket' + str(year) + 'TEST.csv', 'w') as f:
-            for key in bracket_teams.keys():
-                f.write("%s, %s\n" % (key, bracket_teams[key]))
+        with open(bracketpath + 'NCAAWBracket' + str(year) + '.yaml', 'w') as f:
+            yaml.dump(bracket_teams, f)
+
     return None
