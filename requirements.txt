@@ -5,3 +5,4 @@ pyyaml>=5.3                    # Yaml for python
 requests >=2.22.0              # Web service calls
 numpy>1.18.0                   # Library used for arrays
 BeautifulSoup4>=4.10.0         # Used for webscraping the team data
+openpyxl>=3.0.9                # Used to convert to xlsx files
