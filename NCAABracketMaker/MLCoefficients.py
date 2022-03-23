@@ -8,6 +8,7 @@ from NCAABracketMaker.utilities import teampath
 import time
 import pandas as pd
 
+# Not currently used, for advanced optimization of coefficients based on backtesting. Does not work well
 
 def compareResults(results, simbracket):
     percentAccurate = 0
