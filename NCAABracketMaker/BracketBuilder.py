@@ -7,9 +7,6 @@ import os
 from openpyxl import load_workbook
 
 
-# TODO : Add function to import current year bracket into yaml ie: NCAAMBracket2021.yaml
-
-
 def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     """
     Determins the winning teams from each region for the given round of games
