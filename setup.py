@@ -15,7 +15,7 @@ setup(
         'pyyaml>=5.3',
         'requests>=2.22.0',
         'numpy>=1.18.0',
-        'BeautifulSoup4>=4.10.0'
+        'BeautifulSoup4>=4.10.0',
         'openpyxl>=3.0.9'
     ],
     url='https://github.com/hillaxj/NCAABracketMaker',
