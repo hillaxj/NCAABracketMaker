@@ -1,8 +1,0 @@
-pandas>=1.1.0                  # Powerful data structures for data analysis, time series, and statistics.
-pip>=9                         # The PyPA recommended tool for installing Python packages.
-setuptools>=41                 # Fully-featured library designed to facilitate packaging Python projects.
-pyyaml>=5.3                    # Yaml for python
-requests >=2.22.0              # Web service calls
-numpy>1.18.0                   # Library used for arrays
-BeautifulSoup4>=4.10.0         # Used for webscraping the team data
-openpyxl>=3.0.9                # Used to convert to xlsx files
