@@ -1,7 +1,7 @@
 """
 Call on functions to pull data and create brackets
 """
-from NCAABracketMaker.run import bracketmaker
+from NCAABracketMaker.__main__ import bracketmaker
 
 # Example values populated below
 league = 'mens'        # Must be 'mens' or 'womens'
