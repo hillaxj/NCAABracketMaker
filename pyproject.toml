@@ -11,7 +11,7 @@ version = '1.1.0'
 description = 'Generates simulated NCAA March Madness bracket results'
 readme = 'README.md'
 license = {file = 'LICENSE'}
-#author = 'Alex Hill'
+authors = 'Alex Hill'
 classifiers = [
     'Natural Language :: English',
     'Programming Language :: Python :: 3',
@@ -31,19 +31,3 @@ dependencies = [
 [project.urls]
 Source = 'https://github.com/hillaxj/NCAABracketMaker'
 Bug_Tracker = 'https://github.com/hillaxj/NCAABracketMaker/issues'
-
-#[tool.setuptools.package-data]
-#simbracket = 'SimBrackets/*.xlsx'
-#bracket = 'Brackets/*.yaml'
-#data = 'Brackets/Big_Dance_CSV.csv'
-
-#[tool.setuptools.py-modules]
-#pandas>=1.1.0
-#pip>=9
-#setuptools>=61
-#setuptools_scm>=6.4
-#pyyaml>=5.3
-#requests>=2.27.0
-#numpy>=1.22.0
-#BeautifulSoup4>=4.10.0
-#openpyxl>=3.0.9
