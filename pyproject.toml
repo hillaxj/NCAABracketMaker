@@ -8,10 +8,10 @@ write_to = "NCAABracketMaker/_version.py"
 [project]
 name = 'NCAABracketMaker'
 version = '1.1.0'
-#description = 'Generates simulated NCAA March Madness bracket results'
-#readme = 'README.md'
-#license = {file = 'LICENSE'}
-#author = 'Alex Hill'
+description = 'Generates simulated NCAA March Madness bracket results'
+readme = 'README.md'
+license = {file = 'LICENSE'}
+author = 'Alex Hill'
 #classifiers = [
 #    'Natural Language :: English',
 #    'Programming Language :: Python :: 3',
