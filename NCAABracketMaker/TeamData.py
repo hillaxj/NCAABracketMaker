@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
+import os
 from NCAABracketMaker.utilities import teampath, bracketpath
 from NCAABracketMaker.AnalyzeGame import scheduleStrength
 import yaml
@@ -156,6 +157,9 @@ def getTeamData(league, year):
         'Team Schedule Results': teamScheduleResults
 
     })
+
+    # Checks for directory and creates it if needed
+    os.makedirs(teampath, exist_ok=True)
 
     # Export dataframe to CSV file in TeamData directory
     teamData.to_csv(f'{teampath}{league}{year}.csv')
