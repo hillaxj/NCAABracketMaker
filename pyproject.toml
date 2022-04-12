@@ -19,14 +19,14 @@ classifiers = [
     'Operating System :: OS Independent',
     'Development Status :: 3 - Alpha',
 ]
-#dependencies = [
-#    'pandas>=1.1.0',
-#    'pyyaml>=5.3',
-#    'requests>=2.27.0',
-#    'numpy>=1.22.0',
-#    'BeautifulSoup4>=4.10.0',
-#    'openpyxl>=3.0.9'
-#]
+dependencies = [
+    'pandas>=1.1.0',
+    'pyyaml>=5.3',
+    'requests>=2.27.0',
+    'numpy>=1.22.0',
+    'BeautifulSoup4>=4.10.0',
+    'openpyxl>=3.0.9'
+]
 #
 #[project.urls]
 #Source = 'https://github.com/hillaxj/NCAABracketMaker'
