@@ -32,10 +32,10 @@ version = '1.1.0'
 #Source = 'https://github.com/hillaxj/NCAABracketMaker'
 #Bug_Tracker = 'https://github.com/hillaxj/NCAABracketMaker/issues'
 
-[tool.setuptools.package-data]
-simbracket = 'SimBrackets/*.xlsx'
-bracket = 'Brackets/*.yaml'
-data = 'Brackets/Big_Dance_CSV.csv'
+#[tool.setuptools.package-data]
+#simbracket = 'SimBrackets/*.xlsx'
+#bracket = 'Brackets/*.yaml'
+#data = 'Brackets/Big_Dance_CSV.csv'
 
 #[tool.setuptools.py-modules]
 #pandas>=1.1.0
