@@ -11,7 +11,7 @@ log.basicConfig(level=log.INFO, format='%(asctime)s %(levelname)-8s %(message)s'
 # define local path to repo
 try:
     modulepath = str(os.path.dirname(os.path.realpath(__file__)).replace('\\', '/')) + '/'
-    deskpath = os.environ['HOME'] + '/Desktop/BracketMaker/'
+    deskpath = os.environ['HOME'] + '/Desktop/'
 except NameError:
     modulepath = 'NCAABracketMaker/'
     deskpath = 'NCAABracketMaker/'
