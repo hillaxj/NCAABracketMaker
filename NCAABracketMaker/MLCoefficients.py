@@ -1,14 +1,15 @@
-from NCAABracketMaker.utilities import bracketpath, simbracketpath
-import yaml
-from NCAABracketMaker.AnalyzeGame import scheduleStrength
-import numpy
-import logging as log
-import cProfile
-from NCAABracketMaker.utilities import teampath
-import time
+# from NCAABracketMaker.utilities import bracketpath, simbracketpath
+# import yaml
+# from NCAABracketMaker.AnalyzeGame import scheduleStrength
+# import numpy
+# import logging as log
+# import cProfile
+# from NCAABracketMaker.utilities import teampath
+# import time
 import pandas as pd
 
 # Not currently used, for advanced optimization of coefficients based on backtesting. Does not work well
+
 
 def compareResults(results, simbracket):
     percentAccurate = 0
@@ -35,7 +36,6 @@ def compareResults(results, simbracket):
             percentAccurate = percentAccurate + (numAccurate * pow(2, (x-2)))
 
     return percentAccurate / 192
-
 
 
 # Below used for back testing ONLY
