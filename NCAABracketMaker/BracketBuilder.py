@@ -24,10 +24,10 @@ def roundResults(teams, rnd, teamdatadf, pointcof, wincof, rankcof, ratiocof):
 
     # Loops through each game by region
     for x in range(1, 5):
-        for y in range(1, int(pow(2, 4-rnd) + 1)):
+        for y in range(1, int(pow(2, 4 - rnd) + 1)):
             seedid = f'd{rnd}r{x}seed'
-            winners[f'd{rnd+1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), teams.get(''.join(
-                [seedid, str(int(pow(2, 5-rnd) + 1-y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+            winners[f'd{rnd + 1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), teams.get(''.join(
+                [seedid, str(int(pow(2, 5 - rnd) + 1 - y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
 
     return winners
 
@@ -72,9 +72,12 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     round2winners = roundResults(round1winners, 2, teamdatadf, pointcof, wincof, rankcof, ratiocof)
     round3winners = roundResults(round2winners, 3, teamdatadf, pointcof, wincof, rankcof, ratiocof)
     round4winners = roundResults(round3winners, 4, teamdatadf, pointcof, wincof, rankcof, ratiocof)
-    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'), teamdatadf, pointcof, wincof, rankcof, ratiocof),
-                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatadf, pointcof, wincof, rankcof, ratiocof)}
-    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'),
+                                          teamdatadf, pointcof, wincof, rankcof, ratiocof),
+                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'),
+                                          teamdatadf, pointcof, wincof, rankcof, ratiocof)}
+    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatadf,
+                                    pointcof, wincof, rankcof, ratiocof)
 
     try:
         data.pop('d1r1seed16a')
