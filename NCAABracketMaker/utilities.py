@@ -17,7 +17,7 @@ except NameError:
     deskpath = 'NCAABracketMaker/'
 
 
-# define package directorie paths
+# define package directory paths
 teampath = modulepath + 'TeamData/'
 bracketpath = modulepath + 'Brackets/'
 simbracketpath = deskpath + 'SimBrackets/'
