@@ -7,11 +7,11 @@ import os
 from openpyxl import load_workbook
 
 
-def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
+def roundResults(teams, rnd, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     """
     Determins the winning teams from each region for the given round of games
     :param teams:
-    :param round: int, current round of games
+    :param rnd: int, current round of games
     :param teamdatadf: dataframe, all team data
     :param pointcof:  float, points weight coefficient
     :param wincof: float, number of wins weight coefficient
@@ -24,10 +24,10 @@ def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
 
     # Loops through each game by region
     for x in range(1, 5):
-        for y in range(1, int(pow(2, 4-round) + 1)):
-            seedid = f'd{round}r{x}seed'
-            winners[f'd{round+1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), teams.get(''.join([seedid,
-                str(int(pow(2, 5-round) + 1-y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+        for y in range(1, int(pow(2, 4-rnd) + 1)):
+            seedid = f'd{rnd}r{x}seed'
+            winners[f'd{rnd+1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), teams.get(''.join(
+                [seedid, str(int(pow(2, 5-rnd) + 1-y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
 
     return winners
 
@@ -85,10 +85,11 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
         data.pop('d1r4seed16b')
         data.pop('d1r4seed12a')
         data.pop('d1r4seed12b')
-    except:
+    except KeyError:
         pass
 
-    totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners, **champion}
+    totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners,
+                    **champion}
 
     # ensure directory exists
     os.makedirs(f'{modulepath}SimBrackets/', exist_ok=True)
