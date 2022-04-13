@@ -1,12 +1,14 @@
-from NCAABracketMaker.utilities import bracketpath, simbracketpath
-import yaml
-from NCAABracketMaker.AnalyzeGame import scheduleStrength
-import numpy
-import logging as log
-import cProfile
-from NCAABracketMaker.utilities import teampath
-import time
+# from NCAABracketMaker.utilities import bracketpath, simbracketpath
+# import yaml
+# from NCAABracketMaker.AnalyzeGame import scheduleStrength
+# import numpy
+# import logging as log
+# import cProfile
+# from NCAABracketMaker.utilities import teampath
+# import time
 import pandas as pd
+
+# Not currently used, for advanced optimization of coefficients based on backtesting. Does not work well
 
 
 def compareResults(results, simbracket):
@@ -36,12 +38,11 @@ def compareResults(results, simbracket):
     return percentAccurate / 192
 
 
-
 # Below used for back testing ONLY
 # Gets team data from web, run once ESPN has data from 2006 - current year
 # Takes a long time to import data, ~10 min per year
 # for x in range(2006, 2023):
-#     getTeamData(sex, x)
+#     getTeamData(league, x)
 
 # Populate yaml/csv files from past brackets, run once CSV has data from 1985 - 2019
 # for x in range(2006, 2023):
@@ -82,6 +83,6 @@ def compareResults(results, simbracket):
 
 
 # Use to sim current year bracket
-# getTeamData(sex, str(2022))
-# bracketSim('NCAAMBracket2022.yaml', f'{sex}{year}.csv', i, j, k, m)
-# print(compareYamls(f'{year}results.yaml', f'{sex}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))
+# getTeamData(league, str(2022))
+# bracketSim('NCAAMBracket2022.yaml', f'{league}{year}.csv', i, j, k, m)
+# print(compareYamls(f'{year}results.yaml', f'{league}{year}-{i}-{j}-{k}-{m}-SimResults.csv'))

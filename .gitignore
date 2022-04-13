@@ -3,10 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# Untracked files
-TeamData/*
-SimBrackets/*.csv
-Brackets/*results.csv
+# Untracked files:
+NCAABracketMaker/TeamData/*
+NCAABracketMaker/SimBrackets/*
+NCAABracketMaker/Brackets/*results.csv
+*.idea
 
 # C extensions
 *.so

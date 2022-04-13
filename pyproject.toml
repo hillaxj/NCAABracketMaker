@@ -1,0 +1,33 @@
+[build-system]
+requires = ['setuptools', 'wheel', 'setuptools_scm']
+build-backend = 'setuptools.build_meta'
+
+[tool.setuptools_scm]
+write_to = "NCAABracketMaker/_version.py"
+
+[project]
+name = 'NCAABracketMaker'
+version = '1.1.0'
+description = 'Generates simulated NCAA March Madness bracket results'
+readme = 'README.md'
+license = {file = 'LICENSE'}
+authors = [{name = 'Alex Hill'}]
+classifiers = [
+    'Natural Language :: English',
+    'Programming Language :: Python :: 3',
+    'License :: OSI Approved :: MIT License',
+    'Operating System :: OS Independent',
+    'Development Status :: 3 - Alpha',
+]
+dependencies = [
+    'pandas>=1.1.0',
+    'pyyaml>=5.3',
+    'requests>=2.27.0',
+    'numpy>=1.22.0',
+    'BeautifulSoup4>=4.10.0',
+    'openpyxl>=3.0.9'
+]
+
+[project.urls]
+Source = 'https://github.com/hillaxj/NCAABracketMaker'
+Bug_Tracker = 'https://github.com/hillaxj/NCAABracketMaker/issues'

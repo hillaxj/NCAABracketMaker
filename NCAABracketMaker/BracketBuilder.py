@@ -1,85 +1,17 @@
 from NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, modulepath
-from NCAABracketMaker.TeamData import getTeamData
 import yaml
 from NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
 import pandas as pd
 import os
 from openpyxl import load_workbook
-import logging as log
-# TODO : Add function to import current year bracket into yaml ie: NCAAMBracket2021.yaml
 
 
-def bracketmaker(sex: str, year: int, winWeight: float, rankWeight: float, pointsWeight: float,
-                 scheduleWeight: float, reset=False):
-    """
-    Imports data from current year and simulates bracket with defined parameters
-    :param reset: bool, Default False, deletes all csv files in SimBrackets and clears results from Sim_Bracket.xlsx
-    :param sex: str, mens or womens
-    :param year: int, year of bracket to test
-    :param winWeight: float, number of wins weight coefficient
-    :param rankWeight: float, top 25 team rank weight coefficient
-    :param pointsWeight: float, points weight coefficient
-    :param scheduleWeight: float, wins to losses weight coefficient
-    :return: None, creates csv of team data and results, populates xlsx with results
-    """
-    if reset:
-        # Removes all sim results
-        clearSimResults(reset)
-        return None
-
-    # Checks coefficient var types
-    try:
-        winWeight = float(winWeight)
-        rankWeight = float(rankWeight)
-        pointsWeight = float(pointsWeight)
-        scheduleWeight = float(scheduleWeight)
-    except:
-        log.error('Coefficients are not float variables', exc_info=True)
-        return None
-
-    # Checks sex var type and converts to lower
-    try:
-        sex = sex.lower()
-    except:
-        log.error('Not a valid sex. Must be either "mens" or "womens"')
-        return None
-
-    # Sets emptybracket based of selected sex
-    if sex == 'mens':
-        emptybracket = f'NCAAMBracket{year}.yaml'
-
-    elif sex == 'womens':
-        emptybracket = f'NCAAWBracket{year}.yaml'
-    else:
-        log.error('Not a valid sex. Must be either "mens" or "womens"')
-        return None
-
-    if year == 2021 or year == 2022:
-        # Gets team data from web, if file exist, doesn't run
-        try:
-            f = open(teampath + sex + str(year) + '.csv')
-            f.close()
-        except IOError as e:
-            getTeamData(sex, 2022)
-
-        # Use to sim current year bracket
-        bracketSim(emptybracket, f'{sex}{year}.csv', winWeight, rankWeight, pointsWeight,
-                   scheduleWeight)
-        # Generates Excel sheet with bracket results graphic
-        populateBracket(f'{sex}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
-
-        log.info('Open Sim_Bracket.xlsx to see results.')
-    else:
-        log.error('No empty bracket for selected year')
-    return None
-
-
-def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
+def roundResults(teams, rnd, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     """
     Determins the winning teams from each region for the given round of games
     :param teams:
-    :param round: int, current round of games
+    :param rnd: int, current round of games
     :param teamdatadf: dataframe, all team data
     :param pointcof:  float, points weight coefficient
     :param wincof: float, number of wins weight coefficient
@@ -92,10 +24,10 @@ def roundResults(teams, round, teamdatadf, pointcof, wincof, rankcof, ratiocof):
 
     # Loops through each game by region
     for x in range(1, 5):
-        for y in range(1, int(pow(2, 4-round) + 1)):
-            seedid = f'd{round}r{x}seed'
-            winners[f'd{round+1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), teams.get(''.join([seedid,
-                str(int(pow(2, 5-round) + 1-y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+        for y in range(1, int(pow(2, 4 - rnd) + 1)):
+            seedid = f'd{rnd}r{x}seed'
+            winners[f'd{rnd + 1}r{x}seed{y}'] = whoWins(teams.get(''.join([seedid, str(y)])), teams.get(''.join(
+                [seedid, str(int(pow(2, 5 - rnd) + 1 - y))])), teamdatadf, pointcof, wincof, rankcof, ratiocof)
 
     return winners
 
@@ -112,9 +44,8 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     :return: None, saves a csv with the results in SimBrackets directory
     """
     if '2020' in bracketfile:
-        # with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.yaml', 'w') as f:
-        #     yaml.dump('Coronavirus', f, default_flow_style=False)
-        with open(simbracketpath + teamdatafile.replace('.csv', '') + 'Sim.csv', 'w') as f:
+        # 2020 tournament didn't happen so creates an empty file
+        with open(f'{simbracketpath}{teamdatafile.replace(".csv", "")}Sim.csv', 'w') as f:
             f.write('Coronavirus')
         print('Coronavirus')
         return None
@@ -123,7 +54,6 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     # Simulates all games in the supplied brackets based on teamdatafile info
     with open(bracketpath + bracketfile) as f:
         bracketData = yaml.load(f, Loader=yaml.FullLoader)
-    # bracketData = pd.read_csv(bracketpath + bracketfile)
 
     data = dict((k, v) for k, v in bracketData.items() if k[:2] == 'd1')
 
@@ -133,7 +63,7 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     for i in first4seeds:
         try:
             data[i] = whoWins(data.get(f'{i}a'), data.get(f'{i}b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
-        except:
+        except (LookupError, ValueError):
             pass
 
     # Simulates and stores each round until winner is determined
@@ -142,9 +72,12 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     round2winners = roundResults(round1winners, 2, teamdatadf, pointcof, wincof, rankcof, ratiocof)
     round3winners = roundResults(round2winners, 3, teamdatadf, pointcof, wincof, rankcof, ratiocof)
     round4winners = roundResults(round3winners, 4, teamdatadf, pointcof, wincof, rankcof, ratiocof)
-    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'), teamdatadf, pointcof, wincof, rankcof, ratiocof),
-                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'), teamdatadf, pointcof, wincof, rankcof, ratiocof)}
-    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatadf, pointcof, wincof, rankcof, ratiocof)
+    round5winners = {'d6r1seed1': whoWins(round4winners.get('d5r1seed1'), round4winners.get('d5r4seed1'),
+                                          teamdatadf, pointcof, wincof, rankcof, ratiocof),
+                     'd6r1seed2': whoWins(round4winners.get('d5r2seed1'), round4winners.get('d5r3seed1'),
+                                          teamdatadf, pointcof, wincof, rankcof, ratiocof)}
+    champion['d7r1seed1'] = whoWins(round5winners.get('d6r1seed1'), round5winners.get('d6r1seed2'), teamdatadf,
+                                    pointcof, wincof, rankcof, ratiocof)
 
     try:
         data.pop('d1r1seed16a')
@@ -155,16 +88,16 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
         data.pop('d1r4seed16b')
         data.pop('d1r4seed12a')
         data.pop('d1r4seed12b')
-    except:
+    except KeyError:
         pass
 
-    totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners, **champion}
+    totalsimData = {**data, **round1winners, **round2winners, **round3winners, **round4winners, **round5winners,
+                    **champion}
 
     # ensure directory exists
-    os.makedirs(modulepath + 'SimBrackets/', exist_ok=True)
+    os.makedirs(f'{modulepath}SimBrackets/', exist_ok=True)
     datafile = teamdatafile.replace('.csv', '')
-    # with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.yaml', 'w') as f:
-    #     yaml.dump(totalsimData, f, default_flow_style=False)
+
     with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.csv', 'w') as f:
         for key in totalsimData.keys():
             f.write("%s, %s\n" % (key, totalsimData[key]))

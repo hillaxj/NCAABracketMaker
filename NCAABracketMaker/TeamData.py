@@ -3,23 +3,25 @@ from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
 import re
+import os
 from NCAABracketMaker.utilities import teampath, bracketpath
 from NCAABracketMaker.AnalyzeGame import scheduleStrength
+import yaml
 
 # common fxn parameters
 headers = {"Accept-Language": "en-US, en;q=0.5"}
 
 
-def getTeamList(sex):
+def getTeamList(league):
     """
     Generates a list of all the teams in the league
-    :param sex: str, mens or womens league
+    :param league: str, mens or womens league
     :return: list, list of strings with all team names
     """
     # Adds each team ID from complete team list url to list and returns list
     # url for mens NCAA team list
     # Alternate data source 'https://basketball.realgm.com/ncaa/teams'
-    urlTeams = 'https://www.espn.com/' + sex + '-' + 'college-basketball' + '/teams'
+    urlTeams = 'https://www.espn.com/' + league + '-college-basketball/teams'
     teamIDs = []
 
     results = requests.get(urlTeams, headers=headers)
@@ -30,8 +32,7 @@ def getTeamList(sex):
 
     # Trims excess text from HTML to get only team ID, adds ID to list
     for team in id_div:
-        team = str(team).replace('<a class="AnchorLink" href="/' + sex + '-' + 'college-basketball' + \
-                                 '/team/schedule/_/id/', '')
+        team = str(team).replace(f'<a class="AnchorLink" href="/{league}-college-basketball/team/schedule/_/id/', '')
         team = team.replace('" tabindex="0">Schedule</a>', '')
         teamIDs.append(team)
 
@@ -40,10 +41,10 @@ def getTeamList(sex):
     return teamIDs
 
 
-def getTeamData(sex, year):
+def getTeamData(league, year):
     """
     Generates CSV with all team names, mascots, and win/loss record
-    :param sex: str, mens or womens league
+    :param league: str, mens or womens league
     :param year: int, year of data being retrieved
     :return: None, creates csv of team data for each team
     """
@@ -51,7 +52,7 @@ def getTeamData(sex, year):
     # url for mens NCAA team schedule
     # Alternate data source 'https://basketball.realgm.com/ncaa/team-stats', \
     # 'https://basketball.realgm.com/ncaa/conferences/West-Coast-Conference/11/Gonzaga/332/Schedule'
-    urlBase = 'https://www.espn.com/' + sex + '-' + 'college-basketball' + '/team/schedule/_/id/'
+    urlBase = f'https://www.espn.com/{league}-college-basketball/team/schedule/_/id/'
 
     # Initialize lists
     teamName = []
@@ -61,12 +62,12 @@ def getTeamData(sex, year):
     teamWinRatio = []
     teamIDList = []
     teamScheduleResults = []
-    teamIDs = getTeamList(sex)
+    teamIDs = getTeamList(league)
 
     # Iterate through each teamID and populate list
-    for id in teamIDs:
-        log.info('Year ' + str(year) + ' : ' + 'Team ' + str(id))
-        urlTeam = urlBase + str(id) + '/season/' + str(year)
+    for teamid in teamIDs:
+        log.info(f'Year {year} : Team {teamid}')
+        urlTeam = f'{urlBase}{teamid}/season/{year}'
         with requests.get(urlTeam, headers=headers):
             results = requests.get(urlTeam, headers=headers)
             soup = BeautifulSoup(results.text, "html.parser")
@@ -91,7 +92,7 @@ def getTeamData(sex, year):
                 try:
                     int(removedLoc[1])
                     rankedTeam = True
-                except:
+                except (LookupError, ValueError):
                     rankedTeam = False
 
                 if rankedTeam:
@@ -117,9 +118,9 @@ def getTeamData(sex, year):
                 else:
                     continue
                 teamSchedule[gameCount] = [gameDate, gameOpponent, gameOpponentRank, gameResult, gameTeamScore,
-                                              gameOpponentScore]
+                                           gameOpponentScore]
                 gameCount = gameCount + 1
-            except:
+            except (LookupError, ValueError):
                 continue
 
         if teamSchedule == {}:
@@ -137,7 +138,7 @@ def getTeamData(sex, year):
                 # Add mascot to teamMascot list
                 try:
                     teamMascot.append(name[1].text)
-                except:
+                except (LookupError, ValueError):
                     teamMascot.append('N/A')
             teamWinRecord.append(winRecord)
             teamLossRecord.append(loseRecord)
@@ -157,9 +158,12 @@ def getTeamData(sex, year):
 
     })
 
+    # Checks for directory and creates it if needed
+    os.makedirs(teampath, exist_ok=True)
+
     # Export dataframe to CSV file in TeamData directory
-    teamData.to_csv(teampath + sex + str(year) + '.csv')
-    scheduleStrength(f'{sex}{year}.csv')
+    teamData.to_csv(f'{teampath}{league}{year}.csv')
+    scheduleStrength(f'{league}{year}.csv')
 
     return None
 
@@ -174,7 +178,7 @@ def populateResults(year):
     # urlBracket = 'https://query.data.world/s/esvsa75otwudjalobphshkfrcn72dr'
     if year == 2020:
         # No 2020 bracket exists
-        with open(bracketpath + str(year) + 'results.csv', 'w') as f:
+        with open(f'{bracketpath}{year}results.csv', 'w') as f:
             f.write('Coronavirus')
         print('2020 Coronavirus')
         return None
@@ -193,25 +197,25 @@ def populateResults(year):
                 # Corrects team names from csv
                 try:
                     team[i] = nameCheck(row[i])
-                except:
+                except (LookupError, ValueError):
                     pass
 
-            teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
+            teams[f'd{row[1]}r{row[2]}seed{row[4]}'] = team[6]
             # Checks for duplicate seeds
             try:
-                if len(teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])]) > 0:
-                    teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9]+row[8])] = team[7]
-            except:
-                teams['d' + str(row[1]) + 'r' + str(row[2]) + 'seed' + str(row[9])] = team[7]
+                if len(teams[f'd{row[1]}r{row[2]}seed{row[9]}']) > 0:
+                    teams[f'd{row[1]}r{row[2]}seed{row[9]+row[8]}'] = team[7]
+            except (LookupError, ValueError):
+                teams[f'd{row[1]}r{row[2]}seed{row[9]}'] = team[7]
             # Determines champion
             if row[1] == 6:
                 if row[5] > row[8]:
-                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[6]
+                    teams[f'd{row[1] + 1}r{row[2]}seed{row[4]}'] = team[6]
                 else:
-                    teams['d' + str(row[1] + 1) + 'r' + str(row[2]) + 'seed' + str(row[4])] = team[7]
+                    teams[f'd{row[1] + 1}r{row[2]}seed{row[4]}'] = team[7]
 
     # Dump teams dict into csv
-    with open(bracketpath + str(year) + 'results.csv', 'w') as f:
+    with open(f'{bracketpath}{year}results.csv', 'w') as f:
         for key in teams.keys():
             f.write("%s, %s\n" % (key, teams[key]))
 
@@ -258,15 +262,14 @@ def nameCheck(teamName):
         'Middle Tennessee St': 'Middle Tennessee',
         'Arkansas Little Rock': 'Little Rock',
         'College of Charleston': 'Charleston'
-
     }
     team = switch.get(teamName, teamName)
 
     if team.split(' ')[0] == 'St':
         if team.split(' ')[1] == 'Peters' or team.split(' ')[1] == 'Josephs' \
                 or team.split(' ')[1] == 'Louis' or team.split(' ')[1] == 'Marys':
-            team = team.replace('St', 'Saint').replace('Peters', 'Peter\'s').replace('Josephs',
-                                                                            'Joseph\'s').replace('Marys', 'Mary\'s')
+            team = team.replace('St', 'Saint').replace('Peters', 'Peter\'s').replace('Josephs', 'Joseph\'s').replace(
+                'Marys', 'Mary\'s')
         else:
             team = team.replace('St', 'St.')
     # Morgan State for womens team
@@ -274,3 +277,56 @@ def nameCheck(teamName):
         team = teamName.replace('St', 'State')
 
     return team
+
+
+def getemptybracket(league, testyear):
+    """
+    Generates an empty bracket for the current year. Does not work for any other year due to the url only containing
+    info for the current year. Prefer to use the output yaml as a guide and correct as needed each year
+    :param league: league: str, mens or womens league
+    :param testyear: int, requested empty bracket year
+    :return: None, creates a yaml file with the seeds for the current year
+    """
+    # URL for bracket
+    urlbracket = f'http://www.espn.com/{league}-college-basketball/tournament/bracket'
+    bracket_teams = {}
+    seed_list = []
+    results = requests.get(urlbracket, headers=headers)
+    soup = BeautifulSoup(results.text, "html.parser")
+
+    # Gets year for the bracket
+    year = soup.find(class_="h2")
+    year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
+
+    # Exits if year selected is not current year
+    if testyear != year:
+        log.error('No empty bracket for selected year')
+        raise ValueError
+
+    # Split regions
+    region_div = soup.find_all(class_="region")
+    for region in region_div:
+        # Splits region into list of details
+        regionlist = str(region).split('>')
+        for i in regionlist:
+            # If regionlist item starts with a number(seed) and is longer than 25 chars(team link) adds element to list
+            if len(i) > 25 and i[:1].isnumeric():
+                # Does not add element if it already exists
+                if i not in seed_list:
+                    seed_list.append(i)
+
+    # Creates dictionary with seed as key for team
+    for element in seed_list:
+        bracket_teams[f'd1r{-(-(seed_list.index(element)+1)//16)}seed{element.split(" ")[0]}'] = \
+            nameCheck(element.split('title=')[-1].replace('"', ''))
+
+    # Dump teams dict into yaml
+    if league == 'mens':
+        with open(f'{bracketpath}NCAAMBracket{year}.yaml', 'w') as f:
+            yaml.dump(bracket_teams, f)
+
+    elif league == 'womens':
+        with open(f'{bracketpath}NCAAWBracket{year}.yaml', 'w') as f:
+            yaml.dump(bracket_teams, f)
+
+    return None
