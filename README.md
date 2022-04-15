@@ -1,8 +1,8 @@
 # NCAABracketMaker
-NCAABracketMaker is designed to create a simulated NCAA march madness bracket with data 
-from each team's performance. It will save the output the simulated bracket to a folder on the desktop in a csv file 
-as well as populate a xlsx file formatted to display the results in a populated bracket. In the xlsx file, simulation 
-results can be selected from a dropdown list to easily compare different parameters. 
+NCAABracketMaker is designed to create a simulated NCAA march madness bracket with data
+from each team's performance. It will save the output the simulated bracket to a folder on the desktop in a csv file
+as well as populate a xlsx file formatted to display the results in a populated bracket. In the xlsx file, simulation
+results can be selected from a dropdown list to easily compare different parameters.
 
 ## Installation
 pip install git+https://github.com/hillaxj/NCAABracketMaker
@@ -11,7 +11,7 @@ pip install git+https://github.com/hillaxj/NCAABracketMaker
 Running the bracketmaker function will do all the work. On the first run, it will import each team's data for the given
 year and populate the current year's bracket. Importing the data takes a few minutes but after that, each simulation
 is fast. The results will be added to the folder SimBrackets on the desktop. If needed, the filepath can be changed in
-utilities.py. 
+utilities.py.
 
 ```Python
 from NCAABracketMaker import bracketmaker
