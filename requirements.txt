@@ -1,5 +1,4 @@
 setuptools>=61.1.1
-NCAABracketMaker>=1.1.0
 requests>=2.27.1
 pandas>=1.4.1
 PyYAML>=6.0
