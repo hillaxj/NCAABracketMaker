@@ -55,7 +55,7 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     with open(bracketpath + bracketfile) as f:
         bracketData = yaml.load(f, Loader=yaml.FullLoader)
 
-    data = dict((k, v) for k, v in bracketData.items() if k[:2] == 'd1')
+    data = {k: v for k, v in bracketData.items() if k[:2] == 'd1'}
 
     # First 4 games, different years have different first 4 games
     first4seeds = {'d1r1seed11', 'd1r2seed11', 'd1r3seed11', 'd1r4seed11', 'd1r4seed12', 'd1r1seed16', 'd1r2seed16',
@@ -100,7 +100,7 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
 
     with open(f'{simbracketpath}{datafile}-{pointcof}-{wincof}-{rankcof}-{ratiocof}-Sim.csv', 'w') as f:
         for key in totalsimData.keys():
-            f.write("%s, %s\n" % (key, totalsimData[key]))
+            f.write(f"{key}, {totalsimData[key]}\n")
 
     return None
 

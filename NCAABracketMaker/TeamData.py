@@ -217,7 +217,7 @@ def populateResults(year):
     # Dump teams dict into csv
     with open(f'{bracketpath}{year}results.csv', 'w') as f:
         for key in teams.keys():
-            f.write("%s, %s\n" % (key, teams[key]))
+            f.write(f"{key}, {teams[key]}\n")
 
     return None
 
