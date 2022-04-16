@@ -1,92 +1,93 @@
+---
 #First 4 teams by seed
 
-d1r1seed11a : 'Dayton'
-d1r1seed11b : 'DePaul'
+d1r1seed11a: 'Dayton'
+d1r1seed11b: 'DePaul'
 
-d1r1seed16a : 'Howard'
-d1r1seed16b : 'Incarnate Word'
+d1r1seed16a: 'Howard'
+d1r1seed16b: 'Incarnate Word'
 
-d1r2seed11a : "Mount St. Mary's"
-d1r2seed11b : 'Florida State'
+d1r2seed11a: "Mount St. Mary's"
+d1r2seed11b: 'Florida State'
 
-d1r3seed16a : 'Longwood'
-d1r3seed16b : "Mount St. Mary's"
+d1r3seed16a: 'Longwood'
+d1r3seed16b: "Mount St. Mary's"
 
 #Regions labeled as 1(Top Left), 2(Top Right), 3(Bottom Right), 4(Bottom Left)
 
 #Region 1 teams by seed
 
-d1r1seed1 : 'South Carolina'
-d1r1seed2 : 'Iowa'
-d1r1seed3 : 'Iowa State'
-d1r1seed4 : 'Arizona'
-d1r1seed5 : 'North Carolina'
-d1r1seed6 : 'Georgia'
-d1r1seed7 : 'Colorado'
-d1r1seed8 : 'Miami'
-d1r1seed9 : 'South Florida'
-d1r1seed10 : 'Creighton'
-d1r1seed11 :
-d1r1seed12 : 'Stephen F. Austin'
-d1r1seed13 : 'UNLV'
-d1r1seed14 : 'UT Arlington'
-d1r1seed15 : 'Illinois State'
-d1r1seed16 :
+d1r1seed1: 'South Carolina'
+d1r1seed2: 'Iowa'
+d1r1seed3: 'Iowa State'
+d1r1seed4: 'Arizona'
+d1r1seed5: 'North Carolina'
+d1r1seed6: 'Georgia'
+d1r1seed7: 'Colorado'
+d1r1seed8: 'Miami'
+d1r1seed9: 'South Florida'
+d1r1seed10: 'Creighton'
+d1r1seed11:
+d1r1seed12: 'Stephen F. Austin'
+d1r1seed13: 'UNLV'
+d1r1seed14: 'UT Arlington'
+d1r1seed15: 'Illinois State'
+d1r1seed16:
 
 #Region 2 teams by seed
 
-d1r2seed1 : 'Stanford'
-d1r2seed2 : 'Texas'
-d1r2seed3 : 'LSU'
-d1r2seed4 : 'Maryland'
-d1r2seed5 : 'Virginia Tech'
-d1r2seed6 : 'Ohio State'
-d1r2seed7 : 'Utah'
-d1r2seed8 : 'Kansas'
-d1r2seed9 : 'Georgia Tech'
-d1r2seed10 : 'Arkansas'
-d1r2seed11 :
-d1r2seed12 : 'Florida Gulf Coast'
-d1r2seed13 : 'Delaware'
-d1r2seed14 : 'Jackson State'
-d1r2seed15 : 'Fairfield'
-d1r2seed16 : 'Montana State'
+d1r2seed1: 'Stanford'
+d1r2seed2: 'Texas'
+d1r2seed3: 'LSU'
+d1r2seed4: 'Maryland'
+d1r2seed5: 'Virginia Tech'
+d1r2seed6: 'Ohio State'
+d1r2seed7: 'Utah'
+d1r2seed8: 'Kansas'
+d1r2seed9: 'Georgia Tech'
+d1r2seed10: 'Arkansas'
+d1r2seed11:
+d1r2seed12: 'Florida Gulf Coast'
+d1r2seed13: 'Delaware'
+d1r2seed14: 'Jackson State'
+d1r2seed15: 'Fairfield'
+d1r2seed16: 'Montana State'
 
 
 #Region 3 teams by seed
 
-d1r3seed1 : 'NC State'
-d1r3seed2 : 'UConn'
-d1r3seed3 : 'Indiana'
-d1r3seed4 : 'Oklahoma'
-d1r3seed5 : 'Notre Dame'
-d1r3seed6 : 'Kentucky'
-d1r3seed7 : 'UCF'
-d1r3seed8 : 'Washington State'
-d1r3seed9 : 'Kansas State'
-d1r3seed10 : 'Florida'
-d1r3seed11 : 'Princeton'
-d1r3seed12 : 'UMass'
-d1r3seed13 : 'IUPUI'
-d1r3seed14 : 'Charlotte'
-d1r3seed15 : 'Mercer'
-d1r3seed16 :
+d1r3seed1: 'NC State'
+d1r3seed2: 'UConn'
+d1r3seed3: 'Indiana'
+d1r3seed4: 'Oklahoma'
+d1r3seed5: 'Notre Dame'
+d1r3seed6: 'Kentucky'
+d1r3seed7: 'UCF'
+d1r3seed8: 'Washington State'
+d1r3seed9: 'Kansas State'
+d1r3seed10: 'Florida'
+d1r3seed11: 'Princeton'
+d1r3seed12: 'UMass'
+d1r3seed13: 'IUPUI'
+d1r3seed14: 'Charlotte'
+d1r3seed15: 'Mercer'
+d1r3seed16:
 
 #Region 4 teams by seed
 
-d1r4seed1 : 'Louisville'
-d1r4seed2 : 'Baylor'
-d1r4seed3 : 'Michigan'
-d1r4seed4 : 'Tennessee'
-d1r4seed5 : 'Oregon'
-d1r4seed6 : 'BYU'
-d1r4seed7 : 'Ole Miss'
-d1r4seed8 : 'Nebraska'
-d1r4seed9 : 'Gonzaga'
-d1r4seed10 : 'South Dakota'
-d1r4seed11 : 'Villanova'
-d1r4seed12 : 'Belmont'
-d1r4seed13 : 'Buffalo'
-d1r4seed14 : 'American University'
-d1r4seed15 : "Hawai'i"
-d1r4seed16 : 'Albany'
+d1r4seed1: 'Louisville'
+d1r4seed2: 'Baylor'
+d1r4seed3: 'Michigan'
+d1r4seed4: 'Tennessee'
+d1r4seed5: 'Oregon'
+d1r4seed6: 'BYU'
+d1r4seed7: 'Ole Miss'
+d1r4seed8: 'Nebraska'
+d1r4seed9: 'Gonzaga'
+d1r4seed10: 'South Dakota'
+d1r4seed11: 'Villanova'
+d1r4seed12: 'Belmont'
+d1r4seed13: 'Buffalo'
+d1r4seed14: 'American University'
+d1r4seed15: "Hawai'i"
+d1r4seed16: 'Albany'

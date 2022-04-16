@@ -17,18 +17,26 @@ def whoWins(team1, team2, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     """
 
     # Pulls each team's wins and losses from team data csv
-    team1Ratio = teamdatadf.at[team1, 'Team Win Ratio']
-    team2Ratio = teamdatadf.at[team2, 'Team Win Ratio']
-    team1Points = teamdatadf.at[team1, 'Schedule Points']
-    team2Points = teamdatadf.at[team2, 'Schedule Points']
-    team1OppWins = teamdatadf.at[team1, 'Schedule Wins']
-    team2OppWins = teamdatadf.at[team2, 'Schedule Wins']
-    team1OppRank = teamdatadf.at[team1, 'Schedule Rank']
-    team2OppRank = teamdatadf.at[team2, 'Schedule Rank']
+    team1Ratio = teamdatadf.at[team1, "Team Win Ratio"]
+    team2Ratio = teamdatadf.at[team2, "Team Win Ratio"]
+    team1Points = teamdatadf.at[team1, "Schedule Points"]
+    team2Points = teamdatadf.at[team2, "Schedule Points"]
+    team1OppWins = teamdatadf.at[team1, "Schedule Wins"]
+    team2OppWins = teamdatadf.at[team2, "Schedule Wins"]
+    team1OppRank = teamdatadf.at[team1, "Schedule Rank"]
+    team2OppRank = teamdatadf.at[team2, "Schedule Rank"]
 
     # Compares data from each team to determine winner, tie goes to team1
-    if team1Ratio * ratiocof + team1Points * pointcof + team1OppRank * rankcof + team1OppWins * wincof >= \
-            team2Ratio * ratiocof + team2Points * pointcof + team2OppRank * rankcof + team2OppWins * wincof:
+    if (
+        team1Ratio * ratiocof
+        + team1Points * pointcof
+        + team1OppRank * rankcof
+        + team1OppWins * wincof
+        >= team2Ratio * ratiocof
+        + team2Points * pointcof
+        + team2OppRank * rankcof
+        + team2OppWins * wincof
+    ):
         winner = team1
     else:
         winner = team2
@@ -43,7 +51,7 @@ def scheduleStrength(teamdatafile):
     :return: None, adds schedule strength parameters (Schedule Points, Schedule Wins, Schedule Rank) to teamdatafile
     """
     # Reads csv file
-    df = pd.read_csv(f'{teampath}{teamdatafile}', index_col='Team Name')
+    df = pd.read_csv(f"{teampath}{teamdatafile}", index_col="Team Name")
     teams = df.index.tolist()
     pointList = []
     rankList = []
@@ -51,7 +59,7 @@ def scheduleStrength(teamdatafile):
 
     for team in teams:
         # Creates dict of games played
-        schedule = ast.literal_eval(df.at[team, 'Team Schedule Results'])
+        schedule = ast.literal_eval(df.at[team, "Team Schedule Results"])
         oppWinList = []
         oppRankList = []
         pointsList = []
@@ -61,14 +69,14 @@ def scheduleStrength(teamdatafile):
             try:
                 # Opponent win ratio from csv
                 sched = schedule.get(i)
-                oppWinList.append(df.at[sched[1], 'Team Win Ratio'])
+                oppWinList.append(df.at[sched[1], "Team Win Ratio"])
                 # Opponent rank factor
-                if sched[2] != 'N/A':
-                    oppRankList.append((26-int(sched[2])) / 25)
+                if sched[2] != "N/A":
+                    oppRankList.append((26 - int(sched[2])) / 25)
                 else:
                     oppRankList.append(0)
                 # Point differential factor, may need tweaks
-                pointsList.append((100 - abs(int(sched[4]) - int(sched[5])))/100)
+                pointsList.append((100 - abs(int(sched[4]) - int(sched[5]))) / 100)
 
             except (LookupError, ValueError):
                 continue
@@ -77,11 +85,11 @@ def scheduleStrength(teamdatafile):
         rankList.append(sum(oppRankList) / len(oppRankList))
         winList.append(sum(oppWinList) / len(oppWinList))
 
-    df['Schedule Points'] = pointList
-    df['Schedule Wins'] = winList
-    df['Schedule Rank'] = rankList
+    df["Schedule Points"] = pointList
+    df["Schedule Wins"] = winList
+    df["Schedule Rank"] = rankList
     # drop .csv at end of teamdatafile
-    teamdatafile = teamdatafile.replace('.csv', '')
-    df.to_csv(f'{teampath}{teamdatafile}.csv')
+    teamdatafile = teamdatafile.replace(".csv", "")
+    df.to_csv(f"{teampath}{teamdatafile}.csv")
 
     return None
