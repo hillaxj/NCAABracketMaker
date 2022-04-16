@@ -9,8 +9,15 @@ from NCAABracketMaker.utilities import teampath, bracketpath
 from os.path import exists
 
 
-def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, pointsWeight: float,
-                 scheduleWeight: float, reset=False):
+def bracketmaker(
+    league: str,
+    year: int,
+    winWeight: float,
+    rankWeight: float,
+    pointsWeight: float,
+    scheduleWeight: float,
+    reset=False,
+):
     """
     Imports data from current year and simulates bracket with defined parameters
     :param reset: bool, Default False, deletes all csv files in SimBrackets and clears results from Sim_Bracket.xlsx
@@ -25,7 +32,7 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
     if reset:
         # Removes all sim results
         clearSimResults(reset)
-        log.info('Cleared all simulation results')
+        log.info("Cleared all simulation results")
         return None
 
     # Checks coefficient var types
@@ -35,20 +42,22 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         pointsWeight = float(pointsWeight)
         scheduleWeight = float(scheduleWeight)
     except ValueError:
-        log.error('Coefficients are not float variables', exc_info=True)
+        log.error("Coefficients are not float variables", exc_info=True)
         return None
 
     # Checks league var type and converts to lower
     try:
         league = league.lower()
-        if league == 'mens':
-            emptybracket = f'NCAAMBracket{year}.yaml'
-        elif league == 'womens':
-            emptybracket = f'NCAAWBracket{year}.yaml'
+        if league == "mens":
+            emptybracket = f"NCAAMBracket{year}.yaml"
+        elif league == "womens":
+            emptybracket = f"NCAAWBracket{year}.yaml"
         else:
             raise ValueError
     except ValueError:
-        log.error('Not a valid league. Must be either "mens" or "womens"', exc_info=True)
+        log.error(
+            'Not a valid league. Must be either "mens" or "womens"', exc_info=True
+        )
         return None
 
     # Checks for empty bracket and generates one for only the current year if it doesn't exist
@@ -62,19 +71,27 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
     if exists(bracketpath + emptybracket):
         # Gets team data from web, if file exist, doesn't run
         try:
-            f = open(f'{teampath}{league}{year}.csv')
+            f = open(f"{teampath}{league}{year}.csv")
             f.close()
         except FileNotFoundError:
             getTeamData(league, year)
 
         # Use to sim current year bracket
-        bracketSim(emptybracket, f'{league}{year}.csv', winWeight, rankWeight, pointsWeight,
-                   scheduleWeight)
+        bracketSim(
+            emptybracket,
+            f"{league}{year}.csv",
+            winWeight,
+            rankWeight,
+            pointsWeight,
+            scheduleWeight,
+        )
         # Generates Excel sheet with bracket results graphic
-        populateBracket(f'{league}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv')
+        populateBracket(
+            f"{league}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv"
+        )
 
-        log.info('Open Sim_Bracket.xlsx to see results.')
+        log.info("Open Sim_Bracket.xlsx to see results.")
     else:
-        log.error('No empty bracket for selected year')
+        log.error("No empty bracket for selected year")
 
     return None

@@ -28,12 +28,20 @@ def compareResults(results, simbracket):
     for x in range(2, 8):
         # Iterates through each region
         for y in range(1, 5):
-            seedid = f'd{x}r{y}seed'
-            listResultsTeams = [v for k, v in dataResults.items() if k.startswith(seedid)]
+            seedid = f"d{x}r{y}seed"
+            listResultsTeams = [
+                v for k, v in dataResults.items() if k.startswith(seedid)
+            ]
             listSimTeams = [v for k, v in dataSim.items() if k.startswith(seedid)]
             # If element is in both lists, adds 1 to percentAccurate, perfect is 63 matching elements
-            numAccurate = len([z for z in range(len(listResultsTeams)) if listResultsTeams[z] in listSimTeams])
-            percentAccurate = percentAccurate + (numAccurate * pow(2, (x-2)))
+            numAccurate = len(
+                [
+                    z
+                    for z in range(len(listResultsTeams))
+                    if listResultsTeams[z] in listSimTeams
+                ]
+            )
+            percentAccurate = percentAccurate + (numAccurate * pow(2, (x - 2)))
 
     return percentAccurate / 192
 
