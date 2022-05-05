@@ -14,15 +14,16 @@ is fast. The results will be added to the folder SimBrackets on the desktop. If 
 utilities.py.
 
 ```Python
-from NCAABracketMaker import bracketmaker
-# Example values populated below
-league = 'mens'     # Must be 'mens' or 'womens'
-year = 2022         # Empty brackets available for 2021 and 2022 only
+from src.NCAABracketMaker import bracketmaker
 
-win = 1             # Recommend: Float between 0 and 1
-rank = 1            # Recommend: Float between 0 and 1
-points = .5         # Recommend: Float between 0 and 1
-schedule = 5        # Recommend: Float between 1 and 10
+# Example values populated below
+league = 'mens'  # Must be 'mens' or 'womens'
+year = 2022  # Empty brackets available for 2021 and 2022 only
+
+win = 1  # Recommend: Float between 0 and 1
+rank = 1  # Recommend: Float between 0 and 1
+points = .5  # Recommend: Float between 0 and 1
+schedule = 5  # Recommend: Float between 1 and 10
 
 # Can clear simulated brackets by setting reset to True, default is False
 reset = False
@@ -46,4 +47,5 @@ Legacy version 1.0.0 it worked but was not user-friendly
 MIT License
 
 Copyright (c) 2022 Alex Hill
+![Tests](https://github.com/hillaxj/NCAABracketMaker/actions/workflows/tests.yml/badge.svg)
 

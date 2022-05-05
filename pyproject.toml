@@ -31,3 +31,45 @@ dependencies = [
 [project.urls]
 Source = 'https://github.com/hillaxj/NCAABracketMaker'
 Bug_Tracker = 'https://github.com/hillaxj/NCAABracketMaker/issues'
+
+[options]
+packages = "NCAABracketMaker"
+install_requires = "requests>=2.27.0"
+python_requires = ">=3.10"
+package_dir = "src"
+zip_safe = "no"
+
+[options.extras_require]
+testing = [
+    "pytest>=6.0",
+    "pytest-cov>=2.0",
+    "mypy>=0.910",
+    "flake8>=3.9",
+    "tox>=3.24"
+]
+
+[tool.pytest.ini_options]
+addopts = "--cov=NCAABracketMaker"
+testpaths = [
+    "tests",
+]
+
+[tool.mypy]
+mypy_path = "src"
+check_untyped_defs = true
+disallow_any_generics = true
+ignore_missing_imports = true
+no_implicit_optional = true
+show_error_codes = true
+strict_equality = true
+warn_redundant_casts = true
+warn_return_any = true
+warn_unreachable = true
+warn_unused_configs = true
+no_implicit_reexport = true
+
+[options.package_data]
+NCAABRacketMaker = "py.typed"
+
+[flake8]
+max-line-length = 120
