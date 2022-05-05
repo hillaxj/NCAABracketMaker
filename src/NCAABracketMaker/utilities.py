@@ -1,12 +1,12 @@
 import os
-import logging as log
+import logging
 import sys
 import shutil
 
 
 # define log.info output format
-log.basicConfig(
-    level=log.INFO,
+logging.basicConfig(
+    level=logging.INFO,
     format="%(asctime)s %(levelname)-8s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     stream=sys.stdout,
@@ -20,8 +20,8 @@ try:
     # If a different filepath is needed for the results, change deskpath to the desired location
     deskpath = os.environ["HOME"] + "/Desktop/"
 except NameError:
-    modulepath = "NCAABracketMaker/"
-    deskpath = "NCAABracketMaker/"
+    modulepath = "src/NCAABracketMaker/"
+    deskpath = "src/NCAABracketMaker/"
 
 
 # define package directory paths
@@ -39,6 +39,7 @@ folder_list = ["SimBrackets/"]
 for folder in folder_list:
     # Creates directory if needed
     os.makedirs(destination_dir + folder, exist_ok=True)
+    os.makedirs(modulepath + folder, exist_ok=True)
     for file_name in os.listdir(modulepath + folder):
         # Construct full file path
         source = modulepath + folder + file_name
@@ -46,4 +47,4 @@ for folder in folder_list:
         # Move only files
         if os.path.exists(source) and not os.path.exists(destination):
             shutil.copy(source, destination)
-            log.info("File Copied:" + file_name)
+            logging.info("File Copied:" + file_name)

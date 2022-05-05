@@ -1,11 +1,11 @@
 """
 Call on functions to pull data and create brackets
 """
-import logging as log
+import logging
 
-from NCAABracketMaker.BracketBuilder import clearSimResults, bracketSim, populateBracket
-from NCAABracketMaker.TeamData import getTeamData, getemptybracket
-from NCAABracketMaker.utilities import teampath, bracketpath
+from src.NCAABracketMaker.BracketBuilder import clearSimResults, bracketSim, populateBracket
+from src.NCAABracketMaker.TeamData import getTeamData, getemptybracket
+from src.NCAABracketMaker.utilities import teampath, bracketpath
 from os.path import exists
 
 
@@ -32,7 +32,7 @@ def bracketmaker(
     if reset:
         # Removes all sim results
         clearSimResults(reset)
-        log.info("Cleared all simulation results")
+        logging.info("Cleared all simulation results")
         return None
 
     # Checks coefficient var types
@@ -42,7 +42,7 @@ def bracketmaker(
         pointsWeight = float(pointsWeight)
         scheduleWeight = float(scheduleWeight)
     except ValueError:
-        log.error("Coefficients are not float variables", exc_info=True)
+        logging.error("Coefficients are not float variables", exc_info=True)
         return None
 
     # Checks league var type and converts to lower
@@ -55,7 +55,7 @@ def bracketmaker(
         else:
             raise ValueError
     except ValueError:
-        log.error(
+        logging.error(
             'Not a valid league. Must be either "mens" or "womens"', exc_info=True
         )
         return None
@@ -90,8 +90,8 @@ def bracketmaker(
             f"{league}{year}-{winWeight}-{rankWeight}-{pointsWeight}-{scheduleWeight}-Sim.csv"
         )
 
-        log.info("Open Sim_Bracket.xlsx to see results.")
+        logging.info("Open Sim_Bracket.xlsx to see results.")
     else:
-        log.error("No empty bracket for selected year")
+        logging.error("No empty bracket for selected year")
 
     return None
