@@ -5,7 +5,7 @@ __pycache__/
 
 # Untracked files:
 src/NCAABracketMaker/TeamData/*
-src/NCAABracketMaker/SimBrackets/*
+src/NCAABracketMaker/SimBrackets/*.csv
 src/NCAABracketMaker/Brackets/*results.csv
 *.idea
 
