@@ -1,4 +1,4 @@
-from NCAABracketMaker.utilities import teampath
+from src.NCAABracketMaker.utilities import teampath
 import pandas as pd
 import ast
 

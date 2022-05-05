@@ -4,8 +4,8 @@ import pandas as pd
 import logging as log
 import re
 import os
-from NCAABracketMaker.utilities import teampath, bracketpath
-from NCAABracketMaker.AnalyzeGame import scheduleStrength
+from src.NCAABracketMaker.utilities import teampath, bracketpath
+from src.NCAABracketMaker.AnalyzeGame import scheduleStrength
 import yaml
 
 # common fxn parameters

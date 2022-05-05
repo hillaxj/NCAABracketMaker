@@ -1,6 +1,6 @@
-from NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, modulepath
+from src.NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, modulepath
 import yaml
-from NCAABracketMaker.AnalyzeGame import whoWins
+from src.NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
 import pandas as pd
 import os
