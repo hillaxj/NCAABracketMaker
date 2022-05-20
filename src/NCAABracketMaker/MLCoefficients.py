@@ -20,8 +20,10 @@ def compareResults(results, simbracket):
     #     dataSim = yaml.load(f, Loader=yaml.FullLoader)
 
     # Import files and converts to dict
-    dataResults = pd.read_csv(results)
-    dataSim = pd.read_csv(simbracket)
+    dataResults = pd.read_csv(results, header=None, index_col=0)
+    resultsdict = dataResults.to_dict()[1]
+    dataSim = pd.read_csv(simbracket, header=None, index_col=0)
+    simdict = dataSim.to_dict()[1]
 
     # Increases percentAccurate if teams in each round match
     # Iterate through each round, skip first round teams
@@ -30,9 +32,9 @@ def compareResults(results, simbracket):
         for y in range(1, 5):
             seedid = f"d{x}r{y}seed"
             listResultsTeams = [
-                v for k, v in dataResults.items() if k.startswith(seedid)
+                v for k, v in resultsdict.items() if k.startswith(seedid)
             ]
-            listSimTeams = [v for k, v in dataSim.items() if k.startswith(seedid)]
+            listSimTeams = [v for k, v in simdict.items() if k.startswith(seedid)]
             # If element is in both lists, adds 1 to percentAccurate, perfect is 63 matching elements
             numAccurate = len(
                 [
