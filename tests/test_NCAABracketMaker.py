@@ -12,6 +12,6 @@ def test_brackets():
     schedule = 5
 
     bracketmaker(league, year, win, rank, points, schedule)
-    assert compareResults("testsim.csv", f'{simbracketpath}{league}{year}-{win}-{rank}-{points}-{schedule}-Sim.csv') \
+    assert compareResults("test/testsim.csv", f'{simbracketpath}{league}{year}-{win}-{rank}-{points}-{schedule}-Sim.csv') \
            == 1, "Should be 1"
 
