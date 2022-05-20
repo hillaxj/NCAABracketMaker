@@ -1,0 +1,11 @@
+setuptools>=61.1.1
+requests>=2.27.1
+pandas>=1.4.1
+PyYAML>=6.0
+beautifulsoup4>=4.10.0
+openpyxl>=3.0.9
+pytest>=6.0
+pytest-cov>=2.0
+mypy>=0.910
+pyproject-flake8>
+tox>=3.24
