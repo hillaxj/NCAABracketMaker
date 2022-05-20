@@ -1,4 +1,5 @@
 from src.NCAABracketMaker import bracketmaker, compareResults
+from src.NCAABracketMaker.utilities import simbracketpath
 
 
 def test_brackets():
@@ -10,4 +11,7 @@ def test_brackets():
     points = .5  # Recommend: Float between 0 and 1
     schedule = 5
 
-    assert bracketmaker(league, year, win, rank, points, schedule)
+    bracketmaker(league, year, win, rank, points, schedule)
+    assert compareResults("testsim.csv", f'{simbracketpath}{league}{year}-{win}-{rank}-{points}-{schedule}-Sim.csv') \
+           == 1, "Should be 1"
+
