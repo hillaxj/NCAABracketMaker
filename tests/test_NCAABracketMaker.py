@@ -21,6 +21,8 @@ def test_brackets():
     schedule = 1.0
 
     bracketmaker(league, year, win, rank, points, schedule)
-    assert compareResults(f'{testpath}testsim.csv', f'{simbracketpath}{league}{year}-{win}-{rank}-{points}-{schedule}-Sim.csv') \
-           == 1, "Should be 1"
+    # Tests sim results match expected file
+    assert compareResults(f'{testpath}testsim.csv',
+                          f'{simbracketpath}{league}{year}-{win}-{rank}-{points}-{schedule}'
+                          f'-Sim.csv') == 1, "Output changed from original algorithm"
 
