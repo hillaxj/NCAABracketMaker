@@ -4,13 +4,14 @@ import sys
 import shutil
 
 
-# define log.info output format
+# define logging.info output format
 logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s %(levelname)-8s %(message)s",
     datefmt="%Y-%m-%d %H:%M:%S",
     stream=sys.stdout,
 )
+log = logging.getLogger(__name__)
 
 # define local path to repo
 try:
@@ -57,4 +58,4 @@ for folder in folder_list:
         # Move only files
         if os.path.exists(source) and not os.path.exists(destination):
             shutil.copy(source, destination)
-            logging.info("File Copied:" + file_name)
+            log.info("File Copied:" + file_name)

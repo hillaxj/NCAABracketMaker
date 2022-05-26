@@ -1,10 +1,9 @@
 import requests  # type: ignore
 from bs4 import BeautifulSoup
 import pandas as pd
-import logging as log
 import re
 import os
-from src.NCAABracketMaker.utilities import teampath, bracketpath
+from src.NCAABracketMaker.utilities import teampath, bracketpath, log
 from src.NCAABracketMaker.AnalyzeGame import scheduleStrength
 import yaml  # type: ignore
 

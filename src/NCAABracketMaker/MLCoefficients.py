@@ -2,9 +2,8 @@
 # import yaml
 # from NCAABracketMaker.AnalyzeGame import scheduleStrength
 # import numpy
-# import logging as log
 # import cProfile
-# from NCAABracketMaker.utilities import teampath
+# from src.NCAABracketMaker.utilities import teampath, log
 # import time
 import pandas as pd
 
