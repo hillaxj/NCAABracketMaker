@@ -42,7 +42,7 @@ def bracketmaker(
         pointsWeight = float(pointsWeight)
         scheduleWeight = float(scheduleWeight)
     except ValueError:
-        logging.error("Coefficients are not float variables", exc_info=True)
+        logging.exception("Coefficients are not float variables")
         return None
 
     # Checks league var type and converts to lower
@@ -55,9 +55,7 @@ def bracketmaker(
         else:
             raise ValueError
     except ValueError:
-        logging.error(
-            'Not a valid league. Must be either "mens" or "womens"', exc_info=True
-        )
+        logging.exception('Not a valid league. Must be either "mens" or "womens"')
         return None
 
     # Checks for empty bracket and generates one for only the current year if it doesn't exist
