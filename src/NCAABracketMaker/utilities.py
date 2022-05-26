@@ -18,7 +18,17 @@ try:
         str(os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")) + "/"
     )
     # If a different filepath is needed for the results, change deskpath to the desired location
-    deskpath = os.environ["HOME"] + "/Desktop/"
+
+    if sys.platform == "linux" or sys.platform == "linux2":
+        # Linux desktop path
+        deskpath = os.path.join(os.path.join(os.path.expanduser('~')), 'Desktop')
+    # elif sys.platform == "darwin":
+    #     # OS X
+    elif sys.platform == "win32":
+        # Windows desktop path
+        deskpath = os.path.join(os.path.join(os.environ['USERPROFILE']), 'Desktop')
+    # deskpath = os.environ["HOME"] + "/Desktop/"
+
 except NameError:
     modulepath = "src/NCAABracketMaker/"
     deskpath = "src/NCAABracketMaker/"
