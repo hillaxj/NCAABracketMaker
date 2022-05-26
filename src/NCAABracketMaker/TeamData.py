@@ -1,4 +1,4 @@
-import requests
+import requests  # type: ignore
 from bs4 import BeautifulSoup
 import pandas as pd
 import logging as log
@@ -6,7 +6,7 @@ import re
 import os
 from src.NCAABracketMaker.utilities import teampath, bracketpath
 from src.NCAABracketMaker.AnalyzeGame import scheduleStrength
-import yaml
+import yaml  # type: ignore
 
 # common fxn parameters
 headers = {"Accept-Language": "en-US, en;q=0.5"}

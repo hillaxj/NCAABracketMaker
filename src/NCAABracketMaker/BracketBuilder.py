@@ -1,5 +1,5 @@
 from src.NCAABracketMaker.utilities import bracketpath, simbracketpath, teampath, modulepath
-import yaml
+import yaml  # type: ignore
 from src.NCAABracketMaker.AnalyzeGame import whoWins
 from math import pow
 import pandas as pd
