@@ -46,7 +46,7 @@ testing = [
 ]
 
 [tool.pytest.ini_options]
-addopts = "--cov=NCAABracketMaker"
+addopts = "--cov=src"
 testpaths = [
     "tests",
 ]
