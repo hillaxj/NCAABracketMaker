@@ -4,11 +4,11 @@ import os
 
 try:
     testpath = (
-        str(os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")) + "/"
+        str(os.path.dirname(os.path.realpath(__file__)).replace("\\", "/")) + "/TestDocs/"
     )
 
 except NameError:
-    testpath = "tests/"
+    testpath = "tests/TestDocs/"
 
 
 def test_brackets():

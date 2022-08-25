@@ -157,7 +157,7 @@ def getTeamData(league, year):
             teamLossRecord.append(loseRecord)
             teamWinRatio.append(winRecord / (winRecord + loseRecord))
             teamScheduleResults.append(teamSchedule)
-            teamIDList.append(id)
+            teamIDList.append(teamid)
 
     # Create dataframe for lists
     teamData = pd.DataFrame(
