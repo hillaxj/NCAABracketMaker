@@ -9,7 +9,7 @@ from openpyxl import load_workbook
 
 def roundResults(teams, rnd, teamdatadf, pointcof, wincof, rankcof, ratiocof):
     """
-    Determins the winning teams from each region for the given round of games
+    Determines the winning teams from each region for the given round of games
     :param teams:
     :param rnd: int, current round of games
     :param teamdatadf: dataframe, all team data
@@ -58,8 +58,8 @@ def bracketSim(bracketfile, teamdatafile, pointcof, wincof, rankcof, ratiocof):
     data = dict((k, v) for k, v in bracketData.items() if k[:2] == 'd1')
 
     # First 4 games, different years have different first 4 games
-    first4seeds = {'d1r1seed11', 'd1r2seed11', 'd1r3seed11', 'd1r4seed11', 'd1r4seed12', 'd1r1seed16', 'd1r2seed16',
-                   'd1r3seed16', 'd1r4seed16', 'd1r4seed11', 'd1r2seed11', 'd1r4seed12'}
+    first4seeds = {'d1r1seed11', 'd1r2seed11', 'd1r3seed11', 'd1r4seed11', 'd1r1seed12', 'd1r2seed12', 'd1r3seed12',
+                   'd1r4seed12', 'd1r1seed16', 'd1r2seed16', 'd1r3seed16', 'd1r4seed16'}
     for i in first4seeds:
         try:
             data[i] = whoWins(data.get(f'{i}a'), data.get(f'{i}b'), teamdatadf, pointcof, wincof, rankcof, ratiocof)

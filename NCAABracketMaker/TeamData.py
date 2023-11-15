@@ -9,7 +9,7 @@ from NCAABracketMaker.AnalyzeGame import scheduleStrength
 import yaml
 
 # common fxn parameters
-headers = {"Accept-Language": "en-US, en;q=0.5"}
+headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
 
 
 def getTeamList(league):
@@ -144,7 +144,7 @@ def getTeamData(league, year):
             teamLossRecord.append(loseRecord)
             teamWinRatio.append(winRecord / (winRecord + loseRecord))
             teamScheduleResults.append(teamSchedule)
-            teamIDList.append(id)
+            teamIDList.append(teamid)
 
     # Create dataframe for lists
     teamData = pd.DataFrame({
@@ -241,7 +241,7 @@ def nameCheck(teamName):
         'Miami Ohio': 'Miami (OH)',
         'Central Connecticut St': 'Central Connecticut',
         'Mount St Marys': 'Mount St. Mary\'s',
-        'Cal St Fullerton': 'CSU Fullerton',
+        #'Cal St Fullerton': 'CSU Fullerton',
         'Texas Arlington': 'UT Arlington',
         'Cal St Northridge': 'CSU Northridge',
         'Morgan St': 'Morgan St',

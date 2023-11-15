@@ -1,0 +1,92 @@
+#First 4 teams by seed
+
+d1r2seed11a : 'Mississippi St.'
+d1r2seed11b : 'Pittsburgh'
+
+d1r1seed16a : 'A&M Corpus Christi'
+d1r1seed16b : 'Southeast Mo. St.'
+
+d1r3seed11a : 'Arizona St.'
+d1r3seed11b : 'Nevada'
+
+d1r4seed16a : 'Texas Southern'
+d1r4seed16b : 'FDU'
+
+#Regions labeled as 1(Top Left), 2(Top Right), 3(Bottom Right), 4(Bottom Left)
+
+#Region 1 teams by seed
+
+d1r1seed1 : 'Alabama'
+d1r1seed2 : 'Arizona'
+d1r1seed3 : 'Baylor'
+d1r1seed4 : 'Virginia'
+d1r1seed5 : 'San Diego St.'
+d1r1seed6 : 'Creighton'
+d1r1seed7 : 'Missouri'
+d1r1seed8 : 'Maryland'
+d1r1seed9 : 'West Virginia'
+d1r1seed10 : 'Utah St.'
+d1r1seed11 : 'NC State'
+d1r1seed12 : 'Col. of Charleston'
+d1r1seed13 : 'Furman'
+d1r1seed14 : 'UC Santa Barbara'
+d1r1seed15 : 'Princeton'
+d1r1seed16 :
+
+#Region 2 teams by seed
+
+d1r2seed1 : 'Houston'
+d1r2seed2 : 'Texas'
+d1r2seed3 : 'Xavier'
+d1r2seed4 : 'Indiana'
+d1r2seed5 : 'Miami (FL)'
+d1r2seed6 : 'Iowa St.'
+d1r2seed7 : 'Texas A&M'
+d1r2seed8 : 'Iowa'
+d1r2seed9 : 'Auburn'
+d1r2seed10 : 'Penn St.'
+d1r2seed11 :
+d1r2seed12 : 'Drake'
+d1r2seed13 : 'Kent St.'
+d1r2seed14 : 'Kennesaw St.'
+d1r2seed15 : 'Colgate'
+d1r2seed16 : 'Northern Ky.'
+
+
+#Region 3 teams by seed
+
+d1r3seed1 : 'Kansas'
+d1r3seed2 : 'UCLA'
+d1r3seed3 : 'Gonzaga'
+d1r3seed4 : 'UConn'
+d1r3seed5 : "Saint Mary's (CA)"
+d1r3seed6 : 'TCU'
+d1r3seed7 : 'Northwestern'
+d1r3seed8 : 'Arkansas'
+d1r3seed9 : 'Illinois'
+d1r3seed10 : 'Boise St.'
+d1r3seed11 :
+d1r3seed12 : 'VCU'
+d1r3seed13 : 'Iona'
+d1r3seed14 : 'Grand Canyon'
+d1r3seed15 : 'UNC Asheville'
+d1r3seed16 : 'Howard'
+
+#Region 4 teams by seed
+
+d1r4seed1 : 'Purdue'
+d1r4seed2 : 'Marquette'
+d1r4seed3 : 'Kansas St.'
+d1r4seed4 : 'Tennessee'
+d1r4seed5 : 'Duke'
+d1r4seed6 : 'Kentucky'
+d1r4seed7 : 'Michigan St.'
+d1r4seed8 : 'Memphis'
+d1r4seed9 : 'Fla. Atlantic'
+d1r4seed10 : 'Southern California'
+d1r4seed11 : 'Providence'
+d1r4seed12 : 'Oral Roberts'
+d1r4seed13 : 'Louisiana'
+d1r4seed14 : 'Montana St.'
+d1r4seed15 : 'Vermont'
+d1r4seed16 :
