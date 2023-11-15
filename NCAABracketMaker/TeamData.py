@@ -288,7 +288,7 @@ def getemptybracket(league, testyear):
     :return: None, creates a yaml file with the seeds for the current year
     """
     # URL for bracket
-    urlbracket = f'http://www.espn.com/{league}-college-basketball/tournament/bracket'
+    urlbracket = f'http://www.espn.com/{league}-college-basketball/bracket/_/season/{testyear}'
     bracket_teams = {}
     seed_list = []
     results = requests.get(urlbracket, headers=headers)
@@ -299,9 +299,9 @@ def getemptybracket(league, testyear):
     year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
 
     # Exits if year selected is not current year
-    if testyear != year:
-        log.error('No empty bracket for selected year')
-        raise ValueError
+    #if testyear != year:
+    #    log.error('No empty bracket for selected year')
+    #    raise ValueError
 
     # Split regions
     region_div = soup.find_all(class_="region")

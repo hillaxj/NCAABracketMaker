@@ -1,0 +1,92 @@
+#First 4 teams by seed
+
+d1r1seed11a : 'Illinois'
+d1r1seed11b : 'Mississippi State'
+
+d1r2seed16a : 'Tennessee Tech'
+d1r2seed16b : 'Monmouth'
+
+d1r3seed11a : "Purdue"
+d1r3seed11b : "St. John's"
+
+d1r4seed16a : 'Sacred Heart'
+d1r4seed16b : "Southern"
+
+#Regions labeled as 1(Top Left), 2(Top Right), 3(Bottom Right), 4(Bottom Left)
+
+#Region 1 teams by seed
+
+d1r1seed1 : 'South Carolina'
+d1r1seed2 : 'Maryland'
+d1r1seed3 : 'Notre Dame'
+d1r1seed4 : 'UCLA'
+d1r1seed5 : 'Oklahoma'
+d1r1seed6 : 'Creighton'
+d1r1seed7 : 'Arizona'
+d1r1seed8 : 'South Florida'
+d1r1seed9 : 'Marquette'
+d1r1seed10 : 'West Virginia'
+d1r1seed11 :
+d1r1seed12 : 'Portland'
+d1r1seed13 : 'Sacramento State'
+d1r1seed14 : 'Southern Utah'
+d1r1seed15 : 'Holy Cross'
+d1r1seed16 : 'Norfolk State'
+
+#Region 2 teams by seed
+
+d1r2seed1 : 'Indiana'
+d1r2seed2 : 'Utah'
+d1r2seed3 : 'LSU'
+d1r2seed4 : 'Villanova'
+d1r2seed5 : 'Washington State'
+d1r2seed6 : 'Michigan'
+d1r2seed7 : 'NC State'
+d1r2seed8 : 'Oklahoma State'
+d1r2seed9 : 'Miami'
+d1r2seed10 : 'Princeton'
+d1r2seed11 : 'UNLV'
+d1r2seed12 : 'Florida Gulf Coast'
+d1r2seed13 : 'Cleveland State'
+d1r2seed14 : "Hawai'i"
+d1r2seed15 : 'Gardner-Webb'
+d1r2seed16 :
+
+
+#Region 3 teams by seed
+
+d1r3seed1 : 'Virginia Tech'
+d1r3seed2 : 'UConn'
+d1r3seed3 : 'Ohio State'
+d1r3seed4 : 'Tennessee'
+d1r3seed5 : 'Iowa State'
+d1r3seed6 : 'North Carolina'
+d1r3seed7 : 'Baylor'
+d1r3seed8 : 'USC'
+d1r3seed9 : 'South Dakota State'
+d1r3seed10 : 'Alabama'
+d1r3seed11 :
+d1r3seed12 : 'Toledo'
+d1r3seed13 : 'Saint Louis'
+d1r3seed14 : 'James Madison'
+d1r3seed15 : 'Vermont'
+d1r3seed16 : 'Chattanooga'
+
+#Region 4 teams by seed
+
+d1r4seed1 : 'Stanford'
+d1r4seed2 : 'Iowa'
+d1r4seed3 : 'Duke'
+d1r4seed4 : 'Texas'
+d1r4seed5 : 'Louisville'
+d1r4seed6 : 'Colorado'
+d1r4seed7 : 'Florida State'
+d1r4seed8 : 'Ole Miss'
+d1r4seed9 : 'Gonzaga'
+d1r4seed10 : 'Georgia'
+d1r4seed11 : 'Middle Tennessee'
+d1r4seed12 : 'Drake'
+d1r4seed13 : 'East Carolina'
+d1r4seed14 : 'Iona'
+d1r4seed15 : 'SE Louisiana'
+d1r4seed16 :

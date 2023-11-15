@@ -6,7 +6,7 @@ d1r1seed11b : 'DePaul'
 d1r1seed16a : 'Howard'
 d1r1seed16b : 'Incarnate Word'
 
-d1r2seed11a : "Mount St. Mary's"
+d1r2seed11a : 'Missouri State'
 d1r2seed11b : 'Florida State'
 
 d1r3seed16a : 'Longwood'
@@ -66,7 +66,7 @@ d1r3seed8 : 'Washington State'
 d1r3seed9 : 'Kansas State'
 d1r3seed10 : 'Florida'
 d1r3seed11 : 'Princeton'
-d1r3seed12 : 'UMass'
+d1r3seed12 : 'Massachusetts'
 d1r3seed13 : 'IUPUI'
 d1r3seed14 : 'Charlotte'
 d1r3seed15 : 'Mercer'
@@ -89,4 +89,4 @@ d1r4seed12 : 'Belmont'
 d1r4seed13 : 'Buffalo'
 d1r4seed14 : 'American University'
 d1r4seed15 : "Hawai'i"
-d1r4seed16 : 'Albany'
+d1r4seed16 : 'UAlbany'
