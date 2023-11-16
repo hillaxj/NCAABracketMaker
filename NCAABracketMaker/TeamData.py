@@ -64,6 +64,10 @@ def getTeamData(league, year):
     teamScheduleResults = []
     teamIDs = getTeamList(league)
 
+    # Adds teams no longer on the main team list (Hartford)
+    if year == 2021:
+        teamIDs.append(42)
+
     # Iterate through each teamID and populate list
     for teamid in teamIDs:
         log.info(f'Year {year} : Team {teamid}')
@@ -241,7 +245,7 @@ def nameCheck(teamName):
         'Miami Ohio': 'Miami (OH)',
         'Central Connecticut St': 'Central Connecticut',
         'Mount St Marys': 'Mount St. Mary\'s',
-        #'Cal St Fullerton': 'CSU Fullerton',
+        # 'Cal St Fullerton': 'CSU Fullerton',
         'Texas Arlington': 'UT Arlington',
         'Cal St Northridge': 'CSU Northridge',
         'Morgan St': 'Morgan St',
@@ -256,7 +260,7 @@ def nameCheck(teamName):
         'American': 'American',
         'Massachusetts': 'UMass',
         'Cal Irvine': 'UC Irvine',
-        'Hawaii': 'Hawai\'i',
+        'Hawaii': "Hawai'i",
         'Cal St Bakersfield': 'CSU Bakersfield',
         'Wisconsin Green Bay': 'Green Bay',
         'Middle Tennessee St': 'Middle Tennessee',
@@ -299,7 +303,7 @@ def getemptybracket(league, testyear):
     year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
 
     # Exits if year selected is not current year
-    #if testyear != year:
+    # if testyear != year:
     #    log.error('No empty bracket for selected year')
     #    raise ValueError
 

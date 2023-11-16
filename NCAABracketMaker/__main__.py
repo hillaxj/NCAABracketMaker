@@ -28,6 +28,10 @@ def bracketmaker(league: str, year: int, winWeight: float, rankWeight: float, po
         log.info('Cleared all simulation results')
         return None
 
+    if year == 2020:
+        log.error('No Bracket. Covid :-(', exc_info=True)
+        return None
+
     # Checks coefficient var types
     try:
         winWeight = float(winWeight)
