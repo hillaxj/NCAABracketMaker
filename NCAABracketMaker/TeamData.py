@@ -299,8 +299,8 @@ def getemptybracket(league, testyear):
     soup = BeautifulSoup(results.text, "html.parser")
 
     # Gets year for the bracket
-    year = soup.find(class_="h2")
-    year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
+    # year = soup.find(class_="h2")
+    # year = str(year).replace('<h1 class="h2">NCAA Tournament Bracket - ', '').replace('</h1>', '')
 
     # Exits if year selected is not current year
     # if testyear != year:
@@ -326,11 +326,11 @@ def getemptybracket(league, testyear):
 
     # Dump teams dict into yaml
     if league == 'mens':
-        with open(f'{bracketpath}NCAAMBracket{year}.yaml', 'w') as f:
+        with open(f'{bracketpath}NCAAMBracket{testyear}.yaml', 'w') as f:
             yaml.dump(bracket_teams, f)
 
     elif league == 'womens':
-        with open(f'{bracketpath}NCAAWBracket{year}.yaml', 'w') as f:
+        with open(f'{bracketpath}NCAAWBracket{testyear}.yaml', 'w') as f:
             yaml.dump(bracket_teams, f)
 
     return None
